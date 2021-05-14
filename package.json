@@ -1,0 +1,15 @@
+{
+  "name": "ex_prosemirror",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./assets/js/index.js",
+  "module": "./assets/js/index.js",
+  "exports": {
+    "import": "./assets/js/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

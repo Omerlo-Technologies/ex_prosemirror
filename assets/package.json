@@ -1,0 +1,21 @@
+{
+  "name": "ex_prosemirror",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./js/index.js",
+  "module": "./js/index.js",
+  "exports": {
+    "import": "./assets/js/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "prosemirror-schema-basic": "1.x",
+    "prosemirror-state": "1.x",
+    "prosemirror-view": "1.x",
+    "prosemirror-example-setup": "1.x"
+  }
+}
