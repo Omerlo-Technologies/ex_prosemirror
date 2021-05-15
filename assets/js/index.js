@@ -45,11 +45,11 @@ export default class ExProsemirror {
 
   init({schemaFunc, pluginFunc}) {
     if(!schemaFunc) {
-      throw 'ExPromirror - schemaFunc is required in when initialized a new instance.';
+      throw 'ExProsmirror - schemaFunc is required when initializing a new instance.';
     }
 
     if(!pluginFunc) {
-      throw 'ExPromirror - pluginFunc is required in when initialized a new instance.';
+      throw 'ExProsmirror - pluginFunc is required when initializing a new instance.';
     }
 
     Array.from(proseInstances).forEach(el => {

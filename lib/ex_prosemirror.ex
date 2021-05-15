@@ -1,9 +1,9 @@
 defmodule ExProsemirror do
   @moduledoc ~S"""
-  ExProsemirror is a helper to use [ProseMirror](https://prosemirror.net/) inside
-  [Phoenix.HTML.Form](https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html).
+  ExProsemirror is a helper for the [ProseMirror](https://prosemirror.net/) rich-text
+  editor inside of [Phoenix.HTML.Form](https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html).
 
-  Current version is alpha and we don't garantee this lib to works as you expected.
+  > The current version is in **alpha** and we don't guarantee it works as expected.
 
 
   ## Examples
@@ -13,9 +13,9 @@ defmodule ExProsemirror do
         <%= prosemirror_input f, :body, marks: [:strong, :em], blocks: [:p, :h1] %>
       <% end %>
 
-  > Marks and blocks should be defined by your own code using prosemirror.
+  > Marks and blocks should be defined by your own code using ProseMirror.
 
-  This code sample will create a form with 2 fields: `title` and `body`. The
+  The following code sample will create a form with 2 fields: `title` and `body`. The
   title will expose italic marks only. The body will expose italic and strong
   marks plus paragraph and header 1.
 
@@ -43,7 +43,7 @@ defmodule ExProsemirror do
 
   - Then, you have to import `ExProsemirror.HTML.Form` in your views / liveviews
   > This could be done directly in your AppWeb.ex in `view/0` and/or `live_view/0`.
-  > In recent phoenix version, you could simply add the line in `view_helper/0`.
+  > In recent phoenix versions, you could simply add the line in `view_helper/0`.
 
   ``` elixir
   defp view_helpers do
@@ -60,7 +60,7 @@ defmodule ExProsemirror do
   end
   ```
 
-  - Update your package.json to `ex_prosemirror` dependency:
+  - Add the `ex_prosemirror` dependency to your package.json:
 
   ```json
   {
@@ -77,7 +77,7 @@ defmodule ExProsemirror do
   ExProsemirror.
 
   ```elixir
-  # Prosemirror dependencies
+  # ProseMirror dependencies
   import { exampleSetup } from 'prosemirror-example-setup'
   import { EditorState } from 'prosemirror-state'
   import { EditorView } from 'prosemirror-view'
@@ -87,7 +87,7 @@ defmodule ExProsemirror do
   # This is the helper from ex_prosemirror
   import ExProsemirror from 'ex_prosemirror'
 
-  # You'll need to create a function that return a prosemirror Schema when executed
+  # You'll need to create a function that returns a ProseMirror Schema when executed
   const schemaFunc = (options) => {
     return new Schema({
       nodes: {
@@ -96,7 +96,7 @@ defmodule ExProsemirror do
           group: 'block',
           content: 'inline*',
           toDOM() { return ['p', 0]; },
-          parseDOM: [{ tag: 'p' }],
+          parseDOM: [{tag: 'p'}],
         },
         doc: {
           content: 'block+',
@@ -108,11 +108,12 @@ defmodule ExProsemirror do
   # Bind your configuration to ExProsemirror
   const exProsemirror = new ExProsemirror({EditorState, DOMParser, EditorView, Node})
 
-  # Initalizaed schemas
+  # Initialize the schemas
   exProsemirror.init({schemaFunc, pluginFunc: exampleSetup})
   ```
 
-  You can use prosemirror in the way that you need, ExProsemirror will ensure your dom to be bind
-  to your data.
+  You can now use ProseMirror in the way that you need, ExProsemirror will ensure that your DOM is
+  binded to your data.
+
   """
 end
