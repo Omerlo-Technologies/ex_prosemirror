@@ -1,6 +1,10 @@
 # ExProsemirror
 
-To install ExProsemirror, follow instructions [here](TODO).
+ExProsemirror is a toolkit that integrates the [ProseMirror](https://prosemirror.net)
+rich-text editor into elixir/phoenix.
+
+See the [getting started guide](https://omerlo-technologies.github.io/ex_prosemirror/ExProsemirror.html#module-installation) and
+the [online documentation](https://omerlo-technologies.github.io/ex_prosemirror/ExProsemirror.html) for more information.
 
 ## Features
 

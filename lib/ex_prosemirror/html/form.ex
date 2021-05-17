@@ -1,16 +1,18 @@
 defmodule ExProsemirror.HTML.Form do
   @moduledoc """
-  Form helper to generate HTML field required by prosemirror. Using this
-  component, prosemirror will automatically be link to hidden input form.
-  Thoses hidden inputs will be use by `Phoenix.HTML.Form` to send data to
-  the backend.
+  Form helpers to generate HTML fields required by ProseMirror.
+
+  Using this component, ProseMirror will automatically be link to hidden input
+  fields. These hidden inputs will be used by `Phoenix.HTML.Form` to send data
+  to the backend.
 
   > Live synchronization over LiveView is not currently supported.
 
   ## Options
 
-  - marks: uses marks tag use defined in prosemirror config
-  - blocks: uses blocks tag use defined in prosemirror config
+  - marks: mark tags to use defined in your ProseMirror config
+  - blocks: block tags to use defined in your ProseMirror config
+
   """
 
   import Phoenix.HTML
@@ -18,7 +20,7 @@ defmodule ExProsemirror.HTML.Form do
   import Phoenix.HTML.Tag
 
   @doc ~S"""
-  Generate input for Prosemirror.
+  Generates inputs for ProseMirror.
 
   ## Usages
 
@@ -44,9 +46,9 @@ defmodule ExProsemirror.HTML.Form do
   end
 
   @doc ~S"""
-  Generate an hidden input field to store the data of prosemirror.
+  Generates a hidden input field to store data for ProseMirror.
 
-  > Use `Phoenix.HTML.Form.html.hidden_input/3` under the hood.
+  > Uses `Phoenix.HTML.Form.html.hidden_input/3` under the hood.
 
   ## Usage
 
@@ -58,8 +60,7 @@ defmodule ExProsemirror.HTML.Form do
   end
 
   @doc ~S"""
-  Generate the div for prosemirror that will be use by the javascript to mount
-  the prosemirror component.
+  Generates the `<div>` that will be used by javascript to mount the ProseMirror component.
 
   ## Usage
 

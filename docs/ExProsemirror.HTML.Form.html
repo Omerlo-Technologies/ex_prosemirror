@@ -86,14 +86,13 @@ ExProsemirror.HTML.Form <small class="app-vsn">(ex_prosemirror v0.1.0)</small>
 
 
         <section id="moduledoc">
-<p>Form helper to generate HTML field required by prosemirror. Using this
-component, prosemirror will automatically be link to hidden input form.
-Thoses hidden inputs will be use by <a href="https://hexdocs.pm/phoenix_html/2.14.3/Phoenix.HTML.Form.html"><code class="inline">Phoenix.HTML.Form</code></a> to send data to
-the backend.</p><blockquote><p>Live synchronization over LiveView is not currently supported.</p></blockquote><h2 id="module-options" class="section-heading">
+<p>Form helpers to generate HTML fields required by ProseMirror.</p><p>Using this component, ProseMirror will automatically be link to hidden input
+fields. These hidden inputs will be used by <a href="https://hexdocs.pm/phoenix_html/2.14.3/Phoenix.HTML.Form.html"><code class="inline">Phoenix.HTML.Form</code></a> to send data
+to the backend.</p><blockquote><p>Live synchronization over LiveView is not currently supported.</p></blockquote><h2 id="module-options" class="section-heading">
   <a href="#module-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Options
 </h2>
-<ul><li>marks: uses marks tag use defined in prosemirror config</li><li>blocks: uses blocks tag use defined in prosemirror config</li></ul>
+<ul><li>marks: mark tags to use defined in your ProseMirror config</li><li>blocks: block tags to use defined in your ProseMirror config</li></ul>
         </section>
 
 
@@ -116,8 +115,7 @@ the backend.</p><blockquote><p>Live synchronization over LiveView is not current
 
   </div>
 
-    <div class="summary-synopsis"><p>Generate the div for prosemirror that will be use by the javascript to mount
-the prosemirror component.</p></div>
+    <div class="summary-synopsis"><p>Generates the <code class="inline">&lt;div&gt;</code> that will be used by javascript to mount the ProseMirror component.</p></div>
 
 </div>
 <div class="summary-row">
@@ -126,7 +124,7 @@ the prosemirror component.</p></div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Generate an hidden input field to store the data of prosemirror.</p></div>
+    <div class="summary-synopsis"><p>Generates a hidden input field to store data for ProseMirror.</p></div>
 
 </div>
 <div class="summary-row">
@@ -135,7 +133,7 @@ the prosemirror component.</p></div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Generate input for Prosemirror.</p></div>
+    <div class="summary-synopsis"><p>Generates inputs for ProseMirror.</p></div>
 
 </div>
 
@@ -169,12 +167,11 @@ Functions
 
   <section class="docstring">
 
-<p>Generate the div for prosemirror that will be use by the javascript to mount
-the prosemirror component.</p><h2 id="prosemirror_editor/3-usage" class="section-heading">
+<p>Generates the <code class="inline">&lt;div&gt;</code> that will be used by javascript to mount the ProseMirror component.</p><h2 id="prosemirror_editor/3-usage" class="section-heading">
   <a href="#prosemirror_editor/3-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Usage
 </h2>
-<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_editor</span><span class="p" data-group-id="5070767515-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="5070767515-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre><p>See <a href="ExProsemirror.HTML.Form.html#content"><code class="inline">ExProsemirror.HTML.Form</code></a> for options</p>
+<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_editor</span><span class="p" data-group-id="9856866881-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="9856866881-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre><p>See <a href="ExProsemirror.HTML.Form.html#content"><code class="inline">ExProsemirror.HTML.Form</code></a> for options</p>
   </section>
 </section>
 <section class="detail" id="prosemirror_hidden_input/3">
@@ -193,11 +190,11 @@ the prosemirror component.</p><h2 id="prosemirror_editor/3-usage" class="section
 
   <section class="docstring">
 
-<p>Generate an hidden input field to store the data of prosemirror.</p><blockquote><p>Use <code class="inline">Phoenix.HTML.Form.html.hidden_input/3</code> under the hood.</p></blockquote><h2 id="prosemirror_hidden_input/3-usage" class="section-heading">
+<p>Generates a hidden input field to store data for ProseMirror.</p><blockquote><p>Uses <code class="inline">Phoenix.HTML.Form.html.hidden_input/3</code> under the hood.</p></blockquote><h2 id="prosemirror_hidden_input/3-usage" class="section-heading">
   <a href="#prosemirror_hidden_input/3-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Usage
 </h2>
-<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_hidden_input</span><span class="p" data-group-id="4903364402-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="4903364402-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre>
+<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_hidden_input</span><span class="p" data-group-id="9730019545-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="9730019545-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre>
   </section>
 </section>
 <section class="detail" id="prosemirror_input/3">
@@ -216,7 +213,7 @@ the prosemirror component.</p><h2 id="prosemirror_editor/3-usage" class="section
 
   <section class="docstring">
 
-<p>Generate input for Prosemirror.</p><h2 id="prosemirror_input/3-usages" class="section-heading">
+<p>Generates inputs for ProseMirror.</p><h2 id="prosemirror_input/3-usages" class="section-heading">
   <a href="#prosemirror_input/3-usages" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Usages
 </h2>
