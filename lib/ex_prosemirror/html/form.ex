@@ -29,9 +29,11 @@ defmodule ExProsemirror.HTML.Form do
   iex> prosemirror_input(form, :body)
   """
   def prosemirror_input(form, field, opts \\ []) do
+    id = input_id(form, field)
+
     {class, opts} =
       opts
-      |> Keyword.put_new(:id, input_id(form, field))
+      |> Keyword.put_new(:id, id)
       |> Keyword.put_new(:name, input_name(form, field))
       |> Keyword.pop_values(:class)
 
@@ -41,7 +43,8 @@ defmodule ExProsemirror.HTML.Form do
         prosemirror_hidden_input(form, field, opts),
         prosemirror_editor(form, field, opts)
       ],
-      class: class
+      class: class,
+      id: "#{id}_prose_root"
     )
   end
 
@@ -55,7 +58,11 @@ defmodule ExProsemirror.HTML.Form do
       <%= prosemirror_hidden_input(@form, :title) %>
   """
   def prosemirror_hidden_input(form, field, opts \\ []) do
-    opts = Keyword.take(opts, [:id, :name, :value])
+    opts =
+      opts
+      |> Keyword.take([:id, :name, :value])
+      |> Keyword.put(:phx_update, "ignore")
+
     hidden_input(form, field, opts)
   end
 
@@ -88,6 +95,7 @@ defmodule ExProsemirror.HTML.Form do
       opts
       |> format_opts(:id, input_id(form, field))
       |> Keyword.put_new(:class, "ex-prosemirror")
+      |> Keyword.put(:phx_update, "ignore")
 
     {value, opts} = Keyword.pop(opts, :value, input_value(form, field))
 

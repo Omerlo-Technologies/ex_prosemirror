@@ -1,9 +1,7 @@
-
 const proseInstances = document.getElementsByClassName("ex-prosemirror")
 
 class ExEditorView {
   constructor(editorNode, schema, pluginFunc, {EditorView, EditorState, DOMParser, Node}) {
-    const marks = editorNode.dataset.marks
     this.target = editorNode.dataset.target;
 
     const initialValue = document.querySelector(this.target).value
@@ -11,7 +9,12 @@ class ExEditorView {
     let doc;
 
     if(initialValue.length > 0) {
-      doc = Node.fromJSON(schema, JSON.parse(initialValue))
+      let json = JSON.parse(initialValue);
+      try {
+        doc = schema.nodeFromJSON(JSON.parse(initialValue));
+      } catch {
+        doc = DOMParser.fromSchema(schema).parse('')
+      }
     } else {
       doc = DOMParser.fromSchema(schema).parse('')
     }
@@ -38,12 +41,29 @@ class ExEditorView {
   }
 }
 
-export default class ExProsemirror {
+export class ExProsemirror {
   constructor(opts) {
     this.opts = opts
   }
 
-  init({schemaFunc, pluginFunc}) {
+  initAll({schemaFunc, pluginFunc}) {
+    this.validate({schemaFunc, pluginFunc});
+
+    Array.from(proseInstances).forEach(el => {
+      el.innerHTML = '';
+      const configured_schema = schemaFunc(el.dataset)
+      new ExEditorView(el, configured_schema, pluginFunc, this.opts)
+    });
+  }
+
+  init(target, {schemaFunc, pluginFunc}) {
+    target.innerHTML = '';
+    this.validate({schemaFunc, pluginFunc});
+    const configured_schema = schemaFunc(target.dataset)
+    return new ExEditorView(target, configured_schema, pluginFunc, this.opts)
+  }
+
+  validate({schemaFunc, pluginFunc}) {
     if(!schemaFunc) {
       throw 'ExProsmirror - schemaFunc is required when initializing a new instance.';
     }
@@ -51,16 +71,8 @@ export default class ExProsemirror {
     if(!pluginFunc) {
       throw 'ExProsmirror - pluginFunc is required when initializing a new instance.';
     }
-
-    Array.from(proseInstances).forEach(el => {
-      const configured_schema = schemaFunc(el.dataset)
-
-      new ExEditorView(el, configured_schema, pluginFunc, this.opts)
-    });
   }
 }
-
-
 
 /* dispatchTransaction(transaction) {
  *   const newState = window.view.state.apply(transaction);
