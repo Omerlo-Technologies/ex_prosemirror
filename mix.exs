@@ -26,6 +26,8 @@ defmodule ExProsemirror.MixProject do
   defp deps do
     [
       {:phoenix_html, "~> 2.14"},
+      {:ecto, "~> 3.6"},
+      {:polymorphic_embed, "~> 1.6"},
       {:ex_doc, "~> 0.24.2", only: :dev, runtime: false}
     ]
   end

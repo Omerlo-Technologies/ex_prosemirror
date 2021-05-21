@@ -116,4 +116,62 @@ defmodule ExProsemirror do
   binded to your data.
 
   """
+  defmacro __using__(_opts) do
+    quote do
+      import ExProsemirror.EctoHelper
+
+      @behaviour ExProsemirror
+    end
+  end
+
+  @doc ~S"""
+  Override the default `extract_simple_text/1` system for the module that implements the callback.
+
+  ## Examples
+
+        def extract_simple_text(%__MODULE__{text: text}), do: text
+  """
+  @callback extract_simple_text(struct :: struct()) :: String.t() | nil
+
+  @optional_callbacks [extract_simple_text: 1]
+
+  @doc ~S"""
+  Extracts the text(s) value(s) without any text marks / blocks.
+
+  ## Examples
+
+      iex> ExProsemirror.extract_simple_text(%ExProsemirror.Paragraph{content: [
+      ...>   %ExProsemirror.Text{text: "Hello"},
+      ...>   %ExProsemirror.Text{text: "World"}
+      ...> ]})
+      ["Hello", "World"]
+
+      iex> ExProsemirror.extract_simple_text([
+      ...>   %ExProsemirror.Text{text: "Hello"},
+      ...>   %ExProsemirror.Text{text: "World"}
+      ...> ])
+      ["Hello", "World"]
+
+      iex> ExProsemirror.extract_simple_text(%ExProsemirror.Text{text: "Hello"})
+      "Hello"
+
+  """
+  def extract_simple_text(list_of_structs) when is_list(list_of_structs) do
+    Enum.map(list_of_structs, &extract_simple_text/1)
+  end
+
+  def extract_simple_text(struct) when is_struct(struct) do
+    cond do
+      function_exported?(struct.__struct__, :extract_simple_text, 1) ->
+        apply(struct.__struct__, :extract_simple_text, [struct])
+
+      %{content: content} = struct ->
+        extract_simple_text(content)
+
+      true ->
+        nil
+    end
+  end
+
+  def extract_simple_text(_), do: nil
 end
