@@ -1,5 +1,4 @@
 404.html
-Ecto.ExProsemirrorField.html
 ExProsemirror.EctoHelper.html
 ExProsemirror.HTML.Form.html
 ExProsemirror.html
@@ -10,7 +9,7 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-5baf28ea1f.js
-dist/sidebar_items-f5e50b84d1.js
+dist/search_items-7e99f68c1e.js
+dist/sidebar_items-41a1937544.js
 index.html
 search.html

@@ -1,6 +1,33 @@
 defmodule ExProsemirror.EctoHelper do
+  @moduledoc ~S"""
+  Helpers for ecto.
+
+  > This module is automatically import if you use `ExProsemirror`.
+  """
+
   import PolymorphicEmbed, only: [cast_polymorphic_embed: 2]
 
+  @doc ~S"""
+  Add the PolymorphicField in your ecto schema.
+
+  ## Examples
+
+  Single element
+
+      embedded_prosemirror_field([text: ExProsemirror.Text], array: false)
+      # same as
+      embedded_prosemirror_field([text: ExProsemirror.Text])
+
+  Multiple elements
+
+      embedded_prosemirror_field([text: ExProsemirror.Text], array: true)
+
+  ## Options
+
+  - `array`: boolean
+
+  The `array` option will configure PolymorphicEmbed automatically to be a list of your data OR a single element.
+  """
   defmacro embedded_prosemirror_field(mapped_types, opts \\ []) when is_list(mapped_types) do
     %{type: field_type, on_replace: replace_action} = get_field_metadata(opts)
 
@@ -13,6 +40,15 @@ defmodule ExProsemirror.EctoHelper do
     end
   end
 
+  @doc """
+  Cast prosemirror data struct.
+
+  ## Examples
+
+      struct_or_changeset
+      |> cast(attrs, some_fields_to_cast)
+      |> cast_prosemirror_fields()
+  """
   def cast_prosemirror_fields(struct_or_changeset) do
     cast_polymorphic_embed(struct_or_changeset, :content)
   end

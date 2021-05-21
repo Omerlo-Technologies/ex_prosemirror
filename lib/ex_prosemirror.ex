@@ -116,6 +116,10 @@ defmodule ExProsemirror do
   binded to your data.
 
   """
+
+  @doc ~S"""
+  Import ExProsemirror.EctoHelper and add the behaviour of ExProsemirror.
+  """
   defmacro __using__(_opts) do
     quote do
       import ExProsemirror.EctoHelper

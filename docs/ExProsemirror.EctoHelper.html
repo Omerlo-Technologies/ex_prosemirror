@@ -10,7 +10,7 @@
     <title>ExProsemirror.EctoHelper — ex_prosemirror v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-f5e50b84d1.js"></script>
+    <script src="dist/sidebar_items-41a1937544.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -85,6 +85,10 @@ ExProsemirror.EctoHelper <small class="app-vsn">(ex_prosemirror v0.1.0)</small>
       </h1>
 
 
+        <section id="moduledoc">
+<p>Helpers for ecto.</p><blockquote><p>This module is automatically import if you use <a href="ExProsemirror.html"><code class="inline">ExProsemirror</code></a>.</p></blockquote>
+        </section>
+
 
         <section id="summary" class="details-list">
           <h1 class="section-heading">
@@ -105,12 +109,16 @@ ExProsemirror.EctoHelper <small class="app-vsn">(ex_prosemirror v0.1.0)</small>
 
   </div>
 
+    <div class="summary-synopsis"><p>Cast prosemirror data struct.</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#embedded_prosemirror_field/2">embedded_prosemirror_field(mapped_types, opts \\ [])</a>
 
   </div>
+
+    <div class="summary-synopsis"><p>Add the PolymorphicField in your ecto schema.</p></div>
 
 </div>
 
@@ -142,7 +150,13 @@ Functions
 
   <section class="docstring">
 
-
+<p>Cast prosemirror data struct.</p><h2 id="cast_prosemirror_fields/1-examples" class="section-heading">
+  <a href="#cast_prosemirror_fields/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="n">struct_or_changeset</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="6989515609-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="6989515609-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_fields</span><span class="p" data-group-id="6989515609-2">(</span><span class="p" data-group-id="6989515609-2">)</span></code></pre>
   </section>
 </section>
 <section class="detail" id="embedded_prosemirror_field/2">
@@ -163,7 +177,17 @@ Functions
 
   <section class="docstring">
 
-
+<p>Add the PolymorphicField in your ecto schema.</p><h2 id="embedded_prosemirror_field/2-examples" class="section-heading">
+  <a href="#embedded_prosemirror_field/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<p>Single element</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="9992377207-1">(</span><span class="p" data-group-id="9992377207-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="9992377207-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="9992377207-1">)</span><span class="w">
+</span><span class="c1"># same as</span><span class="w">
+</span><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="9992377207-3">(</span><span class="p" data-group-id="9992377207-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="9992377207-4">]</span><span class="p" data-group-id="9992377207-3">)</span></code></pre><p>Multiple elements</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="2357648713-1">(</span><span class="p" data-group-id="2357648713-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="2357648713-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="2357648713-1">)</span></code></pre><h2 id="embedded_prosemirror_field/2-options" class="section-heading">
+  <a href="#embedded_prosemirror_field/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">array</code>: boolean</li></ul><p>The <code class="inline">array</code> option will configure PolymorphicEmbed automatically to be a list of your data OR a single element.</p>
   </section>
 </section>
 
