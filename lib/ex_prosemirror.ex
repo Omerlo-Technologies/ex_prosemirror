@@ -119,12 +119,29 @@ defmodule ExProsemirror do
 
   @doc ~S"""
   Import ExProsemirror.EctoHelper and add the behaviour of ExProsemirror.
+
+  ## Options
+
+  - `safe_parser` defines if the protocole Pheonix.HTML.Safe should be defined by default. When `true`, it
+  will use `ExProsemirror.extract_simple_text/1` (default: `true`)
   """
-  defmacro __using__(_opts) do
+  defmacro __using__(opts) do
     quote do
       import ExProsemirror.EctoHelper
 
       @behaviour ExProsemirror
+
+      unquote(safe_parser(opts))
+    end
+  end
+
+  def safe_parser(opts) do
+    if Keyword.get(opts, :safe_parser, true) do
+      quote do
+        defimpl Phoenix.HTML.Safe, for: __MODULE__ do
+          defdelegate to_iodata(data), to: ExProsemirror, as: :extract_simple_text
+        end
+      end
     end
   end
 

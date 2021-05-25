@@ -28,9 +28,16 @@ defmodule ExProsemirrorTest do
 
       assert @simple_schema_data = data
     end
+
+    test "Test text extract" do
+      assert ExProsemirror.extract_simple_text(@simple_schema_data) == [["hello"]]
+    end
   end
 
-  describe "Test text extract" do
-    assert ExProsemirror.extract_simple_text(@simple_schema_data) == [["hello"]]
+  describe "Test phoenix side" do
+    test "Basic HTML safe" do
+      assert Phoenix.HTML.Safe.to_iodata(@simple_schema_data) ==
+               ExProsemirror.extract_simple_text(@simple_schema_data)
+    end
   end
 end
