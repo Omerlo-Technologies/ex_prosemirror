@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="ex_prosemirror v0.1.2">
 
-    <title>ExProsemirror.__using__ — ex_prosemirror v0.1.2</title>
+    <title>ExProsemirror.Schema — ex_prosemirror v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-1b7fb3b547.js"></script>
@@ -79,12 +79,63 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>ExProsemirror.__using__</h1>
+      <h1>
+ExProsemirror.Schema <small class="app-vsn">(ex_prosemirror v0.1.2)</small>
 
-<div class="deprecated">
-  You're seeing just the macro <code>__using__</code>, go back to <a href="ExProsemirror.html">ExProsemirror</a> module for more information.
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Module helper for Ecto.Schema.</p>
+        </section>
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#__using__/1">__using__(opts)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Automatically import ExProsemirror.Schema functions helper.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#prosemirror_field/1">prosemirror_field(name)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Helper to generate ExProsemirror ecto schema field.</p></div>
+
 </div>
 
+  </div>
+
+        </section>
+
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
 <section class="detail" id="__using__/1">
 
   <div class="detail-header">
@@ -101,15 +152,46 @@ ex_prosemirror
 
   <section class="docstring">
 
-<p>Import ExProsemirror.EctoHelper and add the behaviour of ExProsemirror.</p><h2 id="__using__/1-options" class="section-heading">
-  <a href="#__using__/1-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Options
+<p>Automatically import ExProsemirror.Schema functions helper.</p><h2 id="__using__/1-examples" class="section-heading">
+  <a href="#__using__/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
 </h2>
-<ul><li><code class="inline">safe_parser</code> defines if the protocole Pheonix.HTML.Safe should be defined by default. When <code class="inline">true</code>, it
-will use <a href="#extract_simple_text/1"><code class="inline">ExProsemirror.extract_simple_text/1</code></a> (default: <code class="inline">true</code>)</li></ul>
+<pre><code class="makeup elixir"><span class="kn">use</span><span class="w"> </span><span class="nc">ExProsemirror.Schema</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="prosemirror_field/1">
+
+  <div class="detail-header">
+    <a href="#prosemirror_field/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature">prosemirror_field(name)</h1>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+<p>Helper to generate ExProsemirror ecto schema field.</p><h2 id="prosemirror_field/1-examples" class="section-heading">
+  <a href="#prosemirror_field/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;my_schema&quot;</span><span class="w"> </span><span class="k" data-group-id="7027862520-1">do</span><span class="w">
+  </span><span class="n">prosemirror_field</span><span class="w"> </span><span class="ss">:title</span><span class="w">
+</span><span class="k" data-group-id="7027862520-1">end</span><span class="w">
+
+</span><span class="c1"># produces</span><span class="w">
+
+</span><span class="n">field</span><span class="w"> </span><span class="ss">:title_plain</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="p">,</span><span class="w"> </span><span class="ss">virtual</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span><span class="n">embeds_one</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="nc">ExProsemirror.Schema</span></code></pre>
   </section>
 </section>
 
+          </div>
+        </section>
 
       <footer class="footer">
         <p>

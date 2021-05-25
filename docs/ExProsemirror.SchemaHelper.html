@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.1.0">
+    <meta name="project" content="ex_prosemirror v0.1.2">
 
-    <title>ExProsemirror.EctoHelper — ex_prosemirror v0.1.0</title>
+    <title>ExProsemirror.SchemaHelper — ex_prosemirror v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-41a1937544.js"></script>
+    <script src="dist/sidebar_items-1b7fb3b547.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.1.0
+        v0.1.2
       </strong>
     </div>
 
@@ -80,13 +80,13 @@ ex_prosemirror
     <div id="content" class="content-inner">
 
       <h1>
-ExProsemirror.EctoHelper <small class="app-vsn">(ex_prosemirror v0.1.0)</small>
+ExProsemirror.SchemaHelper <small class="app-vsn">(ex_prosemirror v0.1.2)</small>
 
       </h1>
 
 
         <section id="moduledoc">
-<p>Helpers for ecto.</p><blockquote><p>This module is automatically import if you use <a href="ExProsemirror.html"><code class="inline">ExProsemirror</code></a>.</p></blockquote>
+<p>Ecto schema helper that defines multiples macro to use inside a Ecto.Schema.</p><p>It help you to build custom blocks / marks for <a href="ExProsemirror.html"><code class="inline">ExProsemirror</code></a>.</p><blockquote><p>This module is automatically import if you use <a href="ExProsemirror.html"><code class="inline">ExProsemirror</code></a>.</p></blockquote>
         </section>
 
 
@@ -155,8 +155,8 @@ Functions
   Examples
 </h2>
 <pre><code class="makeup elixir"><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="6989515609-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="6989515609-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_fields</span><span class="p" data-group-id="6989515609-2">(</span><span class="p" data-group-id="6989515609-2">)</span></code></pre>
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="2432471132-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="2432471132-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_fields</span><span class="p" data-group-id="2432471132-2">(</span><span class="p" data-group-id="2432471132-2">)</span></code></pre>
   </section>
 </section>
 <section class="detail" id="embedded_prosemirror_field/2">
@@ -181,9 +181,9 @@ Functions
   <a href="#embedded_prosemirror_field/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<p>Single element</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="9992377207-1">(</span><span class="p" data-group-id="9992377207-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="9992377207-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="9992377207-1">)</span><span class="w">
+<p>Single element</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="1075765176-1">(</span><span class="p" data-group-id="1075765176-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="1075765176-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="1075765176-1">)</span><span class="w">
 </span><span class="c1"># same as</span><span class="w">
-</span><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="9992377207-3">(</span><span class="p" data-group-id="9992377207-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="9992377207-4">]</span><span class="p" data-group-id="9992377207-3">)</span></code></pre><p>Multiple elements</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="2357648713-1">(</span><span class="p" data-group-id="2357648713-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="2357648713-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="2357648713-1">)</span></code></pre><h2 id="embedded_prosemirror_field/2-options" class="section-heading">
+</span><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="1075765176-3">(</span><span class="p" data-group-id="1075765176-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="1075765176-4">]</span><span class="p" data-group-id="1075765176-3">)</span></code></pre><p>Multiple elements</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="8217001432-1">(</span><span class="p" data-group-id="8217001432-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="8217001432-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="8217001432-1">)</span></code></pre><h2 id="embedded_prosemirror_field/2-options" class="section-heading">
   <a href="#embedded_prosemirror_field/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Options
 </h2>

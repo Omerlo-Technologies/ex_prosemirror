@@ -40,4 +40,24 @@ defmodule ExProsemirrorTest do
                ExProsemirror.extract_simple_text(@simple_schema_data)
     end
   end
+
+  describe "Error management" do
+    test "test" do
+      attrs = %{content: [%{type: :text, text: "hello"}]}
+
+      %ExProsemirror.Paragraph{}
+      |> ExProsemirror.Paragraph.changeset(attrs)
+      |> ExProsemirror.Changeset.validate_prosemirror(:content)
+    end
+
+    test "Without ExProsemirror fields" do
+      data = %{}
+      types = %{author_name: :string, title: :map}
+
+      {data, types}
+      |> Ecto.Changeset.cast(%{author_name: "Alexandre Lepretre"}, Map.keys(types))
+      |> Ecto.Changeset.validate_required([:title, :author_name])
+      |> ExProsemirror.Changeset.validate_prosemirror(:title)
+    end
+  end
 end
