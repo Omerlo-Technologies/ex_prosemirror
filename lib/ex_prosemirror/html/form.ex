@@ -62,6 +62,7 @@ defmodule ExProsemirror.HTML.Form do
       opts
       |> Keyword.take([:id, :value])
       |> Keyword.put(:phx_update, "ignore")
+      |> Keyword.update(:id, "#{field}_plain", fn id -> "#{id}_plain" end)
 
     hidden_input(form, :"#{field}_plain", opts)
   end
@@ -78,7 +79,15 @@ defmodule ExProsemirror.HTML.Form do
 
   """
   def prosemirror_editor(form, field, opts \\ []) do
-    opts = Keyword.delete(opts, :value)
+    opts =
+      Keyword.delete(opts, :value)
+      |> Keyword.put_new(:id, input_id(form, field))
+      |> set_target()
+      |> Keyword.put_new(:class, "ex-prosemirror")
+      |> Keyword.put(:phx_update, "ignore")
+      |> Keyword.put(:phx_hook, "MountProseMirror")
+      |> Keyword.put_new(:name, input_name(form, field))
+
     {marks, opts} = Keyword.pop_values(opts, :marks)
     {blocks, opts} = Keyword.pop_values(opts, :blocks)
     {data, opts} = Keyword.pop_values(opts, :data)
@@ -89,15 +98,6 @@ defmodule ExProsemirror.HTML.Form do
       |> Keyword.put(:blocks, to_html_data(blocks))
       |> Keyword.put(:target, "##{Keyword.get(opts, :id)}")
 
-    input_id(form, field)
-
-    opts =
-      opts
-      |> format_opts(:id, input_id(form, field))
-      |> Keyword.put_new(:class, "ex-prosemirror")
-      |> Keyword.put(:phx_update, "ignore")
-      |> Keyword.put(:phx_hook, "MountProseMirror")
-
     {_value, opts} = Keyword.pop(opts, :value, input_value(form, field))
 
     opts = Keyword.put(opts, :data, data)
@@ -105,8 +105,8 @@ defmodule ExProsemirror.HTML.Form do
     content_tag(:div, ["\n", html_escape("")], opts)
   end
 
-  defp format_opts(opts, opt_name, default, prefix \\ "prose") when is_atom(opt_name) do
-    Keyword.update(opts, opt_name, default, &:"#{&1}_#{prefix}")
+  defp set_target(opts) do
+    Keyword.put(opts, :target, "##{Keyword.get(opts, :id)}")
   end
 
   defp to_html_data(values) when is_list(values) do
