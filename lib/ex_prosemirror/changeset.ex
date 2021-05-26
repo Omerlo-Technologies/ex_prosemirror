@@ -4,7 +4,7 @@ defmodule ExProsemirror.Changeset do
   """
 
   @doc ~S"""
-  Cast and validate data integrity for an ExProsemirror field type.
+  Casts and validates data integrity for an ExProsemirror field type.
 
   ## Examples
 
