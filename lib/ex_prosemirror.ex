@@ -3,17 +3,18 @@ defmodule ExProsemirror do
   ExProsemirror is a helper for the [ProseMirror](https://prosemirror.net/) rich-text
   editor inside of [Phoenix.HTML.Form](https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html).
 
-  > The current version is in **alpha** and we don't guarantee it works as expected.
+  **The current version is in **alpha** and we don't guarantee it works as expected.**
 
 
-  ## Examples
+  ## EEx examples
 
       <%= form_for @changeset, "#", fn f -> %>
         <%= prosemirror_input f, :title, marks: [:em] %>
         <%= prosemirror_input f, :body, marks: [:strong, :em], blocks: [:p, :h1] %>
       <% end %>
 
-  > Marks and blocks should be defined by your own code using ProseMirror.
+  > Currently we don't allow custom blocks / marks. You have to use marks and blocks
+  > defined by the lib ex_prosemirror.
 
   The following code sample will create a form with 2 fields: `title` and `body`. The
   title will expose italic marks only. The body will expose italic and strong
@@ -21,13 +22,31 @@ defmodule ExProsemirror do
 
 
       <form for="article">
-        <input type="hidden" name="article[title]">
+        <input type="hidden" name="article[title_plain]">
         <div id="ProseMirrorTitleDiv"></div>
 
-        <input type="hidden" name="article[body]">
+        <input type="hidden" name="article[body_plain]">
         <div id="ProseMirrorBodyDiv"></div>
       </form>
 
+
+  ## Ecto examples
+
+        use ExProsemirror.Schema
+
+        import Ecto.Changeset
+        import ExProsemirror.Changeset
+
+        schema "article" do
+          prosemirror_field :title
+        end
+
+        def changeset(struct_or_changeset, attrs \\ %{}) do
+          struct_or_changeset
+          |> cast_prosemirror(attrs, :title, required: true)
+        end
+
+  > To learn more, take a look at `ExProsemirror.Schema` and `ExProsemirror.Changeset`.
 
   ## Installation
 
@@ -36,7 +55,7 @@ defmodule ExProsemirror do
   ```elixir
   def deps do
   [
-    {:ex_prosemirror, "~> 0.1.0"}
+    {:ex_prosemirror, git: "https://github.com/Omerlo-Technologies/ex_prosemirror", tag: "0.1.2"},
   ]
   end
   ```
@@ -73,47 +92,11 @@ defmodule ExProsemirror do
   }
   ```
 
-  - Finally, add your js part to configure prosemirror and initialized
-  ExProsemirror.
+  - Finally, set the json adapter that you prefer [Jason](https://hex.pm/packages/jason) or
+  [Poison](https://hex.pm/packages/poison).
 
-  ```elixir
-  # ProseMirror dependencies
-  import { exampleSetup } from 'prosemirror-example-setup'
-  import { EditorState } from 'prosemirror-state'
-  import { EditorView } from 'prosemirror-view'
-  import { DOMParser, Node } from "prosemirror-model"
-  import { Schema } from 'prosemirror-model';
-
-  # This is the helper from ex_prosemirror
-  import ExProsemirror from 'ex_prosemirror'
-
-  # You'll need to create a function that returns a ProseMirror Schema when executed
-  const schemaFunc = (options) => {
-    return new Schema({
-      nodes: {
-        text,
-        paragraph: export default {
-          group: 'block',
-          content: 'inline*',
-          toDOM() { return ['p', 0]; },
-          parseDOM: [{tag: 'p'}],
-        },
-        doc: {
-          content: 'block+',
-        },
-      }
-    });
-  }
-
-  # Bind your configuration to ExProsemirror
-  const exProsemirror = new ExProsemirror({EditorState, DOMParser, EditorView, Node})
-
-  # Initialize the schemas
-  exProsemirror.init({schemaFunc, pluginFunc: exampleSetup})
-  ```
-
-  You can now use ProseMirror in the way that you need, ExProsemirror will ensure that your DOM is
-  binded to your data.
+  > Optional: If you want to use the default prosemirror css, you can import the `css/prosemirror.css` file.
+  > E.g `@import "~ex_prosemirror/css/prosemirror.css";`
 
   """
 
@@ -124,10 +107,11 @@ defmodule ExProsemirror do
 
   - `safe_parser` defines if the protocole Pheonix.HTML.Safe should be defined by default. When `true`, it
   will use `ExProsemirror.extract_simple_text/1` (default: `true`)
+
   """
   defmacro __using__(opts) do
     quote do
-      import ExProsemirror.EctoHelper
+      import ExProsemirror.SchemaHelper
 
       @behaviour ExProsemirror
 

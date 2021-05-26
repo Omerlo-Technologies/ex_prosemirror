@@ -1,6 +1,8 @@
-defmodule ExProsemirror.EctoHelper do
+defmodule ExProsemirror.SchemaHelper do
   @moduledoc ~S"""
-  Helpers for ecto.
+  Ecto schema helper that defines multiple macros to use inside an Ecto.Schema.
+
+  It helps you build custom blocks / marks for `ExProsemirror`.
 
   > This module is automatically import if you use `ExProsemirror`.
   """

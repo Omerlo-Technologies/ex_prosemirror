@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="ex_prosemirror v0.1.2">
 
-    <title>API Reference — ex_prosemirror v0.1.2</title>
+    <title>ExProsemirror.SchemaHelper.embedded_prosemirror_field — ex_prosemirror v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-1b7fb3b547.js"></script>
@@ -18,7 +18,7 @@
 
 
   </head>
-  <body data-type="extras">
+  <body data-type="modules">
     <script>
 
       try {
@@ -79,76 +79,44 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>
-  API Reference <small class="app-vsn">ex_prosemirror v0.1.2</small>
-</h1>
+<h1>ExProsemirror.SchemaHelper.embedded_prosemirror_field</h1>
 
-  <section class="details-list">
-    <h2 id="modules" class="section-heading">
-  <a href="#modules" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Modules
+<div class="deprecated">
+  You're seeing just the macro <code>embedded_prosemirror_field</code>, go back to <a href="ExProsemirror.SchemaHelper.html">ExProsemirror.SchemaHelper</a> module for more information.
+</div>
+
+<section class="detail" id="embedded_prosemirror_field/2">
+
+    <span id="embedded_prosemirror_field/1"></span>
+
+  <div class="detail-header">
+    <a href="#embedded_prosemirror_field/2" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature">embedded_prosemirror_field(mapped_types, opts \\ [])</h1>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+<p>Add the PolymorphicField in your ecto schema.</p><h2 id="embedded_prosemirror_field/2-examples" class="section-heading">
+  <a href="#embedded_prosemirror_field/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
 </h2>
-
-    <div class="summary">
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.html">ExProsemirror</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>ExProsemirror is a helper for the <a href="https://prosemirror.net/">ProseMirror</a> rich-text
-editor inside of <a href="https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html">Phoenix.HTML.Form</a>.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.Changeset.html">ExProsemirror.Changeset</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Module helper for Ecto.Changeset.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.HTML.Form.html">ExProsemirror.HTML.Form</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Form helpers to generate HTML fields required by ProseMirror.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.Schema.html">ExProsemirror.Schema</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Module helper for Ecto.Schema.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.SchemaHelper.html">ExProsemirror.SchemaHelper</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Ecto schema helper that defines multiples macro to use inside a Ecto.Schema.</p></div>
-
-</div>
-
-    </div>
+<p>Single element</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="1075765176-1">(</span><span class="p" data-group-id="1075765176-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="1075765176-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="1075765176-1">)</span><span class="w">
+</span><span class="c1"># same as</span><span class="w">
+</span><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="1075765176-3">(</span><span class="p" data-group-id="1075765176-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="1075765176-4">]</span><span class="p" data-group-id="1075765176-3">)</span></code></pre><p>Multiple elements</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="8217001432-1">(</span><span class="p" data-group-id="8217001432-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Text</span><span class="p" data-group-id="8217001432-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="8217001432-1">)</span></code></pre><h2 id="embedded_prosemirror_field/2-options" class="section-heading">
+  <a href="#embedded_prosemirror_field/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">array</code>: boolean</li></ul><p>The <code class="inline">array</code> option will configure PolymorphicEmbed automatically to be a list of your data OR a single element.</p>
   </section>
+</section>
 
-
-<div class="bottom-actions">
-  <div class="bottom-actions-item">
-
-  </div>
-  <div class="bottom-actions-item">
-
-  </div>
-</div>
 
       <footer class="footer">
         <p>

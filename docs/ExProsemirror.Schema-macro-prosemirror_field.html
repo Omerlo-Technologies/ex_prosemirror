@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="ex_prosemirror v0.1.2">
 
-    <title>API Reference — ex_prosemirror v0.1.2</title>
+    <title>ExProsemirror.Schema.prosemirror_field — ex_prosemirror v0.1.2</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-1b7fb3b547.js"></script>
@@ -18,7 +18,7 @@
 
 
   </head>
-  <body data-type="extras">
+  <body data-type="modules">
     <script>
 
       try {
@@ -79,76 +79,43 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>
-  API Reference <small class="app-vsn">ex_prosemirror v0.1.2</small>
-</h1>
+<h1>ExProsemirror.Schema.prosemirror_field</h1>
 
-  <section class="details-list">
-    <h2 id="modules" class="section-heading">
-  <a href="#modules" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Modules
+<div class="deprecated">
+  You're seeing just the macro <code>prosemirror_field</code>, go back to <a href="ExProsemirror.Schema.html">ExProsemirror.Schema</a> module for more information.
+</div>
+
+<section class="detail" id="prosemirror_field/1">
+
+  <div class="detail-header">
+    <a href="#prosemirror_field/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature">prosemirror_field(name)</h1>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+<p>Helper to generate ExProsemirror ecto schema field.</p><h2 id="prosemirror_field/1-examples" class="section-heading">
+  <a href="#prosemirror_field/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
 </h2>
+<pre><code class="makeup elixir"><span class="n">schema</span><span class="w"> </span><span class="s">&quot;my_schema&quot;</span><span class="w"> </span><span class="k" data-group-id="7027862520-1">do</span><span class="w">
+  </span><span class="n">prosemirror_field</span><span class="w"> </span><span class="ss">:title</span><span class="w">
+</span><span class="k" data-group-id="7027862520-1">end</span><span class="w">
 
-    <div class="summary">
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.html">ExProsemirror</a>
+</span><span class="c1"># produces</span><span class="w">
 
-  </div>
-
-    <div class="summary-synopsis"><p>ExProsemirror is a helper for the <a href="https://prosemirror.net/">ProseMirror</a> rich-text
-editor inside of <a href="https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html">Phoenix.HTML.Form</a>.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.Changeset.html">ExProsemirror.Changeset</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Module helper for Ecto.Changeset.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.HTML.Form.html">ExProsemirror.HTML.Form</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Form helpers to generate HTML fields required by ProseMirror.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.Schema.html">ExProsemirror.Schema</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Module helper for Ecto.Schema.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="ExProsemirror.SchemaHelper.html">ExProsemirror.SchemaHelper</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Ecto schema helper that defines multiples macro to use inside a Ecto.Schema.</p></div>
-
-</div>
-
-    </div>
+</span><span class="n">field</span><span class="w"> </span><span class="ss">:title_plain</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="p">,</span><span class="w"> </span><span class="ss">virtual</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span><span class="n">embeds_one</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="nc">ExProsemirror.Schema</span></code></pre>
   </section>
+</section>
 
-
-<div class="bottom-actions">
-  <div class="bottom-actions-item">
-
-  </div>
-  <div class="bottom-actions-item">
-
-  </div>
-</div>
 
       <footer class="footer">
         <p>

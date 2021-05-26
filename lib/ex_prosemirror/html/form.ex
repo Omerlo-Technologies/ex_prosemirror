@@ -60,10 +60,10 @@ defmodule ExProsemirror.HTML.Form do
   def prosemirror_hidden_input(form, field, opts \\ []) do
     opts =
       opts
-      |> Keyword.take([:id, :name, :value])
+      |> Keyword.take([:id, :value])
       |> Keyword.put(:phx_update, "ignore")
 
-    hidden_input(form, field, opts)
+    hidden_input(form, :"#{field}_plain", opts)
   end
 
   @doc ~S"""
@@ -96,12 +96,13 @@ defmodule ExProsemirror.HTML.Form do
       |> format_opts(:id, input_id(form, field))
       |> Keyword.put_new(:class, "ex-prosemirror")
       |> Keyword.put(:phx_update, "ignore")
+      |> Keyword.put(:phx_hook, "MountProseMirror")
 
-    {value, opts} = Keyword.pop(opts, :value, input_value(form, field))
+    {_value, opts} = Keyword.pop(opts, :value, input_value(form, field))
 
     opts = Keyword.put(opts, :data, data)
 
-    content_tag(:div, ["\n", html_escape(value || "")], opts)
+    content_tag(:div, ["\n", html_escape("")], opts)
   end
 
   defp format_opts(opts, opt_name, default, prefix \\ "prose") when is_atom(opt_name) do

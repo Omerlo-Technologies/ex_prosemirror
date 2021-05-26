@@ -1,10 +1,16 @@
-const proseInstances = document.getElementsByClassName("ex-prosemirror")
+import { exampleSetup as pluginFunc } from 'prosemirror-example-setup';
+import { EditorState } from 'prosemirror-state';
+import { EditorView } from 'prosemirror-view';
+import { DOMParser, Node } from 'prosemirror-model';
+import schemaFunc from './prosemirror/schema';
+
+const proseInstances = document.getElementsByClassName("ex-prosemirror");
 
 class ExEditorView {
   constructor(editorNode, schema, pluginFunc, {EditorView, EditorState, DOMParser, Node}) {
     this.target = editorNode.dataset.target;
 
-    const initialValue = document.querySelector(this.target).value
+    const initialValue = document.querySelector(this.target).value;
 
     let doc;
 
@@ -13,10 +19,10 @@ class ExEditorView {
       try {
         doc = schema.nodeFromJSON(JSON.parse(initialValue));
       } catch {
-        doc = DOMParser.fromSchema(schema).parse('')
+        doc = DOMParser.fromSchema(schema).parse('');
       }
     } else {
-      doc = DOMParser.fromSchema(schema).parse('')
+      doc = DOMParser.fromSchema(schema).parse('');
     }
 
     const state = EditorState.create({
@@ -26,7 +32,7 @@ class ExEditorView {
 
     this.editorView = new EditorView(editorNode, {
       state: state,
-      dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction)}
+      dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction)},
     })
   }
 
@@ -41,9 +47,9 @@ class ExEditorView {
   }
 }
 
-export class ExProsemirror {
+class ExProsemirror {
   constructor(opts) {
-    this.opts = opts
+    this.opts = opts;
   }
 
   initAll({schemaFunc, pluginFunc}) {
@@ -59,8 +65,8 @@ export class ExProsemirror {
   init(target, {schemaFunc, pluginFunc}) {
     target.innerHTML = '';
     this.validate({schemaFunc, pluginFunc});
-    const configured_schema = schemaFunc(target.dataset)
-    return new ExEditorView(target, configured_schema, pluginFunc, this.opts)
+    const configured_schema = schemaFunc(target.dataset);
+    return new ExEditorView(target, configured_schema, pluginFunc, this.opts);
   }
 
   validate({schemaFunc, pluginFunc}) {
@@ -74,11 +80,10 @@ export class ExProsemirror {
   }
 }
 
-/* dispatchTransaction(transaction) {
- *   const newState = window.view.state.apply(transaction);
+const exProsemirror = new ExProsemirror({
+  EditorState, DOMParser, EditorView, Node,
+});
 
- *   const parsedState = newState.doc.toJSON();
+exProsemirror.initAll({ schemaFunc, pluginFunc });
 
- *   document.querySelector('#editor-export').textContent = JSON.stringify(parsedState);
- *   this.updateState(newState);
- * }, */
+export default exProsemirror;
