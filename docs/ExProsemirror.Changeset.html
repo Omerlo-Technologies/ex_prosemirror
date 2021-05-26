@@ -109,7 +109,7 @@ ExProsemirror.Changeset <small class="app-vsn">(ex_prosemirror v0.1.2)</small>
 
   </div>
 
-    <div class="summary-synopsis"><p>Cast and validate data integrity for an ExProsemirror field type.</p></div>
+    <div class="summary-synopsis"><p>Casts and validates data integrity for an ExProsemirror field type.</p></div>
 
 </div>
 <div class="summary-row">
@@ -118,7 +118,7 @@ ExProsemirror.Changeset <small class="app-vsn">(ex_prosemirror v0.1.2)</small>
 
   </div>
 
-    <div class="summary-synopsis"><p>Validate a prosemirror field (return <code class="inline">:__parent__</code> errors to the field itself).</p></div>
+    <div class="summary-synopsis"><p>Validates a prosemirror field (returns <code class="inline">:__parent__</code> errors to the field itself).</p></div>
 
 </div>
 
@@ -152,12 +152,12 @@ Functions
 
   <section class="docstring">
 
-<p>Cast and validate data integrity for an ExProsemirror field type.</p><h2 id="cast_prosemirror/4-examples" class="section-heading">
+<p>Casts and validates data integrity for an ExProsemirror field type.</p><h2 id="cast_prosemirror/4-examples" class="section-heading">
   <a href="#cast_prosemirror/4-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="n">cast_prosemirror</span><span class="p" data-group-id="3842692033-1">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="3842692033-1">)</span><span class="w">
-</span><span class="p" data-group-id="3842692033-2">%</span><span class="nc" data-group-id="3842692033-2">Ecto.Changeset</span><span class="p" data-group-id="3842692033-2">{</span><span class="p" data-group-id="3842692033-2">}</span></code></pre><h2 id="cast_prosemirror/4-options" class="section-heading">
+<pre><code class="makeup elixir"><span class="n">cast_prosemirror</span><span class="p" data-group-id="7843777037-1">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="7843777037-1">)</span><span class="w">
+</span><span class="p" data-group-id="7843777037-2">%</span><span class="nc" data-group-id="7843777037-2">Ecto.Changeset</span><span class="p" data-group-id="7843777037-2">{</span><span class="p" data-group-id="7843777037-2">}</span></code></pre><h2 id="cast_prosemirror/4-options" class="section-heading">
   <a href="#cast_prosemirror/4-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Options
 </h2>
@@ -178,16 +178,16 @@ Functions
 
   <section class="docstring">
 
-<p>Validate a prosemirror field (return <code class="inline">:__parent__</code> errors to the field itself).</p><h2 id="validate_prosemirror/2-examples" class="section-heading">
+<p>Validates a prosemirror field (returns <code class="inline">:__parent__</code> errors to the field itself).</p><h2 id="validate_prosemirror/2-examples" class="section-heading">
   <a href="#validate_prosemirror/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="c1"># Where the changeset use a schema that use ExProsemirror for its `title` field.</span><span class="w">
+<pre><code class="makeup elixir"><span class="c1"># Assuming changeset contains an ExProsemirror `title` field.</span><span class="w">
 </span><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Ecto.Changeset</span><span class="o">.</span><span class="n">cast</span><span class="p" data-group-id="2726487736-1">(</span><span class="p" data-group-id="2726487736-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid Json&quot;</span><span class="p" data-group-id="2726487736-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2726487736-3">[</span><span class="p" data-group-id="2726487736-3">]</span><span class="p" data-group-id="2726487736-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">validate_prosemirror</span><span class="p" data-group-id="2726487736-4">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="2726487736-4">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Ecto.Changeset</span><span class="o">.</span><span class="n">cast</span><span class="p" data-group-id="0101566980-1">(</span><span class="p" data-group-id="0101566980-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid Json&quot;</span><span class="p" data-group-id="0101566980-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0101566980-3">[</span><span class="p" data-group-id="0101566980-3">]</span><span class="p" data-group-id="0101566980-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">validate_prosemirror</span><span class="p" data-group-id="0101566980-4">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="0101566980-4">)</span><span class="w">
 
-</span><span class="p" data-group-id="2726487736-5">%</span><span class="nc" data-group-id="2726487736-5">Ecto.Changeset</span><span class="p" data-group-id="2726487736-5">{</span><span class="ss">changes</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2726487736-6">%{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2726487736-7">[</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid json&quot;</span><span class="p" data-group-id="2726487736-7">]</span><span class="p" data-group-id="2726487736-6">}</span><span class="p" data-group-id="2726487736-5">}</span></code></pre>
+</span><span class="p" data-group-id="0101566980-5">%</span><span class="nc" data-group-id="0101566980-5">Ecto.Changeset</span><span class="p" data-group-id="0101566980-5">{</span><span class="ss">changes</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0101566980-6">%{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0101566980-7">[</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid json&quot;</span><span class="p" data-group-id="0101566980-7">]</span><span class="p" data-group-id="0101566980-6">}</span><span class="p" data-group-id="0101566980-5">}</span></code></pre>
   </section>
 </section>
 
