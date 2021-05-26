@@ -3,7 +3,7 @@ defmodule ExProsemirror do
   ExProsemirror is a helper for the [ProseMirror](https://prosemirror.net/) rich-text
   editor inside of [Phoenix.HTML.Form](https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html).
 
-  **The current version is in **alpha** and we don't guarantee it works as expected.**
+  **The current version is in alpha and we don't guarantee it works as expected.**
 
 
   ## EEx examples
@@ -86,7 +86,7 @@ defmodule ExProsemirror do
     ...
     "dependencies": {
       ...
-      "ex_prosemirror": "file:../deps/ex_prosemirror"
+      "ex_prosemirror": "file:../deps/ex_prosemirror/assets"
     }
     ...
   }
@@ -96,6 +96,7 @@ defmodule ExProsemirror do
   [Poison](https://hex.pm/packages/poison).
 
   > Optional: If you want to use the default prosemirror css, you can import the `css/prosemirror.css` file.
+  >
   > E.g `@import "~ex_prosemirror/css/prosemirror.css";`
 
   """
