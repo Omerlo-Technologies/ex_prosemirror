@@ -43,12 +43,12 @@ defmodule ExProsemirror.Changeset do
   end
 
   @doc ~S"""
-  Validate a prosemirror field (return `:__parent__` errors to the field itself).
+  Validates a prosemirror field (returns `:__parent__` errors to the field itself).
 
 
   ## Examples
 
-      # Where the changeset use a schema that use ExProsemirror for its `title` field.
+      # Assuming changeset contains an ExProsemirror `title` field.
       struct_or_changeset
       |> Ecto.Changeset.cast(%{title: "Invalid Json"}, [])
       |> validate_prosemirror(changeset, :title, required: true)

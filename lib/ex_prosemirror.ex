@@ -95,7 +95,7 @@ defmodule ExProsemirror do
   - Finally, set the json adapter that you prefer [Jason](https://hex.pm/packages/jason) or
   [Poison](https://hex.pm/packages/poison).
 
-  > Optional: If you want to use default prosemirror css, you can import the `css/prosemirror.css` file.
+  > Optional: If you want to use the default prosemirror css, you can import the `css/prosemirror.css` file.
   > E.g `@import "~ex_prosemirror/css/prosemirror.css";`
 
   """

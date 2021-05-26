@@ -9,7 +9,7 @@ defmodule ExProsemirror.Schema do
   import Ecto.Changeset
 
   @doc ~S"""
-  Automatically import ExProsemirror.Schema functions helper.
+  Automatically imports ExProsemirror.Schema functions helper.
 
   ## Examples
 
