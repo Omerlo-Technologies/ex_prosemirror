@@ -4,10 +4,10 @@ import { EditorView } from 'prosemirror-view';
 import { DOMParser, Node } from 'prosemirror-model';
 import schemaFunc from './prosemirror/schema';
 
-const proseInstances = document.getElementsByClassName("ex-prosemirror");
+const proseInstances = document.getElementsByClassName('ex-prosemirror');
 
 class ExEditorView {
-  constructor(editorNode, schema, pluginFunc, {EditorView, EditorState, DOMParser, Node}) {
+  constructor(editorNode, schema, pluginFunc, {EditorView, EditorState, DOMParser}) {
     this.target = editorNode.dataset.target + '_plain';
 
     const initialValue = document.querySelector(this.target).value;
@@ -15,7 +15,6 @@ class ExEditorView {
     let doc;
 
     if(initialValue.length > 0) {
-      let json = JSON.parse(initialValue);
       try {
         doc = schema.nodeFromJSON(JSON.parse(initialValue));
       } catch {
@@ -32,8 +31,8 @@ class ExEditorView {
 
     this.editorView = new EditorView(editorNode, {
       state: state,
-      dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction)},
-    })
+      dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction);},
+    });
   }
 
   dispatchTransaction(transaction) {
@@ -57,8 +56,8 @@ class ExProsemirror {
 
     Array.from(proseInstances).forEach(el => {
       el.innerHTML = '';
-      const configured_schema = schemaFunc(el.dataset)
-      new ExEditorView(el, configured_schema, pluginFunc, this.opts)
+      const configured_schema = schemaFunc(el.dataset);
+      new ExEditorView(el, configured_schema, pluginFunc, this.opts);
     });
   }
 
