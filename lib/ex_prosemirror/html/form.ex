@@ -64,7 +64,11 @@ defmodule ExProsemirror.HTML.Form do
       |> Keyword.put(:phx_update, "ignore")
       |> Keyword.update(:id, "#{field}_plain", fn id -> "#{id}_plain" end)
 
-    hidden_input(form, :"#{field}_plain", opts)
+    if Application.get_env(:ex_prosemirror, :debug, false) do
+      textarea(form, :"#{field}_plain", opts)
+    else
+      hidden_input(form, :"#{field}_plain", opts)
+    end
   end
 
   @doc ~S"""

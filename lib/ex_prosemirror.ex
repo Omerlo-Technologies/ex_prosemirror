@@ -188,4 +188,14 @@ defmodule ExProsemirror do
   end
 
   def extract_simple_text(_), do: nil
+
+  @doc ~S"""
+  Setting debug to true will display the hidden form with json structure. 
+  By default, this field is input_hidden.
+
+  ## Examples
+
+    debug(true)
+  """
+  def debug(boolean), do: Application.put_env(:ex_prosemirror, :debug, boolean)
 end
