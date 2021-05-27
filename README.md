@@ -1,5 +1,7 @@
 # ExProsemirror
 
+[![CI](https://github.com/Omerlo-Technologies/ex_prosemirror/actions/workflows/ci.yml/badge.svg)](https://github.com/Omerlo-Technologies/ex_prosemirror/actions/workflows/ci.yml)
+
 ExProsemirror is a toolkit that integrates the [ProseMirror](https://prosemirror.net)
 rich-text editor into elixir/phoenix.
 
