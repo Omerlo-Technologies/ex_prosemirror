@@ -3,7 +3,7 @@ import text from './text';
 import header from './header';
 
 const blocks = {
-  paragraph: paragraph,
+  p: paragraph,
   text: text,
   h1: header(1),
   h2: header(2),
@@ -28,7 +28,7 @@ export default (options) => {
   }, {});
 
   if (Object.keys(blocksResult).length === 0) {
-    blocksResult['paragraph'] = blocks['paragraph'];
+    blocksResult['p'] = blocks['p'];
   }
 
   blocksResult['doc'] = blocks['doc'];
