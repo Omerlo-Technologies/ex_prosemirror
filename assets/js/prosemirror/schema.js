@@ -1,17 +1,10 @@
 import { Schema } from 'prosemirror-model';
 import marks from './marks';
-import text from './text';
-import paragraph from './paragraph';
+import blocks from './blocks';
 
 export default (options) => (
   new Schema({
-    nodes: {
-      text,
-      paragraph,
-      doc: {
-        content: 'block+',
-      },
-    },
+    nodes: blocks(options.blocks),
     marks: marks(options.marks),
   })
 );
