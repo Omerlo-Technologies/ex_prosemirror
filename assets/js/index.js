@@ -8,7 +8,7 @@ const proseInstances = document.getElementsByClassName("ex-prosemirror");
 
 class ExEditorView {
   constructor(editorNode, schema, pluginFunc, {EditorView, EditorState, DOMParser, Node}) {
-    this.target = editorNode.dataset.target;
+    this.target = editorNode.dataset.target + '_plain';
 
     const initialValue = document.querySelector(this.target).value;
 
