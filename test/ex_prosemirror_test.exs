@@ -2,6 +2,8 @@ defmodule ExProsemirrorTest do
   use ExUnit.Case
   doctest ExProsemirror
 
+  import Phoenix.HTML.Safe
+
   @simple_data_attrs %{
     content: %{
       type: :doc,
@@ -36,7 +38,7 @@ defmodule ExProsemirrorTest do
 
   describe "Test phoenix side" do
     test "Basic HTML safe" do
-      assert Phoenix.HTML.Safe.to_iodata(@simple_schema_data) ==
+      assert to_iodata(@simple_schema_data) ==
                ExProsemirror.extract_simple_text(@simple_schema_data)
     end
   end
