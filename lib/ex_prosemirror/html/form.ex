@@ -24,9 +24,17 @@ defmodule ExProsemirror.HTML.Form do
 
   ## Usages
 
-      <%= prosemirror_input @form, :body, id: "my-article-input" %>
+      <%= prosemirror_input @form, :title, id: "my-article-input", blocks: [heading: [1]] %>
+      <%= prosemirror_input @form, :body, id: "my-article-input", blocks: [:p, heading: [2, 3]] %>
+      <%= prosemirror_input @form, :author, id: "my-article-input", marks: [:strong], blocks: [:p] %>
 
-  iex> prosemirror_input(form, :body)
+  ## Options
+
+  - `blocks`:
+    - `:heading`: allow headers. Should be an array of integer (value between 1 to 6).
+    - `:p`: allow paragraph.
+  - `marks`: Could be `strong` or `em`.
+
   """
   def prosemirror_input(form, field, opts \\ []) do
     id = input_id(form, field)
@@ -114,6 +122,12 @@ defmodule ExProsemirror.HTML.Form do
   end
 
   defp to_html_data(values) when is_list(values) do
-    values |> List.flatten() |> Enum.join(",")
+    values
+    |> List.flatten()
+    |> Enum.map(&to_html_data/1)
+    |> Jason.encode!()
   end
+
+  defp to_html_data({key, values}), do: %{key => values}
+  defp to_html_data(value), do: value
 end
