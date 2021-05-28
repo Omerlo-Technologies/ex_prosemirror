@@ -1,4 +1,7 @@
-import { exampleSetup as pluginFunc } from 'prosemirror-example-setup';
+// import { exampleSetup as pluginFunc } from 'prosemirror-example-setup';
+import pluginFunc from './prosemirror/menu';
+import { keymap } from 'prosemirror-keymap';
+import { baseKeymap } from 'prosemirror-commands';
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { DOMParser, Node } from 'prosemirror-model';
@@ -26,7 +29,7 @@ class ExEditorView {
 
     const state = EditorState.create({
       doc: doc,
-      plugins: pluginFunc({schema: schema})
+      plugins: [pluginFunc({ schema }), keymap(baseKeymap)]
     });
 
     this.editorView = new EditorView(editorNode, {
