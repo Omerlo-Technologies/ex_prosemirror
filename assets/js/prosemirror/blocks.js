@@ -1,38 +1,39 @@
-import paragraph from './paragraph';
-import text from './text';
-import header from './header';
+import { nodes } from 'prosemirror-schema-basic';
 
 const blocks = {
-  p: paragraph,
-  text: text,
-  h1: header(1),
-  h2: header(2),
-  h3: header(3),
-  h4: header(4),
-  h5: header(5),
-  h6: header(6),
-  doc: {
-    content: 'block+',
-  },
+  p: nodes.paragraph,
+  text: nodes.text,
+  heading: nodes.heading,
+  doc: nodes.doc
 };
 
+function extractHeading({ heading }) {
+  return {
+    attrs: {level: {default: 1}},
+    allowsLevel: heading,
+    content: 'inline*',
+    group: 'block',
+    defining: true,
+    parseDOM: heading.map((header) => ({tag: 'h' + header, attrs: {level: header}})),
+    toDOM(node) { return ['h' + node.attrs.level, 0]; }
+  };
+}
+
 export default (options) => {
-  const blocksOptions = options.split(',');
+  let jsonOptions = JSON.parse(options);
 
-  const blocksResult =  blocksOptions.reduce((accumulator, value) => {
-    if (value in blocks) {
-      accumulator[value] = blocks[value];
+  const map = {
+    text: blocks.text,
+    doc: blocks.doc
+  };
+
+  jsonOptions.map((option) => {
+    if (typeof(option) == 'object') {
+      map['heading'] = extractHeading(option);
+    } else {
+      map[option] = blocks[option];
     }
+  });
 
-    return accumulator;
-  }, {});
-
-  if (Object.keys(blocksResult).length === 0) {
-    blocksResult['p'] = blocks['p'];
-  }
-
-  blocksResult['doc'] = blocks['doc'];
-  blocksResult['text'] = blocks['text'];
-
-  return blocksResult;
+  return map;
 };
