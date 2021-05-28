@@ -1,91 +1,33 @@
-// import { exampleSetup as pluginFunc } from 'prosemirror-example-setup';
-import pluginFunc from './prosemirror/menu';
-import { keymap } from 'prosemirror-keymap';
-import { baseKeymap } from 'prosemirror-commands';
-import { EditorState } from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
-import { DOMParser, Node } from 'prosemirror-model';
-import schemaFunc from './prosemirror/schema';
+import ExEditorView from './ExEditorView';
 
 const proseInstances = document.getElementsByClassName('ex-prosemirror');
 
-class ExEditorView {
-  constructor(editorNode, schema, pluginFunc, {EditorView, EditorState, DOMParser}) {
-    this.target = editorNode.dataset.target + '_plain';
-
-    const initialValue = document.querySelector(this.target).value;
-
-    let doc;
-
-    if(initialValue.length > 0) {
-      try {
-        doc = schema.nodeFromJSON(JSON.parse(initialValue));
-      } catch {
-        doc = DOMParser.fromSchema(schema).parse('');
-      }
-    } else {
-      doc = DOMParser.fromSchema(schema).parse('');
-    }
-
-    const state = EditorState.create({
-      doc: doc,
-      plugins: [pluginFunc({ schema }), keymap(baseKeymap)]
-    });
-
-    this.editorView = new EditorView(editorNode, {
-      state: state,
-      dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction);},
-    });
-  }
-
-  dispatchTransaction(transaction) {
-    const newState = this.editorView.state.apply(transaction);
-    const parsedState = newState.doc.toJSON();
-
-    // TODO liveview supports
-
-    document.querySelector(this.target).value = JSON.stringify(parsedState);
-    this.editorView.updateState(newState);
-  }
-}
-
+/**
+ * ExProsemirror manage prosemirror in elixir project.
+ */
 class ExProsemirror {
-  constructor(opts) {
-    this.opts = opts;
+  constructor() {
+    this.initAll();
   }
 
-  initAll({schemaFunc, pluginFunc}) {
-    this.validate({schemaFunc, pluginFunc});
-
+  /**
+   * Initializes all prosemirror instances.
+   */
+  initAll() {
     Array.from(proseInstances).forEach(el => {
-      el.innerHTML = '';
-      const configured_schema = schemaFunc(el.dataset);
-      new ExEditorView(el, configured_schema, pluginFunc, this.opts);
+      this.init(el);
     });
   }
 
-  init(target, {schemaFunc, pluginFunc}) {
+  /**
+   * Initializes the specified target (should be an ex_prosemirror instance).
+   *
+   * @param {any} target - target to initialize.
+   */
+  init(target) {
     target.innerHTML = '';
-    this.validate({schemaFunc, pluginFunc});
-    const configured_schema = schemaFunc(target.dataset);
-    return new ExEditorView(target, configured_schema, pluginFunc, this.opts);
-  }
-
-  validate({schemaFunc, pluginFunc}) {
-    if(!schemaFunc) {
-      throw 'ExProsmirror - schemaFunc is required when initializing a new instance.';
-    }
-
-    if(!pluginFunc) {
-      throw 'ExProsmirror - pluginFunc is required when initializing a new instance.';
-    }
+    return new ExEditorView(target);
   }
 }
 
-const exProsemirror = new ExProsemirror({
-  EditorState, DOMParser, EditorView, Node,
-});
-
-exProsemirror.initAll({ schemaFunc, pluginFunc });
-
-export default exProsemirror;
+export default new ExProsemirror();
