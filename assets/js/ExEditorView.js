@@ -18,6 +18,8 @@ export default class ExEditorView {
       state: this.state,
       dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction);},
     });
+
+    this.addListeners();
   }
 
   initializeSchema() {
@@ -41,6 +43,13 @@ export default class ExEditorView {
     } else {
       return DOMParser.fromSchema(schema).parse('');
     }
+  }
+
+  addListeners() {
+    const exEditorView = this;
+    this.editorNode.addEventListener('exProsemirrorInsertPlaceholder', () => {
+      insertPlaceholder(exEditorView);
+    });
   }
 
   dispatchTransaction(transaction) {
