@@ -4,7 +4,8 @@ const blocks = {
   p: nodes.paragraph,
   text: nodes.text,
   heading: nodes.heading,
-  doc: nodes.doc
+  doc: nodes.doc,
+  image: nodes.image
 };
 
 function extractHeading({ heading }) {
