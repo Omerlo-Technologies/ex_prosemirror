@@ -1,4 +1,4 @@
-import { Dropdown, menuBar, icons, blockTypeItem } from 'prosemirror-menu';
+import { Dropdown, MenuItem, menuBar, icons, blockTypeItem } from 'prosemirror-menu';
 import { markItem } from './marks';
 
 function generateHeadingItem(schema) {
@@ -40,6 +40,21 @@ function generateTextStyleMenu(schema) {
   return [];
 }
 
+function generateMediaMenu() {
+  return [[
+    new MenuItem({
+      title: 'Insert image',
+      label: 'Image',
+      enable() { return true; },
+      run(_state, _transaction, view) {
+        const exEditorNode = view.dom.parentNode.parentNode;
+        exEditorNode.dispatchEvent(new Event('exProsemirrorInsertPlaceholder'));
+      }
+    })
+  ]];
+}
+
+
 function generateMarks(schema) {
   if(schema.marks) {
     const keys = Object.keys(schema.marks);
@@ -59,7 +74,8 @@ function generateMarks(schema) {
 export default({ schema  }) => {
   const items = [
     generateMarks(schema),
-    ...generateTextStyleMenu(schema)
+    ...generateTextStyleMenu(schema),
+    ...generateMediaMenu(schema)
   ];
 
   return menuBar({content: items});
