@@ -40,7 +40,11 @@ function generateTextStyleMenu(schema) {
   return [];
 }
 
-function generateMediaMenu() {
+function generateMediaMenu(schema) {
+  if (!schema.nodes.image) {
+    return [];
+  }
+
   return [[
     new MenuItem({
       title: 'Insert image',
