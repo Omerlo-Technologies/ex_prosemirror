@@ -10,8 +10,9 @@ import { placeholderPlugin, insertPlaceholder } from './prosemirror/plugins/plac
 
 export default class ExEditorView {
   constructor(editorNode) {
+    this.editorNode = editorNode;
     this.target = editorNode.dataset.target + '_plain';
-    this.initializeSchema(editorNode);
+    this.initializeSchema();
 
     this.editorView = new EditorView(editorNode, {
       state: this.state,
@@ -19,8 +20,8 @@ export default class ExEditorView {
     });
   }
 
-  initializeSchema(editorNode) {
-    const schema = schemaFunc(editorNode.dataset);
+  initializeSchema() {
+    const schema = schemaFunc(this.editorNode.dataset);
 
     this.state = EditorState.create({
       doc: this.getDoc(schema),
