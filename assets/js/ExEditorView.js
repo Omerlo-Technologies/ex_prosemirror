@@ -5,6 +5,7 @@ import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { DOMParser } from 'prosemirror-model';
 import schemaFunc from './prosemirror/schema';
+import { placeholderPlugin, insertPlaceholder } from './prosemirror/plugins/placeholder';
 
 
 export default class ExEditorView {
@@ -23,7 +24,7 @@ export default class ExEditorView {
 
     this.state = EditorState.create({
       doc: this.getDoc(schema),
-      plugins: [menuPlugin({ schema }), keymap(baseKeymap)]
+      plugins: [menuPlugin({ schema }), keymap(baseKeymap), placeholderPlugin]
     });
   }
 
