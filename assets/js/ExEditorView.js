@@ -12,20 +12,19 @@ export default class ExEditorView {
   constructor(editorNode) {
     this.editorNode = editorNode;
     this.target = editorNode.dataset.target + '_plain';
-    this.initializeSchema();
 
     this.editorView = new EditorView(editorNode, {
-      state: this.state,
+      state: this.initializeEditorState(),
       dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction);},
     });
 
     this.addListeners();
   }
 
-  initializeSchema() {
+  initializeEditorState() {
     const schema = schemaFunc(this.editorNode.dataset);
 
-    this.state = EditorState.create({
+    return EditorState.create({
       doc: this.getDoc(schema),
       plugins: [menuPlugin({ schema }), keymap(baseKeymap), placeholderPlugin]
     });

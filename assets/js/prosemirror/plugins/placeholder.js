@@ -37,7 +37,7 @@ export function insertPlaceholder(exEditorView) {
   let id = {};
 
   // Replace the selection with a placeholder
-  let tr = exEditorView.state.tr;
+  let tr = exEditorView.editorView.state.tr;
   if (!tr.selection.empty) {
     tr.deleteSelection();
   }
