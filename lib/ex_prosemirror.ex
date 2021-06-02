@@ -9,9 +9,38 @@ defmodule ExProsemirror do
   ## EEx examples
 
       <%= form_for @changeset, "#", fn f -> %>
-        <%= prosemirror_input f, :title, marks: [:em] %>
-        <%= prosemirror_input f, :body, marks: [:strong, :em], blocks: [:p, :h1] %>
+        <%= prosemirror_input f, :title, type: :title %>
+        <%= prosemirror_input f, :body, blocks: [h1: false] %>
       <% end %>
+
+  Assuming we have the following in our config:
+
+  ```elixir
+  config :ex_prosemirror,
+    default: [
+      blocks: [:p, :h1, :h2],
+      marks: [:strong]
+    ],
+    types: [
+      title: [
+        marks: [:em],
+        blocks: [:h1]
+      ]
+    ]
+  ```
+
+  We will get the following results:
+
+  * Input of type `:title` will be instantiated with block `h1` and will have the `em` mark
+  * Input of type `:body` will be instantiated with blocks `p` and `h2` and will have the `strong` mark
+
+  When providing the `type` option, we are telling ExProsemirror to fetch the blocks and marks specified in our config.
+
+  The following will go to our config, and grab the blocks/marks specified in the `body` type.
+
+  ```elixir
+  <%= prosemirror_input f, :title, type: :body ... %>
+  ```
 
   > Currently we don't allow custom blocks / marks. You have to use marks and blocks
   > defined by the lib ex_prosemirror.
@@ -190,7 +219,7 @@ defmodule ExProsemirror do
   def extract_simple_text(_), do: nil
 
   @doc ~S"""
-  Setting debug to true will display the hidden form with json structure. 
+  Setting debug to true will display the hidden form with json structure.
   By default, this field is input_hidden.
 
   ## Examples
