@@ -8,6 +8,8 @@ const blocks = {
   image: nodes.image
 };
 
+const allowedHeading = {h1: 1, h2: 2, h3: 3, h4: 4, h5: 5, h6: 6};
+
 function extractHeading({ heading }) {
   return {
     attrs: {level: {default: 1}},
@@ -28,13 +30,16 @@ export default (options) => {
     doc: blocks.doc
   };
 
+  const heading = [];
+
   jsonOptions.map((option) => {
-    if (typeof(option) == 'object') {
-      map['heading'] = extractHeading(option);
-    } else {
+    if (allowedHeading[option]) {
+      heading.push(allowedHeading[option]);
+    } else
       map[option] = blocks[option];
-    }
   });
+
+  map['heading'] = extractHeading({ heading });
 
   return map;
 };
