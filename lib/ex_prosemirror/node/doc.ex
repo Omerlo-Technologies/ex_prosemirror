@@ -1,11 +1,11 @@
-defmodule ExProsemirror.Doc do
+defmodule ExProsemirror.Node.Doc do
   @moduledoc ~S"""
   Root of prosemirror element. It handles element form input and casts it to Ecto schemas.
 
   A doc could contain one or many :
 
-  - `ExProsemirror.Paragraph`
-  - `ExProsemirror.Heading`
+  - `ExProsemirror.Node.Paragraph`
+  - `ExProsemirror.Node.Heading`
   """
 
   use Ecto.Schema
@@ -17,8 +17,8 @@ defmodule ExProsemirror.Doc do
   embedded_schema do
     embedded_prosemirror_field(
       [
-        paragraph: ExProsemirror.Paragraph,
-        heading: ExProsemirror.Heading
+        paragraph: ExProsemirror.Node.Paragraph,
+        heading: ExProsemirror.Node.Heading
       ],
       array: true
     )

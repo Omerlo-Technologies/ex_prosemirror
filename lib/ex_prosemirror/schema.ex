@@ -44,7 +44,7 @@ defmodule ExProsemirror.Schema do
 
   @doc false
   embedded_schema do
-    embedded_prosemirror_field(doc: ExProsemirror.Doc, array: true)
+    embedded_prosemirror_field(doc: ExProsemirror.Node.Doc, array: true)
   end
 
   @doc false
