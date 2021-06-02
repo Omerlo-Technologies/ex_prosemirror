@@ -5,8 +5,10 @@ defmodule ExProsemirrorTest do
 
   import Phoenix.HTML.Safe
 
+  alias ExProsemirror.Node.{Doc, Heading, Paragraph, Text}
+
   @text_content_attrs %{type: :text, text: "hello world"}
-  @text_content_data %ExProsemirror.Text{text: "hello world"}
+  @text_content_data %Text{text: "hello world"}
 
   @simple_data_attrs %{
     content: %{
@@ -16,9 +18,9 @@ defmodule ExProsemirrorTest do
   }
 
   @simple_schema_data %ExProsemirror.Schema{
-    content: %ExProsemirror.Doc{
+    content: %Doc{
       content: [
-        %ExProsemirror.Paragraph{
+        %Paragraph{
           content: [@text_content_data]
         }
       ]
@@ -36,12 +38,12 @@ defmodule ExProsemirrorTest do
   }
 
   @full_schema_data %ExProsemirror.Schema{
-    content: %ExProsemirror.Doc{
+    content: %Doc{
       content: [
-        %ExProsemirror.Paragraph{content: [@text_content_data]},
-        %ExProsemirror.Heading{
+        %Paragraph{content: [@text_content_data]},
+        %Heading{
           content: [@text_content_data],
-          attrs: %ExProsemirror.Heading.Attrs{level: 1}
+          attrs: %Heading.Attrs{level: 1}
         }
       ]
     }
@@ -82,8 +84,8 @@ defmodule ExProsemirrorTest do
     test "test" do
       attrs = %{content: [@text_content_attrs]}
 
-      %ExProsemirror.Paragraph{}
-      |> ExProsemirror.Paragraph.changeset(attrs)
+      %Paragraph{}
+      |> Paragraph.changeset(attrs)
       |> ExProsemirror.Changeset.validate_prosemirror(:content)
     end
 

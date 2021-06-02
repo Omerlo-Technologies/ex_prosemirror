@@ -1,13 +1,13 @@
-defmodule ExProsemirror.Text do
+defmodule ExProsemirror.Node.Text do
   @moduledoc ~S"""
   Prosemirror inline element. It's contained by most of ExProsemirror modifiers like
-  `ExProsemirror.Paragraph` or `ExProsemirror.Heading`.
+  `ExProsemirror.Node.Paragraph` or `ExProsemirror.Node.Heading`.
 
   When creating an ExProsemirror node you can use this module thanks to
 
-      embedded_prosemirror_field([text: ExProsemirror.Text], array: true)
+      embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: true)
 
-  > `embedded_prosemirror_field` is defined in `ExProsemirror.SchemaHelper` and auto imports with
+  > `embedded_prosemirror_field` is defined in `ExProsemirror.SchemaHelper` and is imported with
   > using `ExProsemirror.Schema`.
   """
 
@@ -29,11 +29,11 @@ defmodule ExProsemirror.Text do
   end
 
   @doc ~S"""
-  Returns the text of an `ExProsemirror.Text`.
+  Returns the text of an `ExProsemirror.Node.Text`.
 
   ## E.g
 
-      ExProsemirror.Text.extract_simple_text(%ExProsemirror.Text{text: "Hello elixir's friends"})
+      ExProsemirror.Node.Text.extract_simple_text(%ExProsemirror.Node.Text{text: "Hello elixir's friends"})
       "Hello elixir's friends"
   """
   def extract_simple_text(%__MODULE__{text: text}), do: text

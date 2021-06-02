@@ -1,4 +1,4 @@
-defmodule ExProsemirror.Paragraph do
+defmodule ExProsemirror.Node.Paragraph do
   @moduledoc ~S"""
   Create heading text style using `<p></p>` html style.
 
@@ -15,7 +15,7 @@ defmodule ExProsemirror.Paragraph do
 
   @doc false
   embedded_schema do
-    embedded_prosemirror_field([text: ExProsemirror.Text], array: true)
+    embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: true)
   end
 
   @doc false

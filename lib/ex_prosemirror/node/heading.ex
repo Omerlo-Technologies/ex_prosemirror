@@ -1,4 +1,4 @@
-defmodule ExProsemirror.Heading do
+defmodule ExProsemirror.Node.Heading do
   @moduledoc ~S"""
   Create heading text style using `<hX></hX>` html style.
 
@@ -18,7 +18,7 @@ defmodule ExProsemirror.Heading do
   @doc false
   embedded_schema do
     embeds_one :attrs, __MODULE__.Attrs
-    embedded_prosemirror_field([text: ExProsemirror.Text], array: true)
+    embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: true)
   end
 
   @doc false

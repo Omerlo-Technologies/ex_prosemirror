@@ -33,18 +33,20 @@ defmodule ExProsemirror.MixProject do
   defp docs do
     [
       main: "ExProsemirror",
+      nest_modules_by_prefix: prosemirror_nodes(),
       groups_for_modules: [
-        "ExProsemirror modifiers": prosemirror_modules()
+        Modifiers: prosemirror_nodes()
       ]
     ]
   end
 
-  defp prosemirror_modules do
+  defp prosemirror_nodes do
     [
-      ExProsemirror.Doc,
-      ExProsemirror.Text,
-      ExProsemirror.Heading,
-      ExProsemirror.Paragraph
+      ExProsemirror.Node,
+      ExProsemirror.Node.Doc,
+      ExProsemirror.Node.Text,
+      ExProsemirror.Node.Heading,
+      ExProsemirror.Node.Paragraph
     ]
   end
 end

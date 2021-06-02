@@ -16,13 +16,13 @@ defmodule ExProsemirror.SchemaHelper do
 
   Single element
 
-      embedded_prosemirror_field([text: ExProsemirror.Text], array: false)
+      embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: false)
       # same as
-      embedded_prosemirror_field([text: ExProsemirror.Text])
+      embedded_prosemirror_field([text: ExProsemirror.Node.Text])
 
   Multiple elements
 
-      embedded_prosemirror_field([text: ExProsemirror.Text], array: true)
+      embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: true)
 
   ## Options
 
