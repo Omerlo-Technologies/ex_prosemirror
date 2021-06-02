@@ -5,7 +5,7 @@ defmodule ExProsemirrorTest do
 
   import Phoenix.HTML.Safe
 
-  alias ExProsemirror.Node.{Doc, Heading, Paragraph, Text}
+  alias ExProsemirror.Node.{Doc, Heading, Image, Paragraph, Text}
 
   @text_content_attrs %{type: :text, text: "hello world"}
   @text_content_data %Text{text: "hello world"}
@@ -32,7 +32,8 @@ defmodule ExProsemirrorTest do
       type: :doc,
       content: [
         %{type: :paragraph, content: [@text_content_attrs]},
-        %{type: :heading, attrs: %{level: 1}, content: [@text_content_attrs]}
+        %{type: :heading, attrs: %{level: 1}, content: [@text_content_attrs]},
+        %{type: :image, attrs: %{src: "image-url"}}
       ]
     }
   }
@@ -44,7 +45,8 @@ defmodule ExProsemirrorTest do
         %Heading{
           content: [@text_content_data],
           attrs: %Heading.Attrs{level: 1}
-        }
+        },
+        %Image{attrs: %Image.Attrs{src: "image-url"}}
       ]
     }
   }

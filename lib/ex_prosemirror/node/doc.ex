@@ -18,7 +18,8 @@ defmodule ExProsemirror.Node.Doc do
     embedded_prosemirror_field(
       [
         paragraph: ExProsemirror.Node.Paragraph,
-        heading: ExProsemirror.Node.Heading
+        heading: ExProsemirror.Node.Heading,
+        image: ExProsemirror.Node.Image
       ],
       array: true
     )
