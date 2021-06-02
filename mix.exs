@@ -8,10 +8,7 @@ defmodule ExProsemirror.MixProject do
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      docs: [
-        # The main page in the docs
-        main: "ExProsemirror"
-      ]
+      docs: docs()
     ]
   end
 
@@ -30,6 +27,24 @@ defmodule ExProsemirror.MixProject do
       {:polymorphic_embed, "~> 1.6"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.24.2", only: :dev, runtime: false}
+    ]
+  end
+
+  defp docs do
+    [
+      main: "ExProsemirror",
+      groups_for_modules: [
+        "ExProsemirror modifiers": prosemirror_modules()
+      ]
+    ]
+  end
+
+  defp prosemirror_modules do
+    [
+      ExProsemirror.Doc,
+      ExProsemirror.Text,
+      ExProsemirror.Heading,
+      ExProsemirror.Paragraph
     ]
   end
 end
