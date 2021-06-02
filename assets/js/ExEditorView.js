@@ -5,25 +5,28 @@ import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { DOMParser } from 'prosemirror-model';
 import schemaFunc from './prosemirror/schema';
+import { placeholderPlugin, insertPlaceholder } from './prosemirror/plugins/placeholder';
 
 
 export default class ExEditorView {
   constructor(editorNode) {
+    this.editorNode = editorNode;
     this.target = editorNode.dataset.target + '_plain';
-    this.initializeSchema(editorNode);
 
     this.editorView = new EditorView(editorNode, {
-      state: this.state,
+      state: this.initializeEditorState(),
       dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction);},
     });
+
+    this.addListeners();
   }
 
-  initializeSchema(editorNode) {
-    const schema = schemaFunc(editorNode.dataset);
+  initializeEditorState() {
+    const schema = schemaFunc(this.editorNode.dataset);
 
-    this.state = EditorState.create({
+    return EditorState.create({
       doc: this.getDoc(schema),
-      plugins: [menuPlugin({ schema }), keymap(baseKeymap)]
+      plugins: [menuPlugin({ schema }), keymap(baseKeymap), placeholderPlugin]
     });
   }
 
@@ -39,6 +42,13 @@ export default class ExEditorView {
     } else {
       return DOMParser.fromSchema(schema).parse('');
     }
+  }
+
+  addListeners() {
+    const exEditorView = this;
+    this.editorNode.addEventListener('exProsemirrorInsertPlaceholder', () => {
+      insertPlaceholder(exEditorView);
+    });
   }
 
   dispatchTransaction(transaction) {
