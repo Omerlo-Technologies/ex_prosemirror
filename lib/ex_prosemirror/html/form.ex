@@ -72,7 +72,7 @@ defmodule ExProsemirror.HTML.Form do
       |> Keyword.put(:phx_update, "ignore")
       |> Keyword.update(:id, "#{field}_plain", fn id -> "#{id}_plain" end)
 
-    if Application.get_env(:ex_prosemirror, :debug, false) do
+    if ExProsemirror.Config.debug?() do
       textarea(form, :"#{field}_plain", opts)
     else
       hidden_input(form, :"#{field}_plain", opts)
@@ -98,16 +98,21 @@ defmodule ExProsemirror.HTML.Form do
       |> Keyword.put_new(:class, "ex-prosemirror")
       |> Keyword.put(:phx_update, "ignore")
       |> Keyword.put(:phx_hook, "MountProseMirror")
+      |> Keyword.put_new(:type, :default)
       |> Keyword.put_new(:name, input_name(form, field))
 
+    # TODO  reduce function complexity
+    {type, opts} = Keyword.pop(opts, :type)
     {marks, opts} = Keyword.pop_values(opts, :marks)
     {blocks, opts} = Keyword.pop_values(opts, :blocks)
     {data, opts} = Keyword.pop_values(opts, :data)
 
+    config = ExProsemirror.Config.load(type, marks: marks, blocks: blocks)
+
     data =
       data
-      |> Keyword.put(:marks, to_html_data(marks))
-      |> Keyword.put(:blocks, to_html_data(blocks))
+      |> Keyword.put(:marks, config |> Keyword.get_values(:marks) |> to_html_data())
+      |> Keyword.put(:blocks, config |> Keyword.get_values(:blocks) |> to_html_data())
       |> Keyword.put(:target, "##{Keyword.get(opts, :id)}")
 
     {_value, opts} = Keyword.pop(opts, :value, input_value(form, field))

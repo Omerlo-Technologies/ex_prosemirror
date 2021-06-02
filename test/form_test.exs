@@ -10,7 +10,7 @@ defmodule ExProsemirror.FormTest do
     test "without value" do
       input_html =
         %Form{data: %{}}
-        |> prosemirror_hidden_input(:title)
+        |> prosemirror_hidden_input(:title, type: :empty)
         |> safe_to_string()
 
       assert input_html =~
@@ -20,7 +20,7 @@ defmodule ExProsemirror.FormTest do
     test "with value" do
       input_html =
         %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_hidden_input(:title)
+        |> prosemirror_hidden_input(:title, type: :empty)
         |> safe_to_string()
 
       assert input_html =~
@@ -32,7 +32,7 @@ defmodule ExProsemirror.FormTest do
     test "without opts" do
       input_html =
         %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title)
+        |> prosemirror_editor(:title, type: :empty)
         |> safe_to_string()
 
       assert input_html =~
@@ -42,7 +42,7 @@ defmodule ExProsemirror.FormTest do
     test "with one mark" do
       input_html =
         %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title, marks: [:em])
+        |> prosemirror_editor(:title, type: :empty, marks: [em: true])
         |> safe_to_string()
 
       assert input_html =~
@@ -52,11 +52,31 @@ defmodule ExProsemirror.FormTest do
     test "with 2 marks" do
       input_html =
         %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title, marks: [:em, :strong])
+        |> prosemirror_editor(:title, type: :empty, marks: [em: true, strong: true])
         |> safe_to_string()
 
       assert input_html =~
                ~s(data-marks="[&quot;em&quot;,&quot;strong&quot;]")
+    end
+
+    test "with p block" do
+      input_html =
+        %Form{data: %{title_plain: "hello"}}
+        |> prosemirror_editor(:title, type: :empty, blocks: [p: true])
+        |> safe_to_string()
+
+      assert input_html =~
+               ~s(data-blocks="[&quot;p&quot;]")
+    end
+
+    test "with h1 and p block" do
+      input_html =
+        %Form{data: %{title_plain: "hello"}}
+        |> prosemirror_editor(:title, type: :empty, blocks: [p: true, h1: true])
+        |> safe_to_string()
+
+      assert input_html =~
+               ~s(data-blocks="[&quot;h1&quot;,&quot;p&quot;]")
     end
   end
 
@@ -66,7 +86,7 @@ defmodule ExProsemirror.FormTest do
 
       inputs_html =
         form
-        |> ExProsemirror.HTML.Form.prosemirror_input(:title)
+        |> ExProsemirror.HTML.Form.prosemirror_input(:title, type: :empty)
         |> Phoenix.HTML.safe_to_string()
 
       hidden_input_html =
@@ -76,7 +96,7 @@ defmodule ExProsemirror.FormTest do
 
       editor_input_html =
         form
-        |> prosemirror_editor(:title)
+        |> prosemirror_editor(:title, type: :empty)
         |> safe_to_string()
 
       assert inputs_html =~ hidden_input_html

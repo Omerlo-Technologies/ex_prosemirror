@@ -1,6 +1,7 @@
 defmodule ExProsemirrorTest do
   use ExUnit.Case
   doctest ExProsemirror
+  doctest ExProsemirror.Config
 
   import Phoenix.HTML.Safe
 
