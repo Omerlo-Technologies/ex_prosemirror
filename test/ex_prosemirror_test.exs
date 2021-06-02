@@ -5,10 +5,13 @@ defmodule ExProsemirrorTest do
 
   import Phoenix.HTML.Safe
 
+  @text_content_attrs %{type: :text, text: "hello world"}
+  @text_content_data %ExProsemirror.Text{text: "hello world"}
+
   @simple_data_attrs %{
     content: %{
       type: :doc,
-      content: [%{type: :paragraph, content: [%{type: :text, text: "hello"}]}]
+      content: [%{type: :paragraph, content: [@text_content_attrs]}]
     }
   }
 
@@ -16,7 +19,29 @@ defmodule ExProsemirrorTest do
     content: %ExProsemirror.Doc{
       content: [
         %ExProsemirror.Paragraph{
-          content: [%ExProsemirror.Text{id: nil, text: "hello"}]
+          content: [@text_content_data]
+        }
+      ]
+    }
+  }
+
+  @full_data_attrs %{
+    content: %{
+      type: :doc,
+      content: [
+        %{type: :paragraph, content: [@text_content_attrs]},
+        %{type: :heading, attrs: %{level: 1}, content: [@text_content_attrs]}
+      ]
+    }
+  }
+
+  @full_schema_data %ExProsemirror.Schema{
+    content: %ExProsemirror.Doc{
+      content: [
+        %ExProsemirror.Paragraph{content: [@text_content_data]},
+        %ExProsemirror.Heading{
+          content: [@text_content_data],
+          attrs: %ExProsemirror.Heading.Attrs{level: 1}
         }
       ]
     }
@@ -32,8 +57,17 @@ defmodule ExProsemirrorTest do
       assert @simple_schema_data = data
     end
 
+    test "all doc schema" do
+      data =
+        %ExProsemirror.Schema{}
+        |> ExProsemirror.Schema.changeset(@full_data_attrs)
+        |> Ecto.Changeset.apply_changes()
+
+      assert @full_schema_data = data
+    end
+
     test "Test text extract" do
-      assert ExProsemirror.extract_simple_text(@simple_schema_data) == [["hello"]]
+      assert ExProsemirror.extract_simple_text(@simple_schema_data) == [["hello world"]]
     end
   end
 
@@ -46,7 +80,7 @@ defmodule ExProsemirrorTest do
 
   describe "Error management" do
     test "test" do
-      attrs = %{content: [%{type: :text, text: "hello"}]}
+      attrs = %{content: [@text_content_attrs]}
 
       %ExProsemirror.Paragraph{}
       |> ExProsemirror.Paragraph.changeset(attrs)

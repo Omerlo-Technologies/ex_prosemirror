@@ -10,8 +10,9 @@ defmodule ExProsemirror.HTML.Form do
 
   ## Options
 
-  - marks: mark tags to use defined in your ProseMirror config
-  - blocks: block tags to use defined in your ProseMirror config
+  - `marks`: mark tags to use defined in your ProseMirror config
+  - `blocks`: block tags to use defined in your ProseMirror config
+  - `type`: type of input to use (see: `ExProsemirror.Config` for more informations)
 
   """
 
@@ -24,16 +25,20 @@ defmodule ExProsemirror.HTML.Form do
 
   ## Usages
 
-      <%= prosemirror_input @form, :title, id: "my-article-input", blocks: [heading: [1]] %>
-      <%= prosemirror_input @form, :body, id: "my-article-input", blocks: [:p, heading: [2, 3]] %>
-      <%= prosemirror_input @form, :author, id: "my-article-input", marks: [:strong], blocks: [:p] %>
+      <%= prosemirror_input @form, :title, id: "my-article-input" %>
+      # Generates a prosemirror input with the :default configuration.
 
-  ## Options
+      <%= prosemirror_input @form, :title, type: :title, id: "my-article-input" %>
+      # Generates a prosemirror input with the :title configuration.
 
-  - `blocks`:
-    - `:heading`: allow headers. Should be an array of integer (value between 1 to 6).
-    - `:p`: allow paragraph.
-  - `marks`: Could be `strong` or `em`.
+      <%= prosemirror_input @form, :title, type: :title, id: "my-article-input", block: [h1: false] %>
+      # Overrides the :title configuration to disable the h1 node.
+
+      <%= prosemirror_input @form, :title, type: :title, id: "my-article-input", block: [h2: true] %>
+      # Overrides the :title configuration to enable the h2 node.
+
+
+  Read `ExProsemirror.Config` for more information about configuration.
 
   """
   def prosemirror_input(form, field, opts \\ []) do
