@@ -1,6 +1,6 @@
 import { nodes } from 'prosemirror-schema-basic';
 
-const blocks = {
+const prosemirrorBlocks = {
   p: nodes.paragraph,
   text: nodes.text,
   heading: nodes.heading,
@@ -22,8 +22,12 @@ function extractHeading({ heading }) {
   };
 }
 
-export default (options) => {
-  let jsonOptions = JSON.parse(options);
+/**
+ * @param {Object} blocksSelection
+ * @param {Object[]} customBlocks
+ */
+export default (blocksSelection, customBlocks) => {
+  const blocks = {...prosemirrorBlocks, custom: customBlocks || []};
 
   const map = {
     text: blocks.text,
@@ -32,11 +36,14 @@ export default (options) => {
 
   const heading = [];
 
-  jsonOptions.map((option) => {
-    if (allowedHeading[option]) {
-      heading.push(allowedHeading[option]);
-    } else
-      map[option] = blocks[option];
+  blocksSelection.map((/** @type {Object} */ blockSelection) => {
+    if (allowedHeading[blockSelection]) {
+      heading.push(allowedHeading[blockSelection]);
+    } else if(blocks[blockSelection]) {
+      map[blockSelection] = blocks[blockSelection];
+    } else if(blocks.custom[blockSelection]){
+      map['custom_block_' + blockSelection] = blocks.custom[blockSelection];
+    }
   });
 
   map['heading'] = extractHeading({ heading });

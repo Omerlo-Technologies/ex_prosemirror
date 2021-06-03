@@ -2,6 +2,14 @@ import { Dropdown, MenuItem, menuBar, blockTypeItem } from 'prosemirror-menu';
 import { icons } from './icons';
 import { markItem } from './marks';
 
+function getTitle({name: name, spec: {title}}) {
+  return (title || name).replace(/^custom_mark_/, '');
+}
+
+function getLabel({name: name, spec: {label}}) {
+  return (label || name).replace(/^custom_mark_/, '');
+}
+
 function generateHeadingItem(schema) {
   if(schema.nodes.heading) {
     return schema.nodes.heading.spec.allowsLevel.map((heading) => {
@@ -59,28 +67,39 @@ function generateMediaMenu(schema) {
   ]];
 }
 
-
 function generateMarks(schema) {
   if(schema.marks) {
     const keys = Object.keys(schema.marks);
 
     return keys.map((mark) => {
-      return markItem(schema.marks[mark], {
-        title: mark,
-        icon: icons[mark]
-      });
+      const markElement = schema.marks[mark];
+      const icon = markElement.spec.icon || icons[mark];
+      return markItem(schema.marks[mark], {title: getTitle(markElement), icon});
     });
   }
 
   return [];
 }
 
+function generateCustomBlocks(schema) {
+  const keys = Object.keys(schema.nodes).filter(key => key.indexOf('custom') > -1);
+
+  return keys.map(key => {
+    const block = schema.nodes[key];
+    return blockTypeItem(block, {
+      title: getTitle(block),
+      label: getLabel(block),
+      icon: block.spec.icon
+    });
+  });
+}
 
 export default({ schema  }) => {
   const items = [
     generateMarks(schema),
     ...generateTextStyleMenu(schema),
-    ...generateMediaMenu(schema)
+    ...generateMediaMenu(schema),
+    generateCustomBlocks(schema)
   ];
 
   return menuBar({content: items});

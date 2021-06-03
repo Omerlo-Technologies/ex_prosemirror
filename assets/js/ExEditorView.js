@@ -9,20 +9,31 @@ import { placeholderPlugin, insertPlaceholder } from './prosemirror/plugins/plac
 
 
 export default class ExEditorView {
-  constructor(editorNode) {
+  /**
+   * @param {HTMLElement} editorNode
+   * @param {{customBlocks: Object[], customMarks: Object[]}} opts
+   */
+  constructor(editorNode, opts) {
     this.editorNode = editorNode;
     this.target = editorNode.dataset.target + '_plain';
 
     this.editorView = new EditorView(editorNode, {
-      state: this.initializeEditorState(),
+      state: this.initializeEditorState(opts),
       dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction);},
     });
 
     this.addListeners();
   }
 
-  initializeEditorState() {
-    const schema = schemaFunc(this.editorNode.dataset);
+  initializeEditorState({customBlocks, customMarks}) {
+    const opts = {
+      marksSelection: JSON.parse(this.editorNode.dataset.marks),
+      blocksSelection: JSON.parse(this.editorNode.dataset.blocks),
+      customBlocks,
+      customMarks
+    };
+
+    const schema = schemaFunc(opts);
 
     return EditorState.create({
       doc: this.getDoc(schema),
