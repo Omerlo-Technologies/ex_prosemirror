@@ -32,10 +32,10 @@ defmodule ExProsemirror.HTML.Form do
       # Generates a prosemirror input with the :title configuration.
 
       <%= prosemirror_input @form, :title, type: :title, id: "my-article-input", block: [h1: false] %>
-      # Overrides the :title configuration to disable the h1 node.
+      # Overrides the :title configuration to disable the h1 block.
 
       <%= prosemirror_input @form, :title, type: :title, id: "my-article-input", block: [h2: true] %>
-      # Overrides the :title configuration to enable the h2 node.
+      # Overrides the :title configuration to enable the h2 block.
 
 
   Read `ExProsemirror.Config` for more information about configuration.

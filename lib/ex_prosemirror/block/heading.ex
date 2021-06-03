@@ -1,4 +1,4 @@
-defmodule ExProsemirror.Node.Heading do
+defmodule ExProsemirror.Block.Heading do
   @moduledoc ~S"""
   Create heading text style using `<hX></hX>` html style.
 
@@ -18,7 +18,7 @@ defmodule ExProsemirror.Node.Heading do
   @doc false
   embedded_schema do
     embeds_one :attrs, __MODULE__.Attrs
-    embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: true)
+    embedded_prosemirror_content([text: ExProsemirror.Block.Text], array: true)
   end
 
   @doc false
@@ -26,7 +26,7 @@ defmodule ExProsemirror.Node.Heading do
     struct_or_changeset
     |> cast(attrs, [])
     |> cast_embed(:attrs, required: true)
-    |> cast_prosemirror_fields()
+    |> cast_prosemirror_content()
   end
 
   defmodule __MODULE__.Attrs do

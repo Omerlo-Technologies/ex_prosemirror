@@ -5,15 +5,17 @@ defmodule ExProsemirrorTest do
 
   import Phoenix.HTML.Safe
 
-  alias ExProsemirror.Node.{Doc, Heading, Image, Paragraph, Text}
+  alias ExProsemirror.Block.{Doc, Paragraph, Text}
 
-  @text_content_attrs %{type: :text, text: "hello world"}
-  @text_content_data %Text{text: "hello world"}
+  @simple_text %{
+    attr: %{type: :text, text: "hello world"},
+    struct: %Text{text: "hello world"}
+  }
 
   @simple_data_attrs %{
     content: %{
       type: :doc,
-      content: [%{type: :paragraph, content: [@text_content_attrs]}]
+      content: [%{type: :paragraph, content: [@simple_text.attr]}]
     }
   }
 
@@ -21,32 +23,8 @@ defmodule ExProsemirrorTest do
     content: %Doc{
       content: [
         %Paragraph{
-          content: [@text_content_data]
+          content: [@simple_text.struct]
         }
-      ]
-    }
-  }
-
-  @full_data_attrs %{
-    content: %{
-      type: :doc,
-      content: [
-        %{type: :paragraph, content: [@text_content_attrs]},
-        %{type: :heading, attrs: %{level: 1}, content: [@text_content_attrs]},
-        %{type: :image, attrs: %{src: "image-url"}}
-      ]
-    }
-  }
-
-  @full_schema_data %ExProsemirror.Schema{
-    content: %Doc{
-      content: [
-        %Paragraph{content: [@text_content_data]},
-        %Heading{
-          content: [@text_content_data],
-          attrs: %Heading.Attrs{level: 1}
-        },
-        %Image{attrs: %Image.Attrs{src: "image-url"}}
       ]
     }
   }
@@ -59,15 +37,6 @@ defmodule ExProsemirrorTest do
         |> Ecto.Changeset.apply_changes()
 
       assert @simple_schema_data = data
-    end
-
-    test "all doc schema" do
-      data =
-        %ExProsemirror.Schema{}
-        |> ExProsemirror.Schema.changeset(@full_data_attrs)
-        |> Ecto.Changeset.apply_changes()
-
-      assert @full_schema_data = data
     end
 
     test "Test text extract" do
@@ -84,7 +53,7 @@ defmodule ExProsemirrorTest do
 
   describe "Error management" do
     test "test" do
-      attrs = %{content: [@text_content_attrs]}
+      attrs = %{content: [@simple_text.attr]}
 
       %Paragraph{}
       |> Paragraph.changeset(attrs)
@@ -95,10 +64,14 @@ defmodule ExProsemirrorTest do
       data = %{}
       types = %{author_name: :string, title: :map}
 
-      {data, types}
-      |> Ecto.Changeset.cast(%{author_name: "Alexandre Lepretre"}, Map.keys(types))
-      |> Ecto.Changeset.validate_required([:title, :author_name])
-      |> ExProsemirror.Changeset.validate_prosemirror(:title)
+      changeset =
+        {data, types}
+        |> Ecto.Changeset.cast(%{author_name: "Alexandre Lepretre"}, Map.keys(types))
+        |> Ecto.Changeset.validate_required([:title, :author_name])
+        |> ExProsemirror.Changeset.validate_prosemirror(:title)
+
+      refute changeset.valid?
+      assert changeset.errors == [title: {"can't be blank", [validation: :required]}]
     end
   end
 end

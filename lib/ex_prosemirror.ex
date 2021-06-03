@@ -183,19 +183,19 @@ defmodule ExProsemirror do
 
   ## Examples
 
-      iex> ExProsemirror.extract_simple_text(%ExProsemirror.Node.Paragraph{content: [
-      ...>   %ExProsemirror.Node.Text{text: "Hello"},
-      ...>   %ExProsemirror.Node.Text{text: "World"}
+      iex> ExProsemirror.extract_simple_text(%ExProsemirror.Block.Paragraph{content: [
+      ...>   %ExProsemirror.Block.Text{text: "Hello"},
+      ...>   %ExProsemirror.Block.Text{text: "World"}
       ...> ]})
       ["Hello", "World"]
 
       iex> ExProsemirror.extract_simple_text([
-      ...>   %ExProsemirror.Node.Text{text: "Hello"},
-      ...>   %ExProsemirror.Node.Text{text: "World"}
+      ...>   %ExProsemirror.Block.Text{text: "Hello"},
+      ...>   %ExProsemirror.Block.Text{text: "World"}
       ...> ])
       ["Hello", "World"]
 
-      iex> ExProsemirror.extract_simple_text(%ExProsemirror.Node.Text{text: "Hello"})
+      iex> ExProsemirror.extract_simple_text(%ExProsemirror.Block.Text{text: "Hello"})
       "Hello"
 
   """
