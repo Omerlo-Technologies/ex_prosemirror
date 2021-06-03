@@ -34,8 +34,9 @@ defmodule ExProsemirror.Config do
 
   require Logger
 
-  @default_marks ~w(em strong underline)a
-  @default_blocks ~w(p h1 h2 h3 h4 h5 h6 image)a
+  @default_marks Application.compile_env!(:ex_prosemirror, :default_marks)
+  @default_blocks Application.compile_env!(:ex_prosemirror, :default_blocks)
+  @default [blocks: @default_blocks, marks: @default_marks]
 
   @doc ~S"""
   Override the `config` with the `input_config`.
@@ -121,13 +122,9 @@ defmodule ExProsemirror.Config do
 
   def debug?, do: Application.get_env(:ex_prosemirror, :debug, false)
 
-  defp put_default_types(opts \\ default()) do
+  defp put_default_types(opts \\ @default) do
     opts
-    |> Keyword.put_new(:marks, default_marks())
-    |> Keyword.put_new(:blocks, default_blocks())
+    |> Keyword.put_new(:marks, @default_marks)
+    |> Keyword.put_new(:blocks, @default_blocks)
   end
-
-  defp default, do: Application.get_env(:ex_prosemirror, :default, [])
-  defp default_marks, do: default() |> Keyword.get(:marks, @default_marks)
-  defp default_blocks, do: default() |> Keyword.get(:blocks, @default_blocks)
 end
