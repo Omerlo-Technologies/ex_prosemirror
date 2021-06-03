@@ -27,7 +27,7 @@ class ExProsemirror {
    * Initializes all prosemirror instances.
    */
   initAll() {
-    Array.from(proseInstances).forEach( el => {
+    Array.from(proseInstances).forEach(el => {
       this.init(el);
     });
   }
