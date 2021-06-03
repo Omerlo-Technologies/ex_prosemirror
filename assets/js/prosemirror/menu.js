@@ -1,4 +1,5 @@
-import { Dropdown, MenuItem, menuBar, icons, blockTypeItem } from 'prosemirror-menu';
+import { Dropdown, MenuItem, menuBar, blockTypeItem } from 'prosemirror-menu';
+import { icons } from './icons';
 import { markItem } from './marks';
 
 function generateHeadingItem(schema) {
