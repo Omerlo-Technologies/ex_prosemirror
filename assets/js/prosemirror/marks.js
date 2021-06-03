@@ -2,7 +2,7 @@ import { toggleMark } from 'prosemirror-commands';
 import { marks as prosemirrorMarks } from 'prosemirror-schema-basic';
 import { MenuItem } from 'prosemirror-menu';
 
-const marks = {
+const exProsemirrorMarks = {
   strong: prosemirrorMarks.strong,
   em: prosemirrorMarks.em,
   underline: {
@@ -13,14 +13,20 @@ const marks = {
 
 /**
  * Returns a function that will generate Marks for Prosemirror schema.
+ * @param {Object} marksSelection
+ * @param {Object[]} customMarks
  */
-export const generateSchemaMarks = (options) => {
-  let jsonOptions = JSON.parse(options);
+export const generateSchemaMarks = (marksSelection, customMarks) => {
+  const marks = {...exProsemirrorMarks, custom: customMarks || []};
 
   const result = {};
 
-  jsonOptions.map((mark) => {
-    result[mark] = marks[mark];
+  marksSelection.map((/** @type {Object} */ selection) => {
+    if (marks[selection]) {
+      result[selection] = marks[selection];
+    } else if(marks.custom[selection]){
+      result['custom_mark_' + selection] = marks.custom[selection];
+    }
   });
 
   return result;

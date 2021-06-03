@@ -34,6 +34,7 @@ defmodule ExProsemirror.MixProject do
     [
       main: "ExProsemirror",
       nest_modules_by_prefix: prosemirror_nodes(),
+      extras: ["guides/extends_editor.md"],
       groups_for_modules: [
         Modifiers: prosemirror_nodes()
       ]
