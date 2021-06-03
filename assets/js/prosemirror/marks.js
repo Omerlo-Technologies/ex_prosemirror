@@ -4,7 +4,11 @@ import { MenuItem } from 'prosemirror-menu';
 
 const marks = {
   strong: prosemirrorMarks.strong,
-  em: prosemirrorMarks.em
+  em: prosemirrorMarks.em,
+  underline: {
+    toDOM() { return ['span', {style: 'text-decoration: underline'}, 0]; },
+    parseDOM: [{tag: 'span' }]
+  },
 };
 
 /**

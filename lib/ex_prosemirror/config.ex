@@ -34,7 +34,7 @@ defmodule ExProsemirror.Config do
 
   require Logger
 
-  @default_marks ~w(em strong)a
+  @default_marks ~w(em strong underline)a
   @default_blocks ~w(p h1 h2 h3 h4 h5 h6 image)a
 
   @doc ~S"""
