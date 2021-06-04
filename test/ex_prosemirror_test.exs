@@ -15,7 +15,7 @@ defmodule ExProsemirrorTest do
   @simple_data_attrs %{
     content: %{
       type: :doc,
-      content: [%{type: :paragraph, content: [@simple_text.attr]}]
+      content: [%{type: :p, content: [@simple_text.attr]}]
     }
   }
 
