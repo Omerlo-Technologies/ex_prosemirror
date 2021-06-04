@@ -19,8 +19,6 @@ const exProsemirrorMarks = {
 
 /**
  * Returns a function that will generate Marks for Prosemirror schema.
- * @param {Object} marksSelection
- * @param {Object[]} customMarks
  */
 export const generateSchemaMarks = ({ marksSelection, customMarks }) => {
   const marks = { ...exProsemirrorMarks, custom: customMarks || [] };

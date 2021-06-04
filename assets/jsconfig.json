@@ -4,6 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "checkJs": true,
-    "lib": [ "dom", "es2017" ]
+    "lib": [ "dom", "es2017" ],
+    "moduleResolution": "node"
   }
 }
