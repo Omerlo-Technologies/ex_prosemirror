@@ -7,7 +7,6 @@ import { DOMParser } from 'prosemirror-model';
 import schemaFunc from './prosemirror/schema';
 import { placeholderPlugin, insertPlaceholder } from './prosemirror/plugins/placeholder';
 
-
 export default class ExEditorView {
   /**
    * @param {HTMLElement} editorNode
@@ -19,16 +18,19 @@ export default class ExEditorView {
 
     this.editorView = new EditorView(editorNode, {
       state: this.initializeEditorState(opts),
-      dispatchTransaction: (transaction) => {this.dispatchTransaction(transaction);},
+      dispatchTransaction: (transaction) => {
+        this.dispatchTransaction(transaction);
+      }
     });
 
     this.addListeners();
   }
 
-  initializeEditorState({customBlocks, customMarks}) {
+  initializeEditorState({ customBlocks, customMarks }) {
     const opts = {
       marksSelection: JSON.parse(this.editorNode.dataset.marks),
       blocksSelection: JSON.parse(this.editorNode.dataset.blocks),
+      inline: JSON.parse(this.editorNode.dataset.inline),
       customBlocks,
       customMarks
     };
@@ -44,7 +46,7 @@ export default class ExEditorView {
   getDoc(schema) {
     const initialValue = document.querySelector(this.target).value;
 
-    if(initialValue.length > 0) {
+    if (initialValue.length > 0) {
       try {
         return schema.nodeFromJSON(JSON.parse(initialValue));
       } catch {

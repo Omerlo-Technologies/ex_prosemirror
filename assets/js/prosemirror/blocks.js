@@ -25,12 +25,13 @@ function extractHeading({ heading }) {
 }
 
 function inlineDoc(inline) {
-  return inline == 'true' ? { content: 'block?' } : blocks.doc;
+  return inline ? { content: 'block?' } : prosemirrorBlocks.doc;
 }
 
 /**
  * @param {Object} blocksSelection
  * @param {Object[]} customBlocks
+ * @param {Boolean} inline
  */
 export default (blocksSelection, customBlocks) => {
   const blocks = { ...prosemirrorBlocks, custom: customBlocks || [] };
