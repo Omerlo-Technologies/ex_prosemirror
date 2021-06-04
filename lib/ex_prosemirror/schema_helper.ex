@@ -24,6 +24,12 @@ defmodule ExProsemirror.SchemaHelper do
     end
   end
 
+  # @test Application.compile_env(:ex_prosemirror, :marks,
+  #         strong: Strong,
+  #         em: Em,
+  #         underline: Underline
+  #       )
+
   @doc ~S"""
   Add the PolymorphicField mark in your ecto schema.
 
@@ -34,9 +40,14 @@ defmodule ExProsemirror.SchemaHelper do
   Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
   """
   defmacro embedded_prosemirror_marks(mapped_types) when is_list(mapped_types) do
+    marks =
+      Application.get_env(:ex_prosemirror, :marks)
+      |> IO.inspect()
+
     quote do
-      embedded_prosemirror_field(:marks, unquote(mapped_types), array: true)
+      embedded_prosemirror_field(:marks, unquote(marks), array: true)
     end
+    |> IO.inspect()
   end
 
   @doc ~S"""

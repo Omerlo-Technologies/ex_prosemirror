@@ -2,6 +2,11 @@ use Mix.Config
 
 config :ex_prosemirror,
   debug: false,
+  marks: [
+    strong: ExProsemirrir.Mark.Strong,
+    em: ExProsemirrir.Mark.Em,
+    underline: ExProsemirrir.Mark.Underline
+  ],
   default_blocks: [:p, :h1, :h2, :h3, :h4, :h5, :h6, :image],
   default_marks: [:em, :strong, :underline]
 

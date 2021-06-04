@@ -25,8 +25,8 @@ defmodule ExProsemirror.Block.Heading do
   def changeset(struct_or_changeset, attrs \\ %{}) do
     struct_or_changeset
     |> cast(attrs, [])
-    |> cast_embed(:attrs, required: true)
     |> cast_prosemirror_content()
+    |> cast_embed(:attrs, required: true)
   end
 
   defmodule __MODULE__.Attrs do
