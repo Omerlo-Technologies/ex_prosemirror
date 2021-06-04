@@ -68,7 +68,6 @@ defmodule ExProsemirror.SchemaHelper do
     quote do
       field unquote(field_name), unquote(field_type),
         types: unquote(mapped_types),
-        on_type_not_found: :raise,
         on_replace: unquote(replace_action),
         type_field: :type
     end
