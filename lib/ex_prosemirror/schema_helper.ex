@@ -10,19 +10,49 @@ defmodule ExProsemirror.SchemaHelper do
   import PolymorphicEmbed, only: [cast_polymorphic_embed: 2]
 
   @doc ~S"""
+  Add the PolymorphicField mark in your ecto schema.
+
+  ## Examples
+
+        embedded_prosemirror_content([text: ExProsemirror.Block.Text])
+
+  Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
+  """
+  defmacro embedded_prosemirror_content(mapped_types, opts \\ []) when is_list(mapped_types) do
+    quote do
+      embedded_prosemirror_field(:content, unquote(mapped_types), unquote(opts))
+    end
+  end
+
+  @doc ~S"""
+  Add the PolymorphicField mark in your ecto schema.
+
+  ## Examples
+
+        embedded_prosemirror_mark([strong: ExProsemirror.Mark.Strong])
+
+  Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
+  """
+  defmacro embedded_prosemirror_marks(mapped_types) when is_list(mapped_types) do
+    quote do
+      embedded_prosemirror_field(:marks, unquote(mapped_types), array: true)
+    end
+  end
+
+  @doc ~S"""
   Add the PolymorphicField in your ecto schema.
 
   ## Examples
 
   Single element
 
-      embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: false)
+      embedded_prosemirror_field(:content, [text: ExProsemirror.Block.Text], array: false)
       # same as
-      embedded_prosemirror_field([text: ExProsemirror.Node.Text])
+      embedded_prosemirror_field(:content, [text: ExProsemirror.Block.Text])
 
   Multiple elements
 
-      embedded_prosemirror_field([text: ExProsemirror.Node.Text], array: true)
+      embedded_prosemirror_field(:content, [text: ExProsemirror.Block.Text], array: true)
 
   ## Options
 
@@ -30,11 +60,13 @@ defmodule ExProsemirror.SchemaHelper do
 
   The `array` option will configure PolymorphicEmbed automatically to be a list of your data OR a single element.
   """
-  defmacro embedded_prosemirror_field(mapped_types, opts \\ []) when is_list(mapped_types) do
+  @spec embedded_prosemirror_field(:content | :marks, [module()], array: boolean) :: term()
+  defmacro embedded_prosemirror_field(field_name, mapped_types, opts \\ [])
+           when is_list(mapped_types) and is_atom(field_name) do
     %{type: field_type, on_replace: replace_action} = get_field_metadata(opts)
 
     quote do
-      field :content, unquote(field_type),
+      field unquote(field_name), unquote(field_type),
         types: unquote(mapped_types),
         on_type_not_found: :raise,
         on_replace: unquote(replace_action),
@@ -49,10 +81,14 @@ defmodule ExProsemirror.SchemaHelper do
 
       struct_or_changeset
       |> cast(attrs, some_fields_to_cast)
-      |> cast_prosemirror_fields()
+      |> cast_prosemirror_content()
   """
-  def cast_prosemirror_fields(struct_or_changeset) do
+  def cast_prosemirror_content(struct_or_changeset) do
     cast_polymorphic_embed(struct_or_changeset, :content)
+  end
+
+  def cast_prosemirror_marks(struct_or_changeset) do
+    cast_polymorphic_embed(struct_or_changeset, :marks)
   end
 
   defp get_field_metadata(opts) do

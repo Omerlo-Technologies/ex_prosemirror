@@ -1,4 +1,4 @@
-defmodule ExProsemirror.Node.Image do
+defmodule ExProsemirror.Block.Image do
   @moduledoc ~S"""
   Creates an image using `<img></img>`
 

@@ -44,7 +44,7 @@ defmodule ExProsemirror.Schema do
 
   @doc false
   embedded_schema do
-    embedded_prosemirror_field(doc: ExProsemirror.Node.Doc, array: true)
+    embedded_prosemirror_content(doc: ExProsemirror.Block.Doc, array: true)
   end
 
   @doc false
@@ -63,6 +63,6 @@ defmodule ExProsemirror.Schema do
   def changeset(struct_or_changeset, attrs) when is_map(attrs) do
     struct_or_changeset
     |> cast(attrs, [])
-    |> cast_prosemirror_fields()
+    |> cast_prosemirror_content()
   end
 end
