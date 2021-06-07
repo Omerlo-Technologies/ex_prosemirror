@@ -86,13 +86,7 @@ Now that we have our module that manage the changeset, we have to configure `ex_
 ```elixir
 config :ex_prosemirror,
   debug: true,
-  schema: [
-    "ExProsemirror.Block.Text": [
-      marks: [
-        custom_span: MyApp.MyCustomSpan,
-      ]
-    ]
-  ],
+  custom_marks: [custom_span: MyApp.MyCustomSpan]
 ```
 
 
@@ -152,11 +146,5 @@ The `ex_prosemirror` configuration should be like the following code.
 ```elixir
 config :ex_prosemirror,
   debug: true,
-  schema: [
-    "ExProsemirror.Block.Text": [
-      blocks: [
-        custom_span: MyApp.Block.CustomSpan,
-      ]
-    ]
-  ],
+  custom_blocks: [custom_span: MyApp.MyCustomSpan]
 ```

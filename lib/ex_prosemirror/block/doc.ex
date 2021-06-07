@@ -17,7 +17,7 @@ defmodule ExProsemirror.Block.Doc do
   embedded_schema do
     embedded_prosemirror_content(
       [
-        p: ExProsemirror.Block.Paragraph,
+        custom_p: ExProsemirror.Block.Paragraph,
         heading: ExProsemirror.Block.Heading,
         image: ExProsemirror.Block.Image
       ],

@@ -17,15 +17,13 @@ const exProsemirrorMarks = {
  * @param {Object[]} customMarks
  */
 export const generateSchemaMarks = (marksSelection, customMarks) => {
-  const marks = {...exProsemirrorMarks, custom: customMarks || []};
+  const marks = {...exProsemirrorMarks, ...customMarks || []};
 
   const result = {};
 
   marksSelection.map((/** @type {Object} */ selection) => {
     if (marks[selection]) {
       result[selection] = marks[selection];
-    } else if(marks.custom[selection]){
-      result['custom_mark_' + selection] = marks.custom[selection];
     }
   });
 

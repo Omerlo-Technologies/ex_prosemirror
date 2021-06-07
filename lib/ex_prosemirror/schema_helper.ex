@@ -5,22 +5,15 @@ defmodule ExProsemirror.SchemaHelper do
   It helps you build custom blocks / marks for `ExProsemirror` and override allowed blocks / marks
   using the config system.
 
-  ## Examples
+  You can set the module to use for each `marks` / `blocks`,
+  You can also remove an existing `marks` / `blocks` by setting his value to `nil` or `false`.
 
-  You can add a new mark `custom_span` by mapping the type to your module. And to remove
-  a default block, you have to set his value to `nil`.
+  ## Examples
 
   ```elixir
   config :ex_prosemirror
     # ...
-    schema: [
-      "ExProsemirror.Block.Text": [
-        marks: [
-          custom_span: MyApp.Block.MySpan,
-          strong: nil
-        ]
-      ]
-    ]
+    custom_marks: [custom_span: MyApp.Block.MySpan, strong: false]
   ```
 
   This works at the same way for blocks.
@@ -28,19 +21,14 @@ defmodule ExProsemirror.SchemaHelper do
   ```elixir
   config :ex_prosemirror
     # ...
-    schema: [
-      "ExProsemirror.Block.Text": [
-        blocks: [
-          image: MyApp.Block.Image,
-        ]
-      ]
-    ]
+    custom_blocks: [custom_span: MyApp.Block.MySpan]
   ```
 
   > This module is automatically import if you use `ExProsemirror`.
   """
 
-  @schema Application.compile_env(:ex_prosemirror, :schema, [])
+  @ecto_marks Application.compile_env(:ex_prosemirror, :ecto_marks, [])
+  @ecto_blocks Application.compile_env(:ex_prosemirror, :ecto_blocks, [])
 
   import PolymorphicEmbed, only: [cast_polymorphic_embed: 2]
 
@@ -55,10 +43,7 @@ defmodule ExProsemirror.SchemaHelper do
   """
   defmacro embedded_prosemirror_content(default_blocks, opts \\ [])
            when is_list(default_blocks) do
-    blocks =
-      __CALLER__
-      |> module_config_name()
-      |> polymorphic_fields(:blocks, default_blocks)
+    blocks = Keyword.merge(default_blocks, @ecto_blocks)
 
     quote do
       embedded_prosemirror_field(:content, unquote(blocks), unquote(opts))
@@ -75,29 +60,11 @@ defmodule ExProsemirror.SchemaHelper do
   Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
   """
   defmacro embedded_prosemirror_marks(default_marks) when is_list(default_marks) do
-    marks =
-      __CALLER__
-      |> module_config_name()
-      |> polymorphic_fields(:marks, default_marks)
+    marks = Keyword.merge(default_marks, @ecto_marks)
 
     quote do
       embedded_prosemirror_field(:marks, unquote(marks), array: true)
     end
-  end
-
-  defp module_config_name(caller) do
-    caller.module
-    |> Module.split()
-    |> Enum.join(".")
-    |> String.to_atom()
-  end
-
-  defp polymorphic_fields(module_name, type, base_config) do
-    (@schema[module_name][type] || [])
-    |> Enum.reduce(base_config, fn {name, module}, acc ->
-      Keyword.put(acc, name, module)
-    end)
-    |> Enum.filter(& &1)
   end
 
   @doc ~S"""
@@ -125,6 +92,8 @@ defmodule ExProsemirror.SchemaHelper do
   defmacro embedded_prosemirror_field(field_name, mapped_types, opts \\ [])
            when is_list(mapped_types) and is_atom(field_name) do
     %{type: field_type, on_replace: replace_action} = get_field_metadata(opts)
+
+    mapped_types = Enum.filter(mapped_types, &elem(&1, 1))
 
     quote do
       field unquote(field_name), unquote(field_type),

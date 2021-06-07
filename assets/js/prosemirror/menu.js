@@ -41,7 +41,7 @@ function generateTextStyleMenu(schema) {
     ...generateHeadingItem(schema)
   ];
 
-  if (textStyle.length > 1) {
+  if (textStyle.length > 0) {
     const textStyleMenu = new Dropdown(textStyle, {label: 'Text Style'});
     return [[textStyleMenu]];
   }

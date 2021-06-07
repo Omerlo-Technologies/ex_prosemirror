@@ -239,4 +239,43 @@ defmodule ExProsemirror do
     debug(true)
   """
   def debug(boolean), do: Application.put_env(:ex_prosemirror, :debug, boolean)
+
+  def generate_context() do
+    [
+      marks: generate_context(:marks, ExProsemirror.Mark),
+      nodes: generate_context(:nodes, ExProsemirror.Node),
+      types: generate_context(:types, ExProsemirror.Type)
+    ]
+  end
+
+  def generate_context(type, prefix) when is_atom(type) do
+    :ex_prosemirror
+    |> Application.get_env(type, [])
+    |> generate_context(prefix)
+  end
+
+  def generate_context(marks, prefix) when is_list(marks) do
+    Enum.map(marks, fn {name, opts} ->
+      cond do
+        opts[:module] ->
+          {name, opts}
+
+        opts[:autogenerate] == false ->
+          raise "Autogenerate false required a module"
+
+        true ->
+          module = Module.concat(prefix, Macro.camelize("#{name}"))
+          {name, Keyword.put(opts, :module, module)}
+      end
+    end)
+  end
+
+  def generate_all() do
+    context = generate_context()
+    ExProsemirror.Mark.generate(context)
+    ExProsemirror.Node.generate(context)
+    ExProsemirror.Type.generate(context)
+
+    :ok
+  end
 end
