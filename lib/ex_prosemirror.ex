@@ -121,6 +121,18 @@ defmodule ExProsemirror do
   }
   ```
 
+  - Install prosemirror
+
+  ```bash
+  npm i --save \
+    prosemirror-example-setup \
+    prosemirror-menu \
+    prosemirror-model \
+    prosemirror-schema-basic \
+    prosemirror-state \
+    prosemirror-view
+  ```
+
   - Finally add `ExProsemirrorHooks` to phoenix hooks
 
   ```elixir
