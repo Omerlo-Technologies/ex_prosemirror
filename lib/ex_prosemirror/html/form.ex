@@ -110,14 +110,16 @@ defmodule ExProsemirror.HTML.Form do
     {type, opts} = Keyword.pop(opts, :type)
     {marks, opts} = Keyword.pop_values(opts, :marks)
     {blocks, opts} = Keyword.pop_values(opts, :blocks)
+    {inline, opts} = Keyword.pop(opts, :inline)
     {data, opts} = Keyword.pop_values(opts, :data)
 
-    config = ExProsemirror.Config.load(type, marks: marks, blocks: blocks)
+    config = ExProsemirror.Config.load(type, marks: marks, blocks: blocks, inline: inline)
 
     data =
       data
       |> Keyword.put(:marks, config |> Keyword.get_values(:marks) |> to_html_data())
       |> Keyword.put(:blocks, config |> Keyword.get_values(:blocks) |> to_html_data())
+      |> Keyword.put(:inline, config |> Keyword.get(:inline) |> to_html_data())
       |> Keyword.put(:target, "##{Keyword.get(opts, :id)}")
 
     {_value, opts} = Keyword.pop(opts, :value, input_value(form, field))
