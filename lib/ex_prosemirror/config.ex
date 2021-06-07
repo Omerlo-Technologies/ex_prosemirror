@@ -37,6 +37,7 @@ defmodule ExProsemirror.Config do
   @default_marks Application.compile_env!(:ex_prosemirror, :default_marks)
   @default_blocks Application.compile_env!(:ex_prosemirror, :default_blocks)
   @default [blocks: @default_blocks, marks: @default_marks]
+  @default_inline false
 
   @doc ~S"""
   Override the `config` with the `input_config`.
@@ -56,6 +57,13 @@ defmodule ExProsemirror.Config do
     config
     |> do_override(input_config, :marks)
     |> do_override(input_config, :blocks)
+    |> do_override(input_config, :inline)
+  end
+
+  defp do_override(config, input_config, :inline) do
+    if is_nil(Keyword.get(input_config, :inline)),
+      do: config,
+      else: Keyword.put(config, :inline, Keyword.get(input_config, :inline))
   end
 
   defp do_override(config, input_config, field) do

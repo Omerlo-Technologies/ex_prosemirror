@@ -5,9 +5,8 @@ import blocks from './blocks';
 /**
  * @param {{customBlocks: Object[], customMarks: Object[], blocksSelection: JSON, marksSelection: JSON}} options
  */
-export default (options) => (
+export default (options) =>
   new Schema({
     nodes: blocks(options.blocksSelection, options.customBlocks),
-    marks: generateSchemaMarks(options.marksSelection, options.customMarks),
-  })
-);
+    marks: generateSchemaMarks(options.marksSelection, options.customMarks)
+  });
