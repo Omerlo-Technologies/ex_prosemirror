@@ -6,9 +6,11 @@ const exProsemirrorMarks = {
   strong: prosemirrorMarks.strong,
   em: prosemirrorMarks.em,
   underline: {
-    toDOM() { return ['span', {style: 'text-decoration: underline'}, 0]; },
-    parseDOM: [{tag: 'span' }]
-  },
+    toDOM() {
+      return ['span', { style: 'text-decoration: underline' }, 0];
+    },
+    parseDOM: [{ tag: 'span' }]
+  }
 };
 
 /**
@@ -16,15 +18,15 @@ const exProsemirrorMarks = {
  * @param {Object} marksSelection
  * @param {Object[]} customMarks
  */
-export const generateSchemaMarks = (marksSelection, customMarks) => {
-  const marks = {...exProsemirrorMarks, custom: customMarks || []};
+export const generateSchemaMarks = ({ marksSelection, customMarks }) => {
+  const marks = { ...exProsemirrorMarks, custom: customMarks || [] };
 
   const result = {};
 
   marksSelection.map((/** @type {Object} */ selection) => {
     if (marks[selection]) {
       result[selection] = marks[selection];
-    } else if(marks.custom[selection]){
+    } else if (marks.custom[selection]) {
       result['custom_mark_' + selection] = marks.custom[selection];
     }
   });
@@ -40,7 +42,9 @@ export const generateSchemaMarks = (marksSelection, customMarks) => {
  */
 export function markItem(markType, options) {
   let passedOptions = {
-    active(state) { return markActive(state, markType); },
+    active(state) {
+      return markActive(state, markType);
+    },
     enable: true
   };
 
@@ -55,7 +59,7 @@ export function markItem(markType, options) {
  * @param {any} type - Mark's type
  */
 export function markActive(state, type) {
-  let {from, $from, to, empty} = state.selection;
+  let { from, $from, to, empty } = state.selection;
   if (empty) return type.isInSet(state.storedMarks || $from.marks());
   else return state.doc.rangeHasMark(from, to, type);
 }
@@ -73,7 +77,7 @@ export function cmdItem(cmd, options) {
   };
   for (let prop in options) passedOptions[prop] = options[prop];
   if ((!options.enable || options.enable === true) && !options.select)
-    passedOptions[options.enable ? 'enable' : 'select'] = state => cmd(state);
+    passedOptions[options.enable ? 'enable' : 'select'] = (state) => cmd(state);
 
   return new MenuItem(passedOptions);
 }

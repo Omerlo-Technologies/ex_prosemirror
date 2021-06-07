@@ -36,8 +36,8 @@ defmodule ExProsemirror.Config do
 
   @default_marks Application.compile_env!(:ex_prosemirror, :default_marks)
   @default_blocks Application.compile_env!(:ex_prosemirror, :default_blocks)
+  @default_inline Application.compile_env!(:ex_prosemirror, :default_inline)
   @default [blocks: @default_blocks, marks: @default_marks]
-  @default_inline false
 
   @doc ~S"""
   Override the `config` with the `input_config`.
@@ -61,9 +61,11 @@ defmodule ExProsemirror.Config do
   end
 
   defp do_override(config, input_config, :inline) do
-    if is_nil(Keyword.get(input_config, :inline)),
+    inline? = Keyword.get(input_config, :inline)
+
+    if is_nil(inline?),
       do: config,
-      else: Keyword.put(config, :inline, Keyword.get(input_config, :inline))
+      else: Keyword.put(config, :inline, inline?)
   end
 
   defp do_override(config, input_config, field) do
@@ -99,13 +101,13 @@ defmodule ExProsemirror.Config do
   ## Examples
 
       iex> ExProsemirror.Config.load(:title)
-      [blocks: [:h1, :h2], marks: [:strong]]
+      [blocks: [:h1, :h2], marks: [:strong], inline: false]
 
       iex> ExProsemirror.Config.load(:lead)
-      [blocks: [:h1, :h2, :p], marks: [:em, :strong]]
+      [blocks: [:h1, :h2, :p], marks: [:em, :strong], inline: false]
 
       iex> ExProsemirror.Config.load(:lead, marks: [em: false])
-      [blocks: [:h1, :h2, :p], marks: [:strong]]
+      [blocks: [:h1, :h2, :p], marks: [:strong], inline: false]
 
   """
   def load(type, custom_config \\ [])

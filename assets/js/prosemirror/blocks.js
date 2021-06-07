@@ -33,7 +33,7 @@ function inlineDoc(inline) {
  * @param {Object[]} customBlocks
  * @param {Boolean} inline
  */
-export default (blocksSelection, customBlocks) => {
+export default ({ blocksSelection, customBlocks, inline }) => {
   const blocks = { ...prosemirrorBlocks, custom: customBlocks || [] };
 
   const map = {

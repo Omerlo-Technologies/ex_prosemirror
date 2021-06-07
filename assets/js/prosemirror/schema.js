@@ -7,6 +7,6 @@ import blocks from './blocks';
  */
 export default (options) =>
   new Schema({
-    nodes: blocks(options.blocksSelection, options.customBlocks),
-    marks: generateSchemaMarks(options.marksSelection, options.customMarks)
+    nodes: blocks(options),
+    marks: generateSchemaMarks(options)
   });
