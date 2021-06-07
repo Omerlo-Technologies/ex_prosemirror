@@ -136,5 +136,6 @@ defmodule ExProsemirror.Config do
     opts
     |> Keyword.put_new(:marks, @default_marks)
     |> Keyword.put_new(:blocks, @default_blocks)
+    |> Keyword.put_new(:inline, @default_inline)
   end
 end
