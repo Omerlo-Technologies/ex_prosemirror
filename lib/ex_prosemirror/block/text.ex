@@ -11,27 +11,22 @@ defmodule ExProsemirror.Block.Text do
   > using `ExProsemirror.Schema`.
   """
 
-  @test Application.compile_env(:ex_prosemirror, :marks,
-          strong: Strong,
-          em: Em,
-          underline: Underline
-        )
-
   use Ecto.Schema
 
   import Ecto.Changeset
   import ExProsemirror.SchemaHelper
 
-  alias ExProsemirror.Mark.{Em, Strong, Underline}
-
   @behaviour ExProsemirror
 
   @doc false
   embedded_schema do
-    IO.inspect(@test)
     field :text, :string
 
-    embedded_prosemirror_marks([])
+    embedded_prosemirror_marks(
+      em: ExProsemirror.Mark.Em,
+      strong: ExProsemirror.Mark.Strong,
+      underline: ExProsemirror.Mark.Underline
+    )
   end
 
   @doc false
@@ -50,6 +45,4 @@ defmodule ExProsemirror.Block.Text do
       "Hello elixir's friends"
   """
   def extract_simple_text(%__MODULE__{text: text}), do: text
-
-  def test(), do: @test
 end

@@ -4,7 +4,15 @@ To create a new `mark` / `block`, you should first follow prosemirror spec.
 
 You can find an example [here](https://prosemirror.net/examples/schema/).
 
+> Everytime you update the config `ex_prosemirror.schema` you'll need to recompile
+> the lib `ex_prosemirror`.
+
 ## Create a custom span mark
+
+Here, we'll create a span that will act as a mark.
+
+
+### JS part
 
 In our example, we will have the following mark spec:
 
@@ -47,9 +55,44 @@ const spanMark = {
   toDOM() { return ['span', 0] }
 }
 
-exProsemirror.setCustomMarks({span: spanMark});
+exProsemirror.setCustomMarks({custom_span: spanMark});
 
 exProsemirror.initAll();
+```
+
+
+### Elixir part
+
+First, we'll need to create a module that manages our changeset.
+
+```elixir
+# Note the module name is not important
+defmodule MyApp.MyCustomSpan do
+  use Ecto.Schema
+
+  @doc false
+  embedded_schema do
+  end
+
+  @doc false
+  def changeset(struct_or_changeset, _attrs \\ %{}) do
+    %Ecto.Changeset{valid?: true, data: struct_or_changeset}
+  end
+end
+```
+
+Now that we have our module that manage the changeset, we have to configure `ex_prosemirror` to support it.
+
+```elixir
+config :ex_prosemirror,
+  debug: true,
+  schema: [
+    "ExProsemirror.Block.Text": [
+      marks: [
+        custom_span: MyApp.MyCustomSpan,
+      ]
+    ]
+  ],
 ```
 
 
@@ -98,4 +141,22 @@ const spanBlock = {
 exProsemirror.setCustomBlocks({span: spanBlock});
 
 exProsemirror.initAll();
+```
+
+### Elixir part
+
+We'll use the same changeset that we defined previsouly.
+
+The `ex_prosemirror` configuration should be like the following code.
+
+```elixir
+config :ex_prosemirror,
+  debug: true,
+  schema: [
+    "ExProsemirror.Block.Text": [
+      blocks: [
+        custom_span: MyApp.Block.CustomSpan,
+      ]
+    ]
+  ],
 ```
