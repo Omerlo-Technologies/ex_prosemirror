@@ -17,6 +17,14 @@
     "prosemirror-state": "1.3.4",
     "prosemirror-view": "1.18.7"
   },
+  "peerDependencies": {
+    "prosemirror-example-setup": "1.x",
+    "prosemirror-menu": "1.x",
+    "prosemirror-model": "1.x",
+    "prosemirror-schema-basic": "1.x",
+    "prosemirror-state": "1.x",
+    "prosemirror-view": "1.x"
+  },
   "devDependencies": {
     "eslint": "7.27.0"
   }
