@@ -5,6 +5,10 @@ import { MenuItem } from 'prosemirror-menu';
 const exProsemirrorMarks = {
   strong: prosemirrorMarks.strong,
   em: prosemirrorMarks.em,
+  strikethrough: {
+    toDOM() {return ['del', 0];},
+    parseDOM: [{ tag: 'del' }]
+  },
   underline: {
     toDOM() {
       return ['span', { style: 'text-decoration: underline' }, 0];
