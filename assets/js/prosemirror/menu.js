@@ -35,6 +35,24 @@ function generateParagraphItem(schema) {
   return [];
 }
 
+function generateHTMLItem(schema) {
+  if(schema.nodes.html) {
+    return [[
+      new MenuItem({
+        title: 'Insert HTML code',
+        label: 'HTML',
+        enable() { return true; },
+        run(_state, _transaction, view) {
+          const exEditorNode = view.dom.parentNode.parentNode;
+          exEditorNode.dispatchEvent(new CustomEvent('exProsemirrorInsertPlaceholder', {detail: {nodeType: 'html'}}));
+        }
+      })
+    ]];
+  }
+
+  return [];
+}
+
 function generateTextStyleMenu(schema) {
   const textStyle = [
     ...generateParagraphItem(schema),
@@ -61,7 +79,7 @@ function generateMediaMenu(schema) {
       enable() { return true; },
       run(_state, _transaction, view) {
         const exEditorNode = view.dom.parentNode.parentNode;
-        exEditorNode.dispatchEvent(new Event('exProsemirrorInsertPlaceholder'));
+        exEditorNode.dispatchEvent(new CustomEvent('exProsemirrorInsertPlaceholder', {detail: {nodeType: 'image'}}));
       }
     })
   ]];
@@ -99,6 +117,7 @@ export default({ schema  }) => {
     generateMarks(schema),
     ...generateTextStyleMenu(schema),
     ...generateMediaMenu(schema),
+    ...generateHTMLItem(schema),
     generateCustomBlocks(schema)
   ];
 

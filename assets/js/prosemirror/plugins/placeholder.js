@@ -32,7 +32,7 @@ export const placeholderPlugin = new Plugin({
 });
 
 
-export function insertPlaceholder(exEditorView) {
+export function insertPlaceholder(exEditorView, {nodeType}) {
   // A fresh object to act as the ID for this upload
   let id = {};
 
@@ -50,7 +50,8 @@ export function insertPlaceholder(exEditorView) {
   tr.setMeta(placeholderPlugin, {add: {id, pos: tr.selection.from}});
   exEditorView.editorView.dispatch(tr);
 
-  const msg = {detail: {type: 'image', id, tr}};
+
+  const msg = {detail: {nodeType: nodeType, id, tr}};
   exEditorView.editorNode.dispatchEvent(new CustomEvent('insertPlaceholder', msg));
 }
 
@@ -62,11 +63,31 @@ export function replacePlaceholder(exEditorView, {detail: detail}) {
   // Otherwise, insert it at the placeholder's position, and remove
   // the placeholder
 
+  switch (detail.nodeType) {
+  case 'image':
+    dispatchReplace({
+      exEditorView,
+      id: detail.id,
+      pos,
+      node: exEditorView.editorView.state.schema.nodes.image.create({src: detail.data.url})
+    });
+    break;
+  case 'html':
+    dispatchReplace({
+      exEditorView,
+      id: detail.id,
+      pos,
+      node: exEditorView.editorView.state.schema.nodes.html.create({html: detail.data.html})
+    });
+    break;
+  }
+}
+
+function dispatchReplace({exEditorView, id, pos, node}) {
   // TODO manage error
-  const image = exEditorView.editorView.state.schema.nodes.image.create({src: detail.data.url});
   exEditorView.editorView.dispatch(exEditorView.editorView.state.tr
-    .replaceWith(pos, pos, image)
-    .setMeta(placeholderPlugin, {remove: {id: detail.id}}));
+    .replaceWith(pos, pos, node)
+    .setMeta(placeholderPlugin, {remove: {id}}));
 }
 
 function findPlaceholder(state, id) {
