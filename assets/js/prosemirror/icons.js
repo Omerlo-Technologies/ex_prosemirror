@@ -2,6 +2,11 @@ import { icons as prosemirrorIcons } from 'prosemirror-menu';
 
 export const icons = {
   ...prosemirrorIcons,
+  strikethrough: {
+    'width': 22,
+    'height': 22,
+    'path': 'M15.6 8.5c-.5-.7-1-1.1-1.3-1.3c-.6-.4-1.3-.6-2-.6c-2.7 0-2.8 1.7-2.8 2.1c0 1.6 1.8 2 3.2 2.3c4.4.9 4.6 2.8 4.6 3.9c0 1.4-.7 4.1-5 4.1A6.2 6.2 0 017 16.4l1.5-1.1c.4.6 1.6 2 3.7 2c1.6 0 2.5-.4 3-1.2c.4-.8.3-2-.8-2.6c-.7-.4-1.6-.7-2.9-1c-1-.2-3.9-.8-3.9-3.6C7.6 6 10.3 5 12.4 5c2.9 0 4.2 1.6 4.7 2.4l-1.5 1.1zM5 11h14a1 1 0 010 2H5a1 1 0 010-2z'
+  },
   underline: {
     'width': 22,
     'height': 20,
