@@ -10,48 +10,60 @@ defmodule ExProsemirror do
 
       <%= form_for @changeset, "#", fn f -> %>
         <%= prosemirror_input f, :title, type: :title %>
-        <%= prosemirror_input f, :body, blocks: [h1: false] %>
+        <%= prosemirror_input f, :subtitle, type: :title %>
+        <%= prosemirror_input f, :body, type: :content %>
       <% end %>
 
   Assuming we have the following in our config:
 
   ```elixir
   config :ex_prosemirror,
-    default: [
-      blocks: [:p, :h1, :h2],
-      marks: [:strong]
+    marks_modules: [
+      em: ExProsemirror.Mark.Em,
+      strong: ExProsemirror.Mark.Strong,
+      underline: ExProsemirror.Mark.Underline
+    ],
+    blocks_modules: [
+      p: ExProsemirror.Block.Paragraph,
+      heading: ExProsemirror.Block.Heading,
+      image: ExProsemirror.Block.Image,
+      text: ExProsemirror.Block.Text
     ],
     types: [
       title: [
         marks: [:em],
-        blocks: [:h1]
+        blocks: [{:heading, [:h1, :h2]]
+      ],
+      content: [
+        marks: [:strong]
+        blocks: [:p, {:heading, :h2}],
       ]
     ]
   ```
 
   We will get the following results:
 
-  * Input of type `:title` will be instantiated with block `h1` and will have the `em` mark
+  * Inputs of type `:title` will be instantiated with block `h1` and `h2` and will have the `em` mark
   * Input of type `:body` will be instantiated with blocks `p` and `h2` and will have the `strong` mark
 
   When providing the `type` option, we are telling ExProsemirror to fetch the blocks and marks specified in our config.
 
-  The following will go to our config, and grab the blocks/marks specified in the `body` type.
+  The following will go to our config, and grab the blocks/marks specified in the `title` type.
 
   ```elixir
-  <%= prosemirror_input f, :title, type: :body ... %>
+  <%= prosemirror_input f, :title, type: :title ... %>
   ```
 
-  > Currently we don't allow custom blocks / marks. You have to use marks and blocks
-  > defined by the lib ex_prosemirror.
-
-  The following code sample will create a form with 2 fields: `title` and `body`. The
+  The first code sample will create a form with 3 fields: `title`, `subtitle` and `body`. The
   title will expose italic marks only. The body will expose italic and strong
   marks plus paragraph and header 1.
 
 
       <form for="article">
         <input type="hidden" name="article[title_plain]">
+        <div id="ProseMirrorTitleDiv"></div>
+
+        <input type="hidden" name="article[subtitle_plain]">
         <div id="ProseMirrorTitleDiv"></div>
 
         <input type="hidden" name="article[body_plain]">
@@ -166,6 +178,14 @@ defmodule ExProsemirror do
       end
     end
   end
+
+  @doc ~S"""
+  Custom changeset defintion for ex_prosemirror.
+
+  `opts` contains informations such as `marks` that defined the marks allowed by the type.
+  """
+  @callback changeset(struct_or_changeset :: any, attrs :: map, opts :: keyword) ::
+              Ecto.Changeset.t()
 
   @doc ~S"""
   Override the default `extract_simple_text/1` system for the module that implements the callback.

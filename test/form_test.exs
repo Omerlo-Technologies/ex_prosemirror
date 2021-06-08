@@ -29,7 +29,7 @@ defmodule ExProsemirror.FormTest do
   end
 
   describe "prosemirror_editor/2" do
-    test "without opts" do
+    test "no marks - no blocks" do
       input_html =
         %Form{data: %{title_plain: "hello"}}
         |> prosemirror_editor(:title, type: :empty)
@@ -39,68 +39,51 @@ defmodule ExProsemirror.FormTest do
                ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[]" data-target="#title" id="title")
     end
 
-    test "with one mark" do
+    test "marks only" do
       input_html =
         %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title, type: :empty, marks: [em: true])
+        |> prosemirror_editor(:title, type: :marks_only)
         |> safe_to_string()
 
       assert input_html =~
-               ~s(data-marks="[&quot;em&quot;]")
+               ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[&quot;em&quot;]" data-target="#title" id="title")
     end
 
-    test "with 2 marks" do
+    test "blocks only" do
       input_html =
         %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title, type: :empty, marks: [em: true, strong: true])
+        |> prosemirror_editor(:title, type: :blocks_only)
         |> safe_to_string()
 
       assert input_html =~
-               ~s(data-marks="[&quot;em&quot;,&quot;strong&quot;]")
-    end
-
-    test "with p block" do
-      input_html =
-        %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title, type: :empty, blocks: [p: true])
-        |> safe_to_string()
-
-      assert input_html =~
-               ~s(data-blocks="[&quot;p&quot;]")
-    end
-
-    test "with h1 and p block" do
-      input_html =
-        %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title, type: :empty, blocks: [p: true, h1: true])
-        |> safe_to_string()
-
-      assert input_html =~
-               ~s(data-blocks="[&quot;h1&quot;,&quot;p&quot;]")
+               ~s(<div class="ex-prosemirror" data-blocks="[&quot;p&quot;]" data-inline="false" data-marks="[]" data-target="#title" id="title")
     end
   end
 
-  describe "test prosemirror_input" do
-    test "without options" do
-      form = %Form{data: %{title_plain: "hello"}}
-
-      inputs_html =
-        form
-        |> ExProsemirror.HTML.Form.prosemirror_input(:title, type: :empty)
-        |> Phoenix.HTML.safe_to_string()
-
-      hidden_input_html =
-        form
-        |> prosemirror_hidden_input(:title)
+  @tag capture_log: true
+  describe "defaults" do
+    test "unknow type" do
+      input_html =
+        %Form{data: %{title_plain: "hello"}}
+        |> prosemirror_editor(:title, type: :unkown)
         |> safe_to_string()
 
-      editor_input_html =
-        form
-        |> prosemirror_editor(:title, type: :empty)
-        |> safe_to_string()
+      assert input_html =~
+               ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[]" data-target="#title" id="title")
+    end
 
-      assert inputs_html =~ hidden_input_html
-      assert inputs_html =~ editor_input_html
+    test "unknown type should log a warn" do
+      import ExUnit.CaptureLog
+
+      log =
+        capture_log(fn ->
+          %Form{data: %{title_plain: "hello"}}
+          |> prosemirror_editor(:title, type: :unknown)
+          |> safe_to_string()
+        end)
+
+      assert log =~ ~S(ExProsemirror - Type "unknown" not found)
+      assert log =~ ~S(using default)
     end
   end
 end

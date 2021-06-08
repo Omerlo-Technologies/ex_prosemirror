@@ -1,28 +1,38 @@
 use Mix.Config
 
 config :ex_prosemirror,
-  debug: false,
-  default_blocks: [:p, :h1, :h2, :h3, :h4, :h5, :h6, :image, :html],
-  default_marks: [:em, :strikethrough, :strong, :underline],
-  default_inline: false
+  debug: false
 
 if Mix.env() == :test do
   config :ex_prosemirror,
-    default_blocks: [:p, :h1, :h2],
-    default_marks: [:em, :strong],
-    default_inline: false,
-    default: [
-      blocks: [:p, :h1, :h2]
+    marks_modules: [
+      em: ExProsemirror.Mark.Em,
+      strong: ExProsemirror.Mark.Strong,
+      underline: ExProsemirror.Mark.Underline
+    ],
+    blocks_modules: [
+      p: ExProsemirror.Block.Paragraph,
+      heading: ExProsemirror.Block.Heading,
+      image: ExProsemirror.Block.Image,
+      text: ExProsemirror.Block.Text
     ],
     types: [
-      title: [
-        marks: [:strong],
-        blocks: [:h1, :h2]
+      marks_only: [
+        blocks: [],
+        marks: [:em]
       ],
-      lead: [],
+      blocks_only: [
+        blocks: [:p],
+        marks: []
+      ],
+      title: [
+        inline: true,
+        marks: [:strong],
+        blocks: [{:heading, [:h1, :h2]}, :p]
+      ],
       sublead: [
         marks: [:em],
-        blocks: [:h2, :h3]
+        blocks: [{:heading, [:h2, :h3]}]
       ],
       empty: [
         marks: [],

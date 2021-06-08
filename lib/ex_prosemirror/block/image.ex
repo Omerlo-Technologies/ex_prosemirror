@@ -30,7 +30,7 @@ defmodule ExProsemirror.Block.Image do
 
   """
 
-  use Ecto.Schema
+  use ExProsemirror.Schema
 
   import Ecto.Changeset
 
@@ -47,6 +47,7 @@ defmodule ExProsemirror.Block.Image do
   end
 
   defmodule __MODULE__.Attrs do
+    @derive {Jason.Encoder, except: [:__struct__]}
     @moduledoc false
 
     use Ecto.Schema

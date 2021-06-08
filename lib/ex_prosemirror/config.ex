@@ -34,60 +34,6 @@ defmodule ExProsemirror.Config do
 
   require Logger
 
-  @default_marks Application.compile_env!(:ex_prosemirror, :default_marks)
-  @default_blocks Application.compile_env!(:ex_prosemirror, :default_blocks)
-  @default_inline Application.compile_env!(:ex_prosemirror, :default_inline)
-  @default [blocks: @default_blocks, marks: @default_marks]
-
-  @doc ~S"""
-  Override the `config` with the `input_config`.
-
-  ## Examples
-
-      iex> ExProsemirror.Config.override([marks: []], [marks: [em: true]])
-      [marks: [:em]]
-
-      iex> ExProsemirror.Config.override([marks: [:em]], [marks: [em: true]])
-      [marks: [:em]]
-
-      iex> ExProsemirror.Config.override([marks: [:strong]], [marks: [em: true]])
-      [marks: [:em, :strong]]
-  """
-  def override(config, input_config) do
-    config
-    |> do_override(input_config, :marks)
-    |> do_override(input_config, :blocks)
-    |> do_override(input_config, :inline)
-  end
-
-  defp do_override(config, input_config, :inline) do
-    inline? = Keyword.get(input_config, :inline)
-
-    if is_nil(inline?),
-      do: config,
-      else: Keyword.put(config, :inline, inline?)
-  end
-
-  defp do_override(config, input_config, field) do
-    if curr_config = Keyword.get(config, field) do
-      curr_config = do_override_reduce(curr_config, input_config, field)
-      Keyword.put(config, field, curr_config)
-    else
-      config
-    end
-  end
-
-  defp do_override_reduce(curr_config, input_config, field) do
-    input_config
-    |> Keyword.get(field, [])
-    |> List.flatten()
-    |> Enum.reduce(MapSet.new(curr_config), fn {field_type, enabled}, config ->
-      action = (enabled && :put) || :delete
-      Kernel.apply(MapSet, action, [config, field_type])
-    end)
-    |> MapSet.to_list()
-  end
-
   @doc ~S"""
   Get the configuration of ExProsemirror
   """
@@ -101,23 +47,11 @@ defmodule ExProsemirror.Config do
   ## Examples
 
       iex> ExProsemirror.Config.load(:title)
-      [blocks: [:h1, :h2], marks: [:strong], inline: false]
-
-      iex> ExProsemirror.Config.load(:lead)
-      [blocks: [:h1, :h2, :p], marks: [:em, :strong], inline: false]
-
-      iex> ExProsemirror.Config.load(:lead, marks: [em: false])
-      [blocks: [:h1, :h2, :p], marks: [:strong], inline: false]
+      [inline: true, marks: [:strong], blocks: [{:heading, [:h1, :h2]}, :p]]
 
   """
-  def load(type, custom_config \\ [])
 
-  def load(:default, custom_config) do
-    put_default_types()
-    |> override(custom_config)
-  end
-
-  def load(type, custom_config) do
+  def load(type) do
     if config_type = Keyword.get(load(), type) do
       put_default_types(config_type)
     else
@@ -127,15 +61,14 @@ defmodule ExProsemirror.Config do
 
       put_default_types()
     end
-    |> override(custom_config)
   end
 
   def debug?, do: Application.get_env(:ex_prosemirror, :debug, false)
 
-  defp put_default_types(opts \\ @default) do
+  defp put_default_types(opts \\ []) do
     opts
-    |> Keyword.put_new(:marks, @default_marks)
-    |> Keyword.put_new(:blocks, @default_blocks)
-    |> Keyword.put_new(:inline, @default_inline)
+    |> Keyword.put_new(:marks, [])
+    |> Keyword.put_new(:blocks, [])
+    |> Keyword.put_new(:inline, false)
   end
 end

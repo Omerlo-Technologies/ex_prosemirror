@@ -11,10 +11,10 @@ defmodule ExProsemirror.Block.Text do
   > using `ExProsemirror.Schema`.
   """
 
-  use Ecto.Schema
+  use ExProsemirror.Schema
 
-  import Ecto.Changeset
   import ExProsemirror.SchemaHelper
+  import Ecto.Changeset
 
   alias ExProsemirror.Mark.{Em, Strong, Underline}
 
@@ -28,10 +28,22 @@ defmodule ExProsemirror.Block.Text do
   end
 
   @doc false
-  def changeset(struct_or_changeset, attrs \\ %{}) do
+  def changeset(struct_or_changeset, attrs \\ %{}, opts \\ []) do
+    allowed_marks =
+      opts
+      |> Keyword.get(:marks, [])
+      |> Enum.map(&elem(&1, 1))
+
     struct_or_changeset
     |> cast(attrs, [:text])
     |> cast_prosemirror_marks()
+    |> secure_marks(allowed_marks)
+  end
+
+  defp secure_marks(changeset, allowed_marks) do
+    update_change(changeset, :marks, fn marks ->
+      Enum.filter(marks, &Enum.member?(allowed_marks, &1.__struct__))
+    end)
   end
 
   @doc ~S"""

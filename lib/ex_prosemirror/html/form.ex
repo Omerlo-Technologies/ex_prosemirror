@@ -31,11 +31,8 @@ defmodule ExProsemirror.HTML.Form do
       <%= prosemirror_input @form, :title, type: :title, id: "my-article-input" %>
       # Generates a prosemirror input with the :title configuration.
 
-      <%= prosemirror_input @form, :title, type: :title, id: "my-article-input", block: [h1: false] %>
-      # Overrides the :title configuration to disable the h1 block.
-
-      <%= prosemirror_input @form, :title, type: :title, id: "my-article-input", block: [h2: true] %>
-      # Overrides the :title configuration to enable the h2 block.
+      <%= prosemirror_input @form, :title, type: :content, id: "my-article-content" %>
+      # Generates a prosemirror input with the :content configuration.
 
 
   Read `ExProsemirror.Config` for more information about configuration.
@@ -108,12 +105,9 @@ defmodule ExProsemirror.HTML.Form do
 
     # TODO  reduce function complexity
     {type, opts} = Keyword.pop(opts, :type)
-    {marks, opts} = Keyword.pop_values(opts, :marks)
-    {blocks, opts} = Keyword.pop_values(opts, :blocks)
-    {inline, opts} = Keyword.pop(opts, :inline)
     {data, opts} = Keyword.pop_values(opts, :data)
 
-    config = ExProsemirror.Config.load(type, marks: marks, blocks: blocks, inline: inline)
+    config = ExProsemirror.Config.load(type)
 
     data =
       data
@@ -137,9 +131,10 @@ defmodule ExProsemirror.HTML.Form do
     values
     |> List.flatten()
     |> Enum.map(&to_html_data/1)
+    |> List.flatten()
     |> Jason.encode!()
   end
 
-  defp to_html_data({key, values}), do: %{key => values}
+  defp to_html_data({_key, values}), do: values
   defp to_html_data(value), do: value
 end

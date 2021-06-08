@@ -22,13 +22,7 @@ defmodule ExProsemirror.Changeset do
 
     with data when not is_nil(data) <- Ecto.Changeset.get_change(changeset, plain_field),
          {:ok, parsed_data} <- Jason.decode(data) do
-      parsed_data = %{content: parsed_data}
-
-      embed_value =
-        (Ecto.Changeset.get_field(changeset, field) || %ExProsemirror.Schema{})
-        |> ExProsemirror.Schema.changeset(parsed_data)
-
-      Ecto.Changeset.put_embed(changeset, field, embed_value)
+      Map.update(changeset, :params, %{}, &Map.put(&1, "#{field}", parsed_data))
     else
       {:error, _} ->
         changeset
@@ -39,7 +33,21 @@ defmodule ExProsemirror.Changeset do
         changeset
     end
     |> Ecto.Changeset.cast_embed(field, opts)
+    |> update_plain_field(field)
     |> validate_prosemirror(field)
+  end
+
+  def update_plain_field(changeset, field) do
+    if type_changes = Ecto.Changeset.get_change(changeset, field) do
+      plain_value =
+        type_changes
+        |> Ecto.Changeset.apply_changes()
+        |> ExProsemirror.Type.to_json!()
+
+      Ecto.Changeset.put_change(changeset, :"#{field}_plain", plain_value)
+    else
+      changeset
+    end
   end
 
   @doc ~S"""
