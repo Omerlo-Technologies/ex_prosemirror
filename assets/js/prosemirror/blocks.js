@@ -5,8 +5,28 @@ const prosemirrorBlocks = {
   text: nodes.text,
   heading: nodes.heading,
   doc: nodes.doc,
-  image: nodes.image
+  image: nodes.image,
+  html: {
+    inline: true,
+    attrs: {
+      html: {default: null}
+    },
+    group: 'inline',
+    draggable: false,
+    parseDOM: [{tag: 'div[html]', getAttrs(dom) {
+      return {
+        html: dom.getAttribute('html'),
+      };
+    }}],
+    toDOM(node) {
+      let {html} = node.attrs;
+      let myDom = document.createElement('div');
+      myDom.innerHTML = html;
+      return myDom;
+    }
+  }
 };
+
 
 const allowedHeading = { h1: 1, h2: 2, h3: 3, h4: 4, h5: 5, h6: 6 };
 

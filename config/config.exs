@@ -2,7 +2,7 @@ use Mix.Config
 
 config :ex_prosemirror,
   debug: false,
-  default_blocks: [:p, :h1, :h2, :h3, :h4, :h5, :h6, :image],
+  default_blocks: [:p, :h1, :h2, :h3, :h4, :h5, :h6, :image, :html],
   default_marks: [:em, :strong, :underline],
   default_inline: false
 
