@@ -2,12 +2,15 @@ defmodule ExProsemirror.Generator do
   @callback generate_schema(context :: keyword(), opts :: keyword()) :: any
   @callback generate_changeset(keyword()) :: any
 
+  @optional_callbacks [generate_schema: 2, generate_changeset: 1]
+
   @doc ~S"""
   Define a ExProsemirror Generator.
 
   ## Options
 
-  - `kind` (required): Kind of the generator, could be `:marks`, `:types` or `:nodes`.
+  - `kind`: Kind of the generator, could be `:marks`, `:types` or `:nodes`.
+    If not provided the function `generate/1` will not be add to the module.
 
   ## Examples
 
@@ -15,13 +18,11 @@ defmodule ExProsemirror.Generator do
 
   """
   defmacro __using__(opts) do
-    kind = opts[:kind] || raise "Options `kind` is required"
-
     quote do
       @behaviour ExProsemirror.Generator
 
       import unquote(__MODULE__)
-      generate(unquote(kind))
+      generate(unquote(opts[:kind]))
     end
   end
 
@@ -43,6 +44,8 @@ defmodule ExProsemirror.Generator do
       end
 
   """
+  defmacro generate(nil), do: nil
+
   defmacro generate(kind) do
     quote do
       def generate(context) do
@@ -85,8 +88,22 @@ defmodule ExProsemirror.Generator do
   Currently generators are `ExProsemirror.Mark`, `ExProsemirror.Node` and `ExProsemirror.Type`
   """
   def module_content(context, opts) do
+    module = opts[:module]
     generator = context[:generator]
-    schema = generator.generate_schema(context, opts)
+
+    schema =
+      if function_exported?(module, :generate_schema, 2) do
+        module.generate_schema(context, opts)
+      else
+        generator.generate_schema(context, opts)
+      end
+
+    changeset =
+      if function_exported?(module, :generate_changeset, 1) do
+        module.generate_changeset(schema)
+      else
+        generator.generate_changeset(schema)
+      end
 
     quote do
       use Ecto.Schema
@@ -98,7 +115,7 @@ defmodule ExProsemirror.Generator do
         unquote(schema[:content])
       end
 
-      unquote(generator.generate_changeset(schema))
+      unquote(changeset)
     end
   end
 

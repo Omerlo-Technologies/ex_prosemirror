@@ -1,4 +1,4 @@
-defmodule ExProsemirror.Block.Heading do
+defmodule ExProsemirror.Node.Heading do
   @moduledoc ~S"""
   Create heading text style using `<hX></hX>` html style.
 

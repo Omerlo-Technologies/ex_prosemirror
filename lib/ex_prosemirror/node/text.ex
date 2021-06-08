@@ -1,4 +1,4 @@
-defmodule ExProsemirror.Block.Text do
+defmodule ExProsemirror.Node.Text do
   @moduledoc ~S"""
   Prosemirror inline element. It's contained by most of ExProsemirror modifiers like
   `ExProsemirror.Block.Paragraph` or `ExProsemirror.Block.Heading`.
@@ -18,16 +18,28 @@ defmodule ExProsemirror.Block.Text do
 
   @behaviour ExProsemirror
 
-  @doc false
-  embedded_schema do
-    field :text, :string
+  use ExProsemirror.Generator
 
-    embedded_prosemirror_marks(
-      em: ExProsemirror.Mark.Em,
-      strong: ExProsemirror.Mark.Strong,
-      underline: ExProsemirror.Mark.Underline
-    )
+  def generate_schema(context, opts) do
+    [
+      text:
+        quote do
+          field :text, :string
+        end,
+      marks: generate_marks_fields(opts, context)
+    ]
   end
+
+  # @doc false
+  # embedded_schema do
+  #   field :text, :string
+
+  #   embedded_prosemirror_marks(
+  #     em: ExProsemirror.Mark.Em,
+  #     strong: ExProsemirror.Mark.Strong,
+  #     underline: ExProsemirror.Mark.Underline
+  #   )
+  # end
 
   @doc false
   def changeset(struct_or_changeset, attrs \\ %{}) do
@@ -44,5 +56,5 @@ defmodule ExProsemirror.Block.Text do
       ExProsemirror.Block.Text.extract_simple_text(%ExProsemirror.Block.Text{text: "Hello elixir's friends"})
       "Hello elixir's friends"
   """
-  def extract_simple_text(%__MODULE__{text: text}), do: text
+  def extract_simple_text(%{text: text}), do: text
 end
