@@ -61,7 +61,7 @@ function generateMediaMenu(schema) {
       enable() { return true; },
       run(_state, _transaction, view) {
         const exEditorNode = view.dom.parentNode.parentNode;
-        exEditorNode.dispatchEvent(new Event('exProsemirrorInsertPlaceholder'));
+        exEditorNode.dispatchEvent(new CustomEvent('exProsemirrorInsertPlaceholder', {detail: {nodeType: 'image'}}));
       }
     })
   ]];

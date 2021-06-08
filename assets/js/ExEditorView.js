@@ -59,8 +59,8 @@ export default class ExEditorView {
 
   addListeners() {
     const exEditorView = this;
-    this.editorNode.addEventListener('exProsemirrorInsertPlaceholder', () => {
-      insertPlaceholder(exEditorView);
+    this.editorNode.addEventListener('exProsemirrorInsertPlaceholder', ({detail}) => {
+      insertPlaceholder(exEditorView, {nodeType: detail.nodeType});
     });
   }
 
