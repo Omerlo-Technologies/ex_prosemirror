@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="ex_prosemirror v0.2.0">
 
-    <title>ExProsemirror.HTML.Form.prosemirror_input — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.ModifierHelper.cast_prosemirror_content — ex_prosemirror v0.2.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-eab92df2d7.js"></script>
@@ -79,40 +79,46 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>ExProsemirror.HTML.Form.prosemirror_input</h1>
+<h1>ExProsemirror.ModifierHelper.cast_prosemirror_content</h1>
 
 <div class="deprecated">
-  You're seeing just the function <code>prosemirror_input</code>, go back to <a href="ExProsemirror.HTML.Form.html">ExProsemirror.HTML.Form</a> module for more information.
+  You're seeing just the function <code>cast_prosemirror_content</code>, go back to <a href="ExProsemirror.ModifierHelper.html">ExProsemirror.ModifierHelper</a> module for more information.
 </div>
 
-<section class="detail" id="prosemirror_input/3">
+<section class="detail" id="cast_prosemirror_content/2">
 
-    <span id="prosemirror_input/2"></span>
+    <span id="cast_prosemirror_content/1"></span>
 
   <div class="detail-header">
-    <a href="#prosemirror_input/3" class="detail-link" title="Link to this function">
+    <a href="#cast_prosemirror_content/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">prosemirror_input(form, field, opts \\ [])</h1>
+    <h1 class="signature">cast_prosemirror_content(struct_or_changeset, opts \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Generates inputs for ProseMirror.</p><h2 id="prosemirror_input/3-usages" class="section-heading">
-  <a href="#prosemirror_input/3-usages" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Usages
+<p>Cast prosemirror data struct.</p><h2 id="cast_prosemirror_content/2-examples" class="section-heading">
+  <a href="#cast_prosemirror_content/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
 </h2>
-<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-article-input&quot;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
-</span><span class="c1"># Generates a prosemirror input with the :default configuration.</span><span class="w">
+<pre><code class="makeup elixir"><span class="n">struct_or_changeset</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="2651178153-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="2651178153-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="2651178153-2">(</span><span class="p" data-group-id="2651178153-2">)</span><span class="w">
 
-</span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-article-input&quot;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
-</span><span class="c1"># Generates a prosemirror input with the :title configuration.</span><span class="w">
+</span><span class="c1"># or with opts</span><span class="w">
 
-</span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-article-content&quot;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
-</span><span class="c1"># Generates a prosemirror input with the :content configuration.</span></code></pre><p>Read <a href="ExProsemirror.Config.html"><code class="inline">ExProsemirror.Config</code></a> for more information about configuration.</p>
+</span><span class="n">struct_or_changeset</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="2651178153-3">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="2651178153-3">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="2651178153-4">(</span><span class="ss">with</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2651178153-5">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2651178153-6">{</span><span class="nc">ExProsemirror.Block.Text</span><span class="p">,</span><span class="w"> </span><span class="ss">:changeset</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2651178153-7">[</span><span class="n">opts</span><span class="p" data-group-id="2651178153-7">]</span><span class="p" data-group-id="2651178153-6">}</span><span class="p" data-group-id="2651178153-5">]</span><span class="p" data-group-id="2651178153-4">)</span></code></pre><p>Block <a href="ExProsemirror.Block.Text.html"><code class="inline">ExProsemirror.Block.Text</code></a> will be cast using the <code class="inline">changeset/3</code> with params</p><ul><li>%ExProsemirror.Block.Text{...}</li><li>attrs (map of data to cast)</li><li>opts: opts to use in the changeset (e.g. allowed marks to cast defined in the ExProsemirror type.)</li></ul><blockquote><p>If a block/mark's type is not specified in the <code class="inline">with</code> opts, the <code class="inline">changeset/2</code> will be use.</p></blockquote><h2 id="cast_prosemirror_content/2-options" class="section-heading">
+  <a href="#cast_prosemirror_content/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">with</code>: define the changeset to apply, to send allowed marks we recommend
+ to set this element to passed <code class="inline">opts</code>.</li></ul>
   </section>
 </section>
 

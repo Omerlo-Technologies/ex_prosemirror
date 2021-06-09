@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="ex_prosemirror v0.2.0">
 
-    <title>404 — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.Type.get_context — ex_prosemirror v0.2.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-eab92df2d7.js"></script>
@@ -18,7 +18,7 @@
 
 
   </head>
-  <body data-type="extras">
+  <body data-type="modules">
     <script>
 
       try {
@@ -79,14 +79,48 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h2>Page not found</h2>
+<h1>ExProsemirror.Type.get_context</h1>
 
-<p>Sorry, but the page you were trying to get to, does not exist. You
-may want to try searching this site using the sidebar
+<div class="deprecated">
+  You're seeing just the function <code>get_context</code>, go back to <a href="ExProsemirror.Type.html">ExProsemirror.Type</a> module for more information.
+</div>
 
-  or using our <a href="api-reference.html">API Reference</a> page
+<section class="detail" id="get_context/0">
 
-to find what you were looking for.</p>
+  <div class="detail-header">
+    <a href="#get_context/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_context()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Returns context to use for ExProsemirror types.</p><h2 id="get_context/0-examples" class="section-heading">
+  <a href="#get_context/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="nc">ExProsemirror.TypeGenerator</span><span class="o">.</span><span class="n">get_context</span><span class="p" data-group-id="4845886869-1">(</span><span class="p" data-group-id="4845886869-1">)</span><span class="w">
+</span><span class="p" data-group-id="4845886869-2">[</span><span class="w">
+  </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4845886869-3">[</span><span class="w">
+    </span><span class="ss">em</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Em</span><span class="p">,</span><span class="w">
+    </span><span class="ss">strong</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Strong</span><span class="p">,</span><span class="w">
+    </span><span class="ss">underline</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Underline</span><span class="w">
+  </span><span class="p" data-group-id="4845886869-3">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4845886869-4">[</span><span class="w">
+    </span><span class="ss">p</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Paragraph</span><span class="p">,</span><span class="w">
+    </span><span class="ss">heading</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Heading</span><span class="p">,</span><span class="w">
+    </span><span class="ss">image</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Image</span><span class="p">,</span><span class="w">
+    </span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="w">
+  </span><span class="p" data-group-id="4845886869-4">]</span><span class="w">
+</span><span class="p" data-group-id="4845886869-2">]</span></code></pre>
+  </section>
+</section>
+
+
       <footer class="footer">
         <p>
           <span class="line">

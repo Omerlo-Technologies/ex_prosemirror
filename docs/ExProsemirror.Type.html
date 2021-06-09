@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="ex_prosemirror v0.2.0">
 
-    <title>ExProsemirror.Changeset — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.Type — ex_prosemirror v0.2.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-eab92df2d7.js"></script>
@@ -80,13 +80,13 @@ ex_prosemirror
     <div id="content" class="content-inner">
 
       <h1>
-ExProsemirror.Changeset <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
+ExProsemirror.Type <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
 
       </h1>
 
 
         <section id="moduledoc">
-<p>Module helper for Ecto.Changeset.</p>
+<p>ExProsemirror's type helpers.</p>
         </section>
 
 
@@ -105,27 +105,45 @@ ExProsemirror.Changeset <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#cast_prosemirror/4">cast_prosemirror(changeset, attrs, field, opts \\ [])</a>
+    <a href="#changeset/3">changeset(struct_or_changeset, attrs \\ %{}, opts \\ [])</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Casts and validates data integrity for an ExProsemirror field type.</p></div>
+    <div class="summary-synopsis"><p>Changeset used by all <a href="ExProsemirror.Type.html#content"><code class="inline">ExProsemirror.Type</code></a>.</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#update_plain_field/2">update_plain_field(changeset, field)</a>
+    <a href="#encode/2">encode(elements, context)</a>
 
   </div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#validate_prosemirror/2">validate_prosemirror(changeset, field)</a>
+    <a href="#get_context/0">get_context()</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Validates a prosemirror field (returns <code class="inline">:__parent__</code> errors to the field itself).</p></div>
+    <div class="summary-synopsis"><p>Returns context to use for ExProsemirror types.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_json/1">to_json(ex_prosemirror_type)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Json the specified prosemirror type.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_json!/1">to_json!(ex_prosemirror_type)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>See <a href="#to_json/1"><code class="inline">to_json/1</code></a></p></div>
 
 </div>
 
@@ -143,42 +161,35 @@ ExProsemirror.Changeset <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
 Functions
           </h1>
           <div class="functions-list">
-<section class="detail" id="cast_prosemirror/4">
+<section class="detail" id="changeset/3">
 
-    <span id="cast_prosemirror/3"></span>
+    <span id="changeset/1"></span>
+
+    <span id="changeset/2"></span>
 
   <div class="detail-header">
-    <a href="#cast_prosemirror/4" class="detail-link" title="Link to this function">
+    <a href="#changeset/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">cast_prosemirror(changeset, attrs, field, opts \\ [])</h1>
+    <h1 class="signature">changeset(struct_or_changeset, attrs \\ %{}, opts \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Casts and validates data integrity for an ExProsemirror field type.</p><h2 id="cast_prosemirror/4-examples" class="section-heading">
-  <a href="#cast_prosemirror/4-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-<pre><code class="makeup elixir"><span class="n">cast_prosemirror</span><span class="p" data-group-id="6466775686-1">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="6466775686-1">)</span><span class="w">
-</span><span class="p" data-group-id="6466775686-2">%</span><span class="nc" data-group-id="6466775686-2">Ecto.Changeset</span><span class="p" data-group-id="6466775686-2">{</span><span class="p" data-group-id="6466775686-2">}</span></code></pre><h2 id="cast_prosemirror/4-options" class="section-heading">
-  <a href="#cast_prosemirror/4-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Options
-</h2>
-<p>Same options as (<a href="https://hexdocs.pm/ecto/3.6.1/Ecto.Changeset.html#cast_embed/3"><code class="inline">Ecto.Changeset.cast_embed/3</code></a>](<a href="https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_embed/3).">https://hexdocs.pm/ecto/Ecto.Changeset.html#cast_embed/3).</a></p>
+<p>Changeset used by all <a href="ExProsemirror.Type.html#content"><code class="inline">ExProsemirror.Type</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="update_plain_field/2">
+<section class="detail" id="encode/2">
 
   <div class="detail-header">
-    <a href="#update_plain_field/2" class="detail-link" title="Link to this function">
+    <a href="#encode/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">update_plain_field(changeset, field)</h1>
+    <h1 class="signature">encode(elements, context)</h1>
 
 
   </div>
@@ -188,30 +199,80 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="validate_prosemirror/2">
+<section class="detail" id="get_context/0">
 
   <div class="detail-header">
-    <a href="#validate_prosemirror/2" class="detail-link" title="Link to this function">
+    <a href="#get_context/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">validate_prosemirror(changeset, field)</h1>
+    <h1 class="signature">get_context()</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Validates a prosemirror field (returns <code class="inline">:__parent__</code> errors to the field itself).</p><h2 id="validate_prosemirror/2-examples" class="section-heading">
-  <a href="#validate_prosemirror/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<p>Returns context to use for ExProsemirror types.</p><h2 id="get_context/0-examples" class="section-heading">
+  <a href="#get_context/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="c1"># Assuming changeset contains an ExProsemirror `title` field.</span><span class="w">
-</span><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Ecto.Changeset</span><span class="o">.</span><span class="n">cast</span><span class="p" data-group-id="9927481414-1">(</span><span class="p" data-group-id="9927481414-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid Json&quot;</span><span class="p" data-group-id="9927481414-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9927481414-3">[</span><span class="p" data-group-id="9927481414-3">]</span><span class="p" data-group-id="9927481414-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">validate_prosemirror</span><span class="p" data-group-id="9927481414-4">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="9927481414-4">)</span><span class="w">
+<pre><code class="makeup elixir"><span class="nc">ExProsemirror.TypeGenerator</span><span class="o">.</span><span class="n">get_context</span><span class="p" data-group-id="4845886869-1">(</span><span class="p" data-group-id="4845886869-1">)</span><span class="w">
+</span><span class="p" data-group-id="4845886869-2">[</span><span class="w">
+  </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4845886869-3">[</span><span class="w">
+    </span><span class="ss">em</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Em</span><span class="p">,</span><span class="w">
+    </span><span class="ss">strong</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Strong</span><span class="p">,</span><span class="w">
+    </span><span class="ss">underline</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Underline</span><span class="w">
+  </span><span class="p" data-group-id="4845886869-3">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4845886869-4">[</span><span class="w">
+    </span><span class="ss">p</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Paragraph</span><span class="p">,</span><span class="w">
+    </span><span class="ss">heading</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Heading</span><span class="p">,</span><span class="w">
+    </span><span class="ss">image</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Image</span><span class="p">,</span><span class="w">
+    </span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="w">
+  </span><span class="p" data-group-id="4845886869-4">]</span><span class="w">
+</span><span class="p" data-group-id="4845886869-2">]</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="to_json/1">
 
-</span><span class="p" data-group-id="9927481414-5">%</span><span class="nc" data-group-id="9927481414-5">Ecto.Changeset</span><span class="p" data-group-id="9927481414-5">{</span><span class="ss">changes</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9927481414-6">%{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9927481414-7">[</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid json&quot;</span><span class="p" data-group-id="9927481414-7">]</span><span class="p" data-group-id="9927481414-6">}</span><span class="p" data-group-id="9927481414-5">}</span></code></pre>
+  <div class="detail-header">
+    <a href="#to_json/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">to_json(ex_prosemirror_type)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>to_json(ex_prosemirror_type :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) ::
+  {:ok, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+<p>Json the specified prosemirror type.</p>
+  </section>
+</section>
+<section class="detail" id="to_json!/1">
+
+  <div class="detail-header">
+    <a href="#to_json!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">to_json!(ex_prosemirror_type)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>See <a href="#to_json/1"><code class="inline">to_json/1</code></a></p>
   </section>
 </section>
 

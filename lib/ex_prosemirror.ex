@@ -253,7 +253,7 @@ defmodule ExProsemirror do
 
   ## Examples
 
-    debug(true)
+      debug(true)
   """
   def debug(boolean), do: Application.put_env(:ex_prosemirror, :debug, boolean)
 end
