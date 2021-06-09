@@ -1,10 +1,10 @@
 defmodule ExProsemirror.Block.Image do
   @moduledoc ~S"""
-  Creates an image using `<img></img>`
+  Image only contains attrs that defines:
 
-  ## inputs opts:
-
-      blocks: [:image]
+  * src: Source of the image
+  * alt: Alternate text for an image, if the image cannot be displayed.
+  * title: Title of the image
 
   ## JS Interop
 
@@ -33,6 +33,14 @@ defmodule ExProsemirror.Block.Image do
   use ExProsemirror.Schema
 
   import Ecto.Changeset
+
+  @type t :: %__MODULE__{
+          attrs: %__MODULE__.Attrs{
+            src: String.t(),
+            alt: String.t(),
+            title: String.t()
+          }
+        }
 
   @doc false
   embedded_schema do

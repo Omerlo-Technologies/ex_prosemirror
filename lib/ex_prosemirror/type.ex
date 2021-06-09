@@ -4,7 +4,7 @@ defmodule ExProsemirror.Type do
   """
 
   import Ecto.Changeset
-  import ExProsemirror.SchemaHelper
+  import ExProsemirror.ModifierHelper
 
   require ExProsemirror.TypeGenerator
   ExProsemirror.TypeGenerator.generate_all()

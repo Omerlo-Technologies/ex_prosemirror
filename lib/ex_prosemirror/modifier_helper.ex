@@ -1,6 +1,9 @@
-defmodule ExProsemirror.SchemaHelper do
+defmodule ExProsemirror.ModifierHelper do
   @moduledoc ~S"""
   Ecto schema helper that defines multiple macros to use inside an Ecto.Schema.
+
+  In contrast of `ExProsemirror.Schema`, this module should not be imported to your business schema.
+  It **MUST** be used to create custom block / marks.
 
   It helps you build custom blocks / marks for `ExProsemirror`.
 
@@ -16,7 +19,11 @@ defmodule ExProsemirror.SchemaHelper do
 
         embedded_prosemirror_content([text: ExProsemirror.Block.Text])
 
-  Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
+  ## Options
+
+  - array: boolean that defines if we could have multiple elements.
+
+  > Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
   """
   defmacro embedded_prosemirror_content(mapped_types, opts \\ []) when is_list(mapped_types) do
     quote do
@@ -27,11 +34,13 @@ defmodule ExProsemirror.SchemaHelper do
   @doc ~S"""
   Add the PolymorphicField mark in your ecto schema.
 
+  The embedded_field created accepts an array of marks.
+
   ## Examples
 
         embedded_prosemirror_mark([strong: ExProsemirror.Mark.Strong])
 
-  Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
+  > Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
   """
   defmacro embedded_prosemirror_marks(mapped_types) when is_list(mapped_types) do
     quote do
@@ -83,6 +92,26 @@ defmodule ExProsemirror.SchemaHelper do
       struct_or_changeset
       |> cast(attrs, some_fields_to_cast)
       |> cast_prosemirror_content()
+
+      # or with opts
+
+      struct_or_changeset
+      |> cast(attrs, some_fields_to_cast)
+      |> cast_prosemirror_content(with: [text: {ExProsemirror.Block.Text, :changeset, [opts]}])
+
+  Block `ExProsemirror.Block.Text` will be cast using the `changeset/3` with params
+
+  * %ExProsemirror.Block.Text{...}
+  * attrs (map of data to cast)
+  * opts: opts to use in the changeset (e.g. allowed marks to cast defined in the ExProsemirror type.)
+
+  > If a block/mark's type is not specified in the `with` opts, the `changeset/2` will be use.
+
+  ## Options
+
+  * `with`: define the changeset to apply, to send allowed marks we recommend
+     to set this element to passed `opts`.
+
   """
   def cast_prosemirror_content(struct_or_changeset, opts \\ []) do
     cast_polymorphic_embed(struct_or_changeset, :content, opts)

@@ -4,7 +4,7 @@ defmodule ExProsemirror.MixProject do
   def project do
     [
       app: :ex_prosemirror,
-      version: "0.1.3",
+      version: "0.2.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -36,6 +36,8 @@ defmodule ExProsemirror.MixProject do
       nest_modules_by_prefix: prosemirror_modifiers(),
       extras: ["guides/extends_editor.md"],
       groups_for_modules: [
+        HTML: [ExProsemirror.HTML.Form],
+        Ecto: prosemirror_ecto_related(),
         Modifiers: prosemirror_modifiers()
       ]
     ]
@@ -43,6 +45,7 @@ defmodule ExProsemirror.MixProject do
 
   defp prosemirror_modifiers do
     [
+      ExProsemirror.ModifierHelper,
       ExProsemirror.Block,
       ExProsemirror.Block.Doc,
       ExProsemirror.Block.Heading,
@@ -53,6 +56,13 @@ defmodule ExProsemirror.MixProject do
       ExProsemirror.Mark.Em,
       ExProsemirror.Mark.Strong,
       ExProsemirror.Mark.Underline
+    ]
+  end
+
+  defp prosemirror_ecto_related do
+    [
+      ExProsemirror.Schema,
+      ExProsemirror.Changeset
     ]
   end
 end

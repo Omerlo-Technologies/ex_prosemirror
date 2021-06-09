@@ -27,11 +27,11 @@ defmodule ExProsemirrorBlocksTest do
   test "heading", %{text: text} do
     heading =
       %Heading{}
-      |> Heading.changeset(%{content: [text.attr], attrs: %{level: 1}})
+      |> Heading.changeset(%{content: text.attr, attrs: %{level: 1}})
       |> apply_changes()
 
     assert heading == %Heading{
-             content: [text.struct],
+             content: text.struct,
              attrs: %Heading.Attrs{level: 1}
            }
   end

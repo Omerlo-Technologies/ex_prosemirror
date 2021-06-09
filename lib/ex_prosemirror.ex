@@ -26,16 +26,14 @@ defmodule ExProsemirror do
     blocks_modules: [
       p: ExProsemirror.Block.Paragraph,
       heading: ExProsemirror.Block.Heading,
-      image: ExProsemirror.Block.Image,
-      text: ExProsemirror.Block.Text
     ],
     types: [
       title: [
         marks: [:em],
-        blocks: [{:heading, [:h1, :h2]]
+        blocks: [{:heading, [:h1, :h2]}]
       ],
       content: [
-        marks: [:strong]
+        marks: [:strong, :underline]
         blocks: [:p, {:heading, :h2}],
       ]
     ]
@@ -43,16 +41,12 @@ defmodule ExProsemirror do
 
   We will get the following results:
 
-  * Inputs of type `:title` will be instantiated with block `h1` and `h2` and will have the `em` mark
-  * Input of type `:body` will be instantiated with blocks `p` and `h2` and will have the `strong` mark
-
-  When providing the `type` option, we are telling ExProsemirror to fetch the blocks and marks specified in our config.
-
-  The following will go to our config, and grab the blocks/marks specified in the `title` type.
-
-  ```elixir
-  <%= prosemirror_input f, :title, type: :title ... %>
-  ```
+  * Inputs of type `:title` will be instantiated with
+    * blocks: `h1` and `h2`
+    * marks: `em`
+  * Inputs of type `:body` will be instantiated with
+    * blocks: `p` and `h2`
+    * marks: `strong` and `underline`
 
   The first code sample will create a form with 3 fields: `title`, `subtitle` and `body`. The
   title will expose italic marks only. The body will expose italic and strong
@@ -64,28 +58,43 @@ defmodule ExProsemirror do
         <div id="ProseMirrorTitleDiv"></div>
 
         <input type="hidden" name="article[subtitle_plain]">
-        <div id="ProseMirrorTitleDiv"></div>
+        <div id="ProseMirrorSubTitleDiv"></div>
 
         <input type="hidden" name="article[body_plain]">
         <div id="ProseMirrorBodyDiv"></div>
       </form>
 
+  HTML nodes with id `ProseMirror___Div` will be updated by the js part to instanciate ExProsemirror js editor.
+
 
   ## Ecto examples
 
+      defmodule ExProsemirror.Block.Paragraph do
         use ExProsemirror.Schema
+        use ExProsemirror
 
         import Ecto.Changeset
-        import ExProsemirror.Changeset
 
-        schema "article" do
-          prosemirror_field :title
+        alias ExProsemirror.Block.Text
+
+        embedded_schema do
+          # Create a embedded ex_prosemirror content and define if it's an array or not
+          embedded_prosemirror_content([text: Text], array: true)
         end
 
-        def changeset(struct_or_changeset, attrs \\ %{}) do
+        # opts contains allowed marks
+        def changeset(struct_or_changeset, attrs \\ %{}, opts \\ []) do
           struct_or_changeset
-          |> cast_prosemirror(attrs, :title, required: true)
+          |> cast(attrs, [])
+          # cast_prosemirror_content will cast the embedded schema
+          |> cast_prosemirror_content(with: [text: {Text, :changeset, [opts]}])
         end
+
+        # A callback to return the text of the block
+        def extract_simple_text(struct) do
+          Enum.map(struct.content, &ExProsemirror.extract_simple_text/1)
+        end
+      end
 
   > To learn more, take a look at `ExProsemirror.Schema` and `ExProsemirror.Changeset`.
 
@@ -96,7 +105,7 @@ defmodule ExProsemirror do
   ```elixir
   def deps do
   [
-    {:ex_prosemirror, git: "https://github.com/Omerlo-Technologies/ex_prosemirror", tag: "0.1.2"},
+    {:ex_prosemirror, git: "https://github.com/Omerlo-Technologies/ex_prosemirror", tag: "0.2.0"},
   ]
   end
   ```
@@ -161,7 +170,7 @@ defmodule ExProsemirror do
   """
   defmacro __using__(opts) do
     quote do
-      import ExProsemirror.SchemaHelper
+      import ExProsemirror.ModifierHelper
 
       @behaviour ExProsemirror
 
@@ -169,7 +178,7 @@ defmodule ExProsemirror do
     end
   end
 
-  def safe_parser(opts) do
+  defp safe_parser(opts) do
     if Keyword.get(opts, :safe_parser, true) do
       quote do
         defimpl Phoenix.HTML.Safe, for: __MODULE__ do
