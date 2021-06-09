@@ -7,29 +7,29 @@ defmodule ExProsemirror.Config do
   E.g.
 
       config :ex_prosemirror,
+        marks_modules: [
+          # ...
+        ],
+        blocks_modules: [
+          # ...
+          heading: ExProsemirror.Block.Heading
+        ],
         types: [
-          title: [blocks: [:h1], marks: []],
-          subtitle: [blocks: [:h2, :h3]]
+          title: [blocks: [{:heading, [:h1]}], marks: [], inline: true],
+          subtitle: [blocks: [{:heading, [:h2, :h3]}], marks: []]
         ]
 
   This will create 2 customs types:
 
-  - `title` that allows only `h1` block without any marks
+  - `title` that allows only `h1` block without any marks and will be inline.
   - `subtitle` that allows `h2` and `h3` blocks and use default marks.
 
-  If there is no default configuration, then everything is allowed.
+  ## Configuration
 
-  To override `default`, you can add a `default` config for `ex_prosemirror`.
+  * `blocks` (required) - array of blocks.
+  * `marks` (optional, default: `[]`) - array of marks.
+  * `inline` (optional, default: `false`) - define if the type is inline.
 
-  E.g
-
-      config :ex_prosemirror,
-        default: [
-          marks: [:em],
-          blocks: [:p, :h1]
-        ]
-
-  This will set default marks to `em` only and `blocks` to `p` and `h1`.
   """
 
   require Logger
@@ -55,17 +55,19 @@ defmodule ExProsemirror.Config do
     if config_type = Keyword.get(load(), type) do
       put_default_types(config_type)
     else
-      Logger.warn(fn ->
-        "ExProsemirror - Type \"#{type}\" not found in your configuration, using default."
-      end)
-
-      put_default_types()
+      raise "ExProsemirror - Type \"#{type}\" not found in your configuration"
     end
   end
 
+  @doc ~S"""
+  Return if the debug mode is enable for `ex_prosemirror`.
+
+  * `true`: all `ex_prosemirror` hidden input will be visible.
+  * `false` (default value): mean hidden input stay hidden for the end user.
+  """
   def debug?, do: Application.get_env(:ex_prosemirror, :debug, false)
 
-  defp put_default_types(opts \\ []) do
+  defp put_default_types(opts) do
     opts
     |> Keyword.put_new(:marks, [])
     |> Keyword.put_new(:blocks, [])

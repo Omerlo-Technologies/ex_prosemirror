@@ -10,6 +10,8 @@ defmodule ExProsemirror.Mark.Strong do
 
   use ExProsemirror.Schema
 
+  @type t :: %__MODULE__{}
+
   @doc false
   embedded_schema do
   end

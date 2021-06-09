@@ -63,27 +63,16 @@ defmodule ExProsemirror.FormTest do
   @tag capture_log: true
   describe "defaults" do
     test "unknow type" do
-      input_html =
+      func = fn ->
         %Form{data: %{title_plain: "hello"}}
-        |> prosemirror_editor(:title, type: :unkown)
-        |> safe_to_string()
+        |> prosemirror_editor(:title, type: :unknown)
+      end
 
-      assert input_html =~
-               ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[]" data-target="#title" id="title")
-    end
-
-    test "unknown type should log a warn" do
-      import ExUnit.CaptureLog
-
-      log =
-        capture_log(fn ->
-          %Form{data: %{title_plain: "hello"}}
-          |> prosemirror_editor(:title, type: :unknown)
-          |> safe_to_string()
-        end)
-
-      assert log =~ ~S(ExProsemirror - Type "unknown" not found)
-      assert log =~ ~S(using default)
+      assert_raise(
+        RuntimeError,
+        ~S(ExProsemirror - Type "unknown" not found in your configuration),
+        func
+      )
     end
   end
 end

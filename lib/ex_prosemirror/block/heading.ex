@@ -1,13 +1,7 @@
 defmodule ExProsemirror.Block.Heading do
   @moduledoc ~S"""
-  Create heading text style using `<hX></hX>` html style.
-
-  > `X` is a number between 1 and 6.
-
-  ## inputs opts:
-
-      blocks: [{:heading, [:h1, :h2, :h3, :h4, :h5, :h6]}]
-
+  Heading contains multiple ExProsemirror.Block.Text and have attributes that
+  define the level of the heading (between 1 and 6).
   """
 
   use ExProsemirror.Schema
@@ -17,10 +11,17 @@ defmodule ExProsemirror.Block.Heading do
 
   alias ExProsemirror.Block.Text
 
+  @type t :: %__MODULE__{
+          attrs: %__MODULE__.Attrs{level: attrs_level},
+          content: Text.t()
+        }
+
+  @type attrs_level :: 1 | 2 | 3 | 4 | 5 | 6
+
   @doc false
   embedded_schema do
     embeds_one :attrs, __MODULE__.Attrs
-    embedded_prosemirror_content([text: Text], array: true)
+    embedded_prosemirror_content([text: Text], array: false)
   end
 
   @doc false

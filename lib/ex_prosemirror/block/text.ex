@@ -1,24 +1,29 @@
 defmodule ExProsemirror.Block.Text do
   @moduledoc ~S"""
-  Prosemirror inline element. It's contained by most of ExProsemirror modifiers like
+  Prosemirror inline element. It's contained by most of ExProsemirror blocks like
   `ExProsemirror.Block.Paragraph` or `ExProsemirror.Block.Heading`.
 
   When creating an ExProsemirror block you can use this module thanks to
 
       embedded_prosemirror_content([text: ExProsemirror.Block.Text], array: true)
 
+  You can also set `array` to `false` if you want to inline the block.
+
   > `embedded_prosemirror_content` is defined in `ExProsemirror.SchemaHelper` and is imported with
   > using `ExProsemirror.Schema`.
   """
 
+  use ExProsemirror
   use ExProsemirror.Schema
 
-  import ExProsemirror.SchemaHelper
   import Ecto.Changeset
 
   alias ExProsemirror.Mark.{Em, Strong, Underline}
 
-  @behaviour ExProsemirror
+  @type t :: %__MODULE__{
+          text: String.t(),
+          marks: [Strong.t() | Em.t() | Underline.t()]
+        }
 
   @doc false
   embedded_schema do
@@ -37,10 +42,10 @@ defmodule ExProsemirror.Block.Text do
     struct_or_changeset
     |> cast(attrs, [:text])
     |> cast_prosemirror_marks()
-    |> secure_marks(allowed_marks)
+    |> filter_marks(allowed_marks)
   end
 
-  defp secure_marks(changeset, allowed_marks) do
+  defp filter_marks(changeset, allowed_marks) do
     update_change(changeset, :marks, fn marks ->
       Enum.filter(marks, &Enum.member?(allowed_marks, &1.__struct__))
     end)
