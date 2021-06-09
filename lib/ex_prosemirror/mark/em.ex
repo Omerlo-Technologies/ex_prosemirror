@@ -8,7 +8,7 @@ defmodule ExProsemirror.Mark.Em do
 
   """
 
-  use Ecto.Schema
+  use ExProsemirror.Schema
 
   @doc false
   embedded_schema do

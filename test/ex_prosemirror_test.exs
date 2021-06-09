@@ -5,35 +5,33 @@ defmodule ExProsemirrorTest do
 
   import Phoenix.HTML.Safe
 
-  alias ExProsemirror.Block.{Doc, Paragraph, Text}
+  alias ExProsemirror.Block.{Paragraph, Text}
+  alias ExProsemirror.Type.BlocksOnly
 
   @simple_text %{
-    attr: %{type: :text, text: "hello world"},
+    attr: %{type: "text", text: "hello world"},
     struct: %Text{text: "hello world"}
   }
 
   @simple_data_attrs %{
-    content: %{
-      type: :doc,
-      content: [%{type: :p, content: [@simple_text.attr]}]
-    }
+    type: "doc",
+    content: [%{type: "p", content: [@simple_text.attr]}]
   }
 
-  @simple_schema_data %ExProsemirror.Schema{
-    content: %Doc{
-      content: [
-        %Paragraph{
-          content: [@simple_text.struct]
-        }
-      ]
-    }
+  @simple_schema_data %BlocksOnly{
+    type: "doc",
+    content: [
+      %Paragraph{
+        content: [@simple_text.struct]
+      }
+    ]
   }
 
   describe "test schema" do
-    test "Simple doc" do
+    test "Title" do
       data =
-        %ExProsemirror.Schema{}
-        |> ExProsemirror.Schema.changeset(@simple_data_attrs)
+        %BlocksOnly{}
+        |> BlocksOnly.changeset(@simple_data_attrs)
         |> Ecto.Changeset.apply_changes()
 
       assert @simple_schema_data = data
@@ -55,9 +53,12 @@ defmodule ExProsemirrorTest do
     test "test" do
       attrs = %{content: [@simple_text.attr]}
 
-      %Paragraph{}
-      |> Paragraph.changeset(attrs)
-      |> ExProsemirror.Changeset.validate_prosemirror(:content)
+      paragraph =
+        %Paragraph{}
+        |> Paragraph.changeset(attrs)
+        |> ExProsemirror.Changeset.validate_prosemirror(:content)
+
+      assert paragraph.valid?
     end
 
     test "Without ExProsemirror fields" do

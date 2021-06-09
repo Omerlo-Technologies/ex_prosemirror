@@ -7,7 +7,7 @@ defmodule ExProsemirror.SchemaHelper do
   > This module is automatically import if you use `ExProsemirror`.
   """
 
-  import PolymorphicEmbed, only: [cast_polymorphic_embed: 2]
+  import PolymorphicEmbed, only: [cast_polymorphic_embed: 3]
 
   @doc ~S"""
   Add the PolymorphicField mark in your ecto schema.
@@ -63,13 +63,14 @@ defmodule ExProsemirror.SchemaHelper do
   @spec embedded_prosemirror_field(:content | :marks, [module()], array: boolean) :: term()
   defmacro embedded_prosemirror_field(field_name, mapped_types, opts \\ [])
            when is_list(mapped_types) and is_atom(field_name) do
-    %{type: field_type, on_replace: replace_action} = get_field_metadata(opts)
+    %{type: field_type, on_replace: replace_action, default: default} = get_field_metadata(opts)
 
     quote do
       field unquote(field_name), unquote(field_type),
         types: unquote(mapped_types),
         on_replace: unquote(replace_action),
-        type_field: :type
+        type_field: :type,
+        default: unquote(default)
     end
   end
 
@@ -82,19 +83,19 @@ defmodule ExProsemirror.SchemaHelper do
       |> cast(attrs, some_fields_to_cast)
       |> cast_prosemirror_content()
   """
-  def cast_prosemirror_content(struct_or_changeset) do
-    cast_polymorphic_embed(struct_or_changeset, :content)
+  def cast_prosemirror_content(struct_or_changeset, opts \\ []) do
+    cast_polymorphic_embed(struct_or_changeset, :content, opts)
   end
 
-  def cast_prosemirror_marks(struct_or_changeset) do
-    cast_polymorphic_embed(struct_or_changeset, :marks)
+  def cast_prosemirror_marks(struct_or_changeset, opts \\ []) do
+    cast_polymorphic_embed(struct_or_changeset, :marks, opts)
   end
 
   defp get_field_metadata(opts) do
     if Keyword.get(opts, :array) do
-      %{type: {:array, PolymorphicEmbed}, on_replace: :delete}
+      %{type: {:array, PolymorphicEmbed}, on_replace: :delete, default: []}
     else
-      %{type: PolymorphicEmbed, on_replace: :update}
+      %{type: PolymorphicEmbed, on_replace: :update, default: nil}
     end
   end
 end
