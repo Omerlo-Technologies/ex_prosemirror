@@ -1,35 +1,6 @@
-import { nodes } from 'prosemirror-schema-basic';
-
-const prosemirrorBlocks = {
-  p: nodes.paragraph,
-  text: nodes.text,
-  heading: nodes.heading,
-  doc: nodes.doc,
-  image: nodes.image,
-  html: {
-    inline: true,
-    attrs: {
-      html: {default: null}
-    },
-    group: 'inline',
-    draggable: false,
-    parseDOM: [{tag: 'div[html]', getAttrs(dom) {
-      return {
-        html: dom.getAttribute('html'),
-      };
-    }}],
-    toDOM(node) {
-      let {html} = node.attrs;
-      let myDom = document.createElement('div');
-      myDom.innerHTML = html;
-      return myDom;
-    }
-  }
-};
-
 const allowedHeading = { h1: 1, h2: 2, h3: 3, h4: 4, h5: 5, h6: 6 };
 
-function extractHeading({ heading }) {
+export function extractHeading({ heading }) {
   return {
     attrs: { level: { default: 1 } },
     allowsLevel: heading,
@@ -43,21 +14,27 @@ function extractHeading({ heading }) {
   };
 }
 
-function inlineDoc(inline) {
-  return inline ? { content: 'block?' } : prosemirrorBlocks.doc;
+/**
+ * @param {Object} blocks
+ * @param {Boolean} inline
+
+ */
+function inlineDoc(blocks, inline) {
+  return inline ? { content: 'block?' } : blocks.doc;
 }
 
 /**
  * @param {Object} blocksSelection
+ * @param {Object} baseBlocks
  * @param {Object[]} customBlocks
  * @param {Boolean} inline
  */
-export default ({ blocksSelection, customBlocks, inline }) => {
-  const blocks = { ...prosemirrorBlocks, custom: customBlocks || [] };
+export const generateExProsemirorBlocks = (blocksSelection, baseBlocks, customBlocks, inline) => {
+  const blocks = {...baseBlocks, custom: customBlocks || []};
 
   const map = {
     text: blocks.text,
-    doc: inlineDoc(inline)
+    doc: inlineDoc(blocks, inline)
   };
 
   const heading = [];

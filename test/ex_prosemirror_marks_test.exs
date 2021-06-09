@@ -68,11 +68,11 @@ defmodule ExProsemirrorMarksTest do
     assert text == Map.put(text_struct, :marks, [%Underline{}, %Strong{}])
   end
 
-  @tag marks: [%{type: "unallowed_mark"}]
+  @tag marks: [%{type: "underline"}]
   test "unallowd mark", %{text_attrs: text_attrs, text_struct: text_struct} do
     text =
       %Text{}
-      |> Text.changeset(text_attrs, marks: @allowed_marks)
+      |> Text.changeset(text_attrs, marks: [])
       |> apply_changes()
 
     assert text == text_struct

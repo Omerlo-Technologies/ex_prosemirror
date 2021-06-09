@@ -1,12 +1,13 @@
 import { Schema } from 'prosemirror-model';
 import { generateSchemaMarks } from './marks';
-import blocks from './blocks';
+import { generateSchemablocks } from './blocks';
 
 /**
  * @param {{customBlocks: Object[], customMarks: Object[], blocksSelection: JSON, marksSelection: JSON, inline: Boolean}} options
  */
-export default (options) =>
+export default (options) => (
   new Schema({
-    nodes: blocks(options),
+    nodes: generateSchemablocks(options),
     marks: generateSchemaMarks(options)
-  });
+  })
+);
