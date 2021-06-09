@@ -21,7 +21,7 @@ defmodule ExProsemirror.Block.Heading do
   @doc false
   embedded_schema do
     embeds_one :attrs, __MODULE__.Attrs
-    embedded_prosemirror_content([text: Text], array: false)
+    embedded_prosemirror_content([text: Text], array: true)
   end
 
   @doc false

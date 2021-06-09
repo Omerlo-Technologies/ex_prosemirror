@@ -29,7 +29,8 @@ defmodule ExProsemirror.TypeGenerator do
   defp type_module_content(opts, context) do
     context = [
       marks: define_modifiers(opts, :marks, context),
-      blocks: define_modifiers(opts, :blocks, context)
+      blocks: define_modifiers(opts, :blocks, context),
+      inline: opts[:inline] || false
     ]
 
     quote do
@@ -59,7 +60,7 @@ defmodule ExProsemirror.TypeGenerator do
         {name, {module, :changeset, [[marks: context[:marks]]]}}
       end)
 
-    changeset_opts = [with: with_opts]
+    changeset_opts = [with: with_opts, inline: context[:inline]]
 
     quote do
       def changeset(struct_or_changeset, attrs \\ %{}) do
