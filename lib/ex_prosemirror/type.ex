@@ -16,6 +16,18 @@ defmodule ExProsemirror.Type do
     struct_or_changeset
     |> cast(attrs, [])
     |> cast_prosemirror_content(opts)
+    |> maybe_force_inline(opts[:inline])
+  end
+
+  defp maybe_force_inline(changeset, false), do: changeset
+
+  defp maybe_force_inline(changeset, true) do
+    update_change(changeset, :content, fn content ->
+      case content do
+        [content | _] -> content
+        _ -> []
+      end
+    end)
   end
 
   @doc """
