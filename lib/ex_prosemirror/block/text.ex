@@ -18,8 +18,6 @@ defmodule ExProsemirror.Block.Text do
 
   import Ecto.Changeset
 
-  alias ExProsemirror.Mark.{Em, Strong, Underline}
-
   @type t :: %__MODULE__{
           text: String.t(),
           marks: [Strong.t() | Em.t() | Underline.t()]
@@ -29,7 +27,7 @@ defmodule ExProsemirror.Block.Text do
   embedded_schema do
     field :text, :string
 
-    embedded_prosemirror_marks(strong: Strong, em: Em, underline: Underline)
+    embedded_prosemirror_marks()
   end
 
   @doc false

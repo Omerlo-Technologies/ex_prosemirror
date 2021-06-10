@@ -38,13 +38,17 @@ defmodule ExProsemirror.ModifierHelper do
 
   ## Examples
 
-        embedded_prosemirror_mark([strong: ExProsemirror.Mark.Strong])
+        embedded_prosemirror_mark()
+
+  Set all marks defined in `configs.exs`.
 
   > Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
   """
-  defmacro embedded_prosemirror_marks(mapped_types) when is_list(mapped_types) do
+  defmacro embedded_prosemirror_marks do
+    marks = Application.get_env(:ex_prosemirror, :marks_modules)
+
     quote do
-      embedded_prosemirror_field(:marks, unquote(mapped_types), array: true)
+      embedded_prosemirror_field(:marks, unquote(marks), array: true)
     end
   end
 

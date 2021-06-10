@@ -1,6 +1,6 @@
-defmodule ExProsemirror.Mark.Em do
+defmodule ExProsemirror.Mark.Strikethrough do
   @moduledoc ~S"""
-  Italic mark.
+  Strikethrough mark.
   """
 
   use ExProsemirror.Schema
