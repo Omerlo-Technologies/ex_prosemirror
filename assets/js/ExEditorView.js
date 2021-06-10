@@ -1,16 +1,13 @@
-import menuPlugin from './prosemirror/menu';
-import { keymap } from 'prosemirror-keymap';
-import { baseKeymap } from 'prosemirror-commands';
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { DOMParser } from 'prosemirror-model';
 import schemaFunc from './prosemirror/schema';
-import { placeholderPlugin, insertPlaceholder } from './prosemirror/plugins/placeholder';
+import { insertPlaceholder } from './prosemirror/plugins/placeholder';
 
 export default class ExEditorView {
   /**
    * @param {HTMLElement} editorNode
-   * @param {{customBlocks: Object[], customMarks: Object[]}} opts
+   * @param {{blocks: Object[], marks: Object[]}, plugins: Object[]} opts
    */
   constructor(editorNode, opts) {
     this.editorNode = editorNode;
@@ -26,20 +23,27 @@ export default class ExEditorView {
     this.addListeners();
   }
 
-  initializeEditorState({ customBlocks, customMarks }) {
+  initializeEditorState({ blocks, marks, plugins }) {
     const opts = {
       marksSelection: JSON.parse(this.editorNode.dataset.marks),
       blocksSelection: JSON.parse(this.editorNode.dataset.blocks),
       inline: JSON.parse(this.editorNode.dataset.inline),
-      customBlocks,
-      customMarks
+      blocks,
+      marks
     };
 
     const schema = schemaFunc(opts);
 
+    plugins = plugins(schema).map((plugin, index) => {
+      if (plugin.key.startsWith('plugin$')) {
+        plugin.key = 'plugin$' + index;
+      }
+      return plugin;
+    });
+
     return EditorState.create({
       doc: this.getDoc(schema),
-      plugins: [menuPlugin({ schema }), keymap(baseKeymap), placeholderPlugin]
+      plugins: plugins
     });
   }
 

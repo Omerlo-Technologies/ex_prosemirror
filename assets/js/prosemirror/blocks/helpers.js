@@ -25,13 +25,10 @@ function inlineDoc(blocks, inline) {
 
 /**
  * @param {Object} blocksSelection
- * @param {Object} baseBlocks
- * @param {Object[]} customBlocks
+ * @param {Object} blocks
  * @param {Boolean} inline
  */
-export const generateExProsemirorBlocks = (blocksSelection, baseBlocks, customBlocks, inline) => {
-  const blocks = {...baseBlocks, custom: customBlocks || []};
-
+export const generateExProsemirorBlocks = (blocksSelection, blocks, inline) => {
   const map = {
     text: blocks.text,
     doc: inlineDoc(blocks, inline)
@@ -39,13 +36,12 @@ export const generateExProsemirorBlocks = (blocksSelection, baseBlocks, customBl
 
   const heading = [];
 
+  // TODO This should be outside of the ExProsemirror
   blocksSelection.map((/** @type {Object} */ blockSelection) => {
     if (allowedHeading[blockSelection]) {
       heading.push(allowedHeading[blockSelection]);
     } else if (blocks[blockSelection]) {
       map[blockSelection] = blocks[blockSelection];
-    } else if (blocks.custom[blockSelection]) {
-      map['custom_block_' + blockSelection] = blocks.custom[blockSelection];
     }
   });
 

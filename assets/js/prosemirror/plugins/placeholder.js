@@ -63,24 +63,12 @@ export function replacePlaceholder(exEditorView, {detail: detail}) {
   // Otherwise, insert it at the placeholder's position, and remove
   // the placeholder
 
-  switch (detail.nodeType) {
-  case 'image':
-    dispatchReplace({
-      exEditorView,
-      id: detail.id,
-      pos,
-      node: exEditorView.editorView.state.schema.nodes.image.create({src: detail.data.url})
-    });
-    break;
-  case 'html':
-    dispatchReplace({
-      exEditorView,
-      id: detail.id,
-      pos,
-      node: exEditorView.editorView.state.schema.nodes.html.create({html: detail.data.html})
-    });
-    break;
-  }
+  dispatchReplace({
+    node: detail.callback(exEditorView.editorView.state.schema.nodes),
+    id: detail.id,
+    pos,
+    exEditorView
+  });
 }
 
 function dispatchReplace({exEditorView, id, pos, node}) {
