@@ -2,7 +2,7 @@ defmodule ExProsemirrorBlocksTest do
   use ExUnit.Case
   import Ecto.Changeset
 
-  alias ExProsemirror.Block.{Heading, Image, Paragraph, Text}
+  alias ExProsemirror.Block.{Heading, HTML, Image, Paragraph, Text}
 
   setup do
     custom_text = Ecto.UUID.generate()
@@ -43,5 +43,14 @@ defmodule ExProsemirrorBlocksTest do
       |> apply_changes()
 
     assert image == %Image{attrs: %Image.Attrs{src: "image-url"}}
+  end
+
+  test "html" do
+    html =
+      %HTML{}
+      |> HTML.changeset(%{type: :html, attrs: %{html: "<div>Vim >= Emacs 😀</div>"}})
+      |> apply_changes()
+
+    assert html == %HTML{attrs: %HTML.Attrs{html: "<div>Vim >= Emacs 😀</div>"}}
   end
 end
