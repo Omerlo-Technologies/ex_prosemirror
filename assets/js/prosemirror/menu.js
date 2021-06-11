@@ -1,16 +1,12 @@
-import { Dropdown, MenuItem, menuBar, blockTypeItem } from 'prosemirror-menu';
+import { MenuItem, blockTypeItem } from 'prosemirror-menu';
 import { icons } from './icons';
-import { markItem } from './marks';
+import { toggleMark } from 'prosemirror-commands';
 
 function getTitle({name: name, spec: {title}}) {
-  return (title || name).replace(/^custom_mark_/, '');
+  return (title || name);
 }
 
-function getLabel({name: name, spec: {label}}) {
-  return (label || name).replace(/^custom_mark_/, '');
-}
-
-function generateHeadingItem(schema) {
+export const generateHeadingItem = (schema) => {
   if(schema.nodes.heading) {
     return schema.nodes.heading.spec.allowsLevel.map((heading) => {
       return blockTypeItem(schema.nodes.heading, {
@@ -22,9 +18,9 @@ function generateHeadingItem(schema) {
   } else {
     return [];
   }
-}
+};
 
-function generateParagraphItem(schema) {
+export const generateParagraphItem = (schema) => {
   if(schema.nodes.p) {
     return [blockTypeItem(schema.nodes.p, {
       title: 'paragraph',
@@ -33,11 +29,11 @@ function generateParagraphItem(schema) {
   }
 
   return [];
-}
+};
 
-function generateHTMLItem(schema) {
+export const generateHTMLItem = (schema) => {
   if(schema.nodes.html) {
-    return [[
+    return [
       new MenuItem({
         title: 'Insert HTML code',
         label: 'HTML',
@@ -47,32 +43,19 @@ function generateHTMLItem(schema) {
           exEditorNode.dispatchEvent(new CustomEvent('exProsemirrorInsertPlaceholder', {detail: {nodeType: 'html'}}));
         }
       })
-    ]];
+    ];
   }
 
   return [];
-}
+};
 
-function generateTextStyleMenu(schema) {
-  const textStyle = [
-    ...generateParagraphItem(schema),
-    ...generateHeadingItem(schema)
-  ];
 
-  if (textStyle.length > 1) {
-    const textStyleMenu = new Dropdown(textStyle, {label: 'Text Style'});
-    return [[textStyleMenu]];
-  }
-
-  return [];
-}
-
-function generateMediaMenu(schema) {
+export const generateMediaMenu = (schema) => {
   if (!schema.nodes.image) {
     return [];
   }
 
-  return [[
+  return [
     new MenuItem({
       title: 'Insert image',
       label: 'Image',
@@ -82,10 +65,10 @@ function generateMediaMenu(schema) {
         exEditorNode.dispatchEvent(new CustomEvent('exProsemirrorInsertPlaceholder', {detail: {nodeType: 'image'}}));
       }
     })
-  ]];
-}
+  ];
+};
 
-function generateMarks(schema) {
+export const generateMarks = (schema) => {
   if(schema.marks) {
     const keys = Object.keys(schema.marks);
 
@@ -97,29 +80,55 @@ function generateMarks(schema) {
   }
 
   return [];
-}
-
-function generateCustomBlocks(schema) {
-  const keys = Object.keys(schema.nodes).filter(key => key.indexOf('custom') > -1);
-
-  return keys.map(key => {
-    const block = schema.nodes[key];
-    return blockTypeItem(block, {
-      title: getTitle(block),
-      label: getLabel(block),
-      icon: block.spec.icon
-    });
-  });
-}
-
-export default({ schema  }) => {
-  const items = [
-    generateMarks(schema),
-    ...generateTextStyleMenu(schema),
-    ...generateMediaMenu(schema),
-    ...generateHTMLItem(schema),
-    generateCustomBlocks(schema)
-  ];
-
-  return menuBar({content: items});
 };
+
+/**
+ * Generate a MenuItem for a schema's mark.
+ *
+ * @param {any} markType - Type of mark to generate
+ * @param {Object} options
+ */
+export function markItem(markType, options) {
+  let passedOptions = {
+    active(state) {
+      return markActive(state, markType);
+    },
+    enable: true
+  };
+
+  for (let prop in options) passedOptions[prop] = options[prop];
+  return cmdItem(toggleMark(markType), passedOptions);
+}
+
+
+/**
+ * Execute a ProsemirrorCommand
+ *
+ * @param {any} cmd - command to execute
+ * @param {Object} options
+ */
+export function cmdItem(cmd, options) {
+  let passedOptions = {
+    label: options.title,
+    run: cmd
+  };
+  for (let prop in options) passedOptions[prop] = options[prop];
+  if ((!options.enable || options.enable === true) && !options.select)
+    passedOptions[options.enable ? 'enable' : 'select'] = (state) => cmd(state);
+
+  return new MenuItem(passedOptions);
+}
+
+/**
+ * Define if a mark is active or not.
+ *
+ * @param {EditorState} state
+ * @param {any} type - Mark's type
+ */
+export function markActive(state, type) {
+  let { from, $from, to, empty } = state.selection;
+  if (empty) return type.isInSet(state.storedMarks || $from.marks());
+  else return state.doc.rangeHasMark(from, to, type);
+}
+
+export const menuHelper = { generateParagraphItem, generateHeadingItem, generateHTMLItem, generateMediaMenu };

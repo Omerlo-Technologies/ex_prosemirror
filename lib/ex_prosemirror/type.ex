@@ -24,7 +24,7 @@ defmodule ExProsemirror.Type do
   defp maybe_force_inline(changeset, true) do
     update_change(changeset, :content, fn content ->
       case content do
-        [content | _] -> content
+        [content | _] -> [content]
         _ -> []
       end
     end)

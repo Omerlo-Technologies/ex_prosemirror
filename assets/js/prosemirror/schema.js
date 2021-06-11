@@ -3,7 +3,7 @@ import { generateSchemaMarks } from './marks';
 import { generateSchemablocks } from './blocks';
 
 /**
- * @param {{customBlocks: Object[], customMarks: Object[], blocksSelection: JSON, marksSelection: JSON, inline: Boolean}} options
+ * @param {{blocks: Object[], marks: Object[], blocksSelection: JSON, marksSelection: JSON, inline: Boolean}} options
  */
 export default (options) => (
   new Schema({

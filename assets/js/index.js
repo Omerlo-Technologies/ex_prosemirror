@@ -12,15 +12,22 @@ class ExProsemirror {
   /**
    * @param {[Object]} blocks
    */
-  setCustomBlocks(blocks) {
-    this.customBlocks = blocks;
+  setBlocks(blocks) {
+    this.blocks = blocks;
+    return this;
   }
 
   /**
    * @param {[Object]} marks
    */
-  setCustomMarks(marks) {
-    this.customMarks = marks;
+  setMarks(marks) {
+    this.marks = marks;
+    return this;
+  }
+
+  setPlugins(plugins) {
+    this.plugins = plugins;
+    return this;
   }
 
   /**
@@ -40,7 +47,8 @@ class ExProsemirror {
   init(target) {
     if (target instanceof HTMLElement) {
       target.innerHTML = '';
-      return new ExEditorView(target, {customBlocks: this.customBlocks, customMarks: this.customMarks});
+      const plugins = this.plugins || [];
+      return new ExEditorView(target, {blocks: this.blocks, marks: this.marks, plugins});
     }
 
     return null;
