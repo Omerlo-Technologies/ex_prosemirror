@@ -25,9 +25,6 @@ defmodule ExProsemirror.HTML.Form do
 
   ## Usages
 
-      <%= prosemirror_input @form, :title, id: "my-article-input" %>
-      # Generates a prosemirror input with the :default configuration.
-
       <%= prosemirror_input @form, :title, type: :title, id: "my-article-input" %>
       # Generates a prosemirror input with the :title configuration.
 
@@ -100,7 +97,6 @@ defmodule ExProsemirror.HTML.Form do
       |> Keyword.put_new(:class, "ex-prosemirror")
       |> Keyword.put(:phx_update, "ignore")
       |> Keyword.put(:phx_hook, "MountProseMirror")
-      |> Keyword.put_new(:type, :default)
       |> Keyword.put_new(:name, input_name(form, field))
 
     # TODO  reduce function complexity

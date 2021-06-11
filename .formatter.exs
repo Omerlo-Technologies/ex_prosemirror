@@ -1,7 +1,7 @@
 # Used by "mix format"
 
 locals_without_parens = [
-  prosemirror_field: 1
+  prosemirror_field: 2
 ]
 
 [
