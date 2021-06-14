@@ -3,13 +3,21 @@ defmodule ExProsemirror.TypeGenerator do
   Generate types of ExProsemirror.
   """
 
+  # FIXME : quick fix to return an error. We should prove a mix task to
+  # generate Type instead of generated them on build
+  @types Application.compile_env(:ex_prosemirror, :types, [])
+  @default_blocks Application.compile_env(:ex_prosemirror, :default_blocks)
+  @default_marks Application.compile_env(:ex_prosemirror, :default_marks)
+  @blocks_modules Application.compile_env(:ex_prosemirror, :blocks_modules, [])
+  @marks_modules Application.compile_env(:ex_prosemirror, :marks_modules, [])
+
   @doc ~S"""
   Generate all types defined in config `:exprosemirror`, `:types`.
   """
   defmacro generate_all do
     context = get_context()
 
-    Application.get_env(:ex_prosemirror, :types, [])
+    @types
     |> Stream.map(fn {name, opts} -> generate(name, opts, context) end)
     |> Stream.run()
   end
@@ -19,8 +27,8 @@ defmodule ExProsemirror.TypeGenerator do
 
     opts =
       opts
-      |> Keyword.put_new(:blocks, Application.get_env(:ex_prosemirror, :default_blocks))
-      |> Keyword.put_new(:marks, Application.get_env(:ex_prosemirror, :default_marks))
+      |> Keyword.put_new(:blocks, @default_blocks)
+      |> Keyword.put_new(:marks, @default_marks)
 
     module_content = type_module_content(opts, context)
     Module.create(module_name, module_content, Macro.Env.location(__ENV__))
@@ -84,8 +92,8 @@ defmodule ExProsemirror.TypeGenerator do
 
   def get_context do
     [
-      marks: Application.get_env(:ex_prosemirror, :marks_modules, []),
-      blocks: Application.get_env(:ex_prosemirror, :blocks_modules, [])
+      marks: @marks_modules,
+      blocks: @blocks_modules
     ]
   end
 end
