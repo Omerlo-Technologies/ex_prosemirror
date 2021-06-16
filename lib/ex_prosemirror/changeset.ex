@@ -38,12 +38,8 @@ defmodule ExProsemirror.Changeset do
   end
 
   def update_plain_field(changeset, field) do
-    if type_changes = Ecto.Changeset.get_change(changeset, field) do
-      plain_value =
-        type_changes
-        |> Ecto.Changeset.apply_changes()
-        |> ExProsemirror.Type.to_json!()
-
+    if type_changes = Ecto.Changeset.get_field(changeset, field) do
+      plain_value = ExProsemirror.Type.to_json!(type_changes)
       Ecto.Changeset.put_change(changeset, :"#{field}_plain", plain_value)
     else
       changeset
