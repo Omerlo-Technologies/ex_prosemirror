@@ -16,7 +16,7 @@ defmodule ExProsemirror.Config do
         ],
         types: [
           title: [blocks: [{:heading, [:h1]}], marks: [], inline: true],
-          subtitle: [blocks: [{:heading, [:h2, :h3]}], marks: []]
+          subtitle: [blocks: [{:heading, [2, 3]}], marks: []]
         ]
 
   This will create 2 customs types:
@@ -47,7 +47,7 @@ defmodule ExProsemirror.Config do
   ## Examples
 
       iex> ExProsemirror.Config.load(:title)
-      [inline: true, marks: [:strong], blocks: [{:heading, [:h1, :h2]}, :p]]
+      [inline: true, marks: [:strong], blocks: [{:heading, [1, 2]}, :p]]
 
   """
 

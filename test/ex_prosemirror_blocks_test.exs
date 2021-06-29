@@ -48,9 +48,9 @@ defmodule ExProsemirrorBlocksTest do
   test "html" do
     html =
       %HTML{}
-      |> HTML.changeset(%{type: :html, attrs: %{html: "<div>Vim <= Emacs 😀</div>"}})
+      |> HTML.changeset(%{type: :html, attrs: %{html: "<div>Vim >= Emacs 😀</div>"}})
       |> apply_changes()
 
-    assert html == %HTML{attrs: %HTML.Attrs{html: "<div>Vim <= Emacs 😀</div>"}}
+    assert html == %HTML{attrs: %HTML.Attrs{html: "<div>Vim >= Emacs 😀</div>"}}
   end
 end

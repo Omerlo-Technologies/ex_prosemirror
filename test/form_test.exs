@@ -46,7 +46,7 @@ defmodule ExProsemirror.FormTest do
         |> safe_to_string()
 
       assert input_html =~
-               ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[&quot;em&quot;]" data-target="#title" id="title")
+               ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[{&quot;type&quot;:&quot;em&quot;}]" data-target="#title" id="title")
     end
 
     test "blocks only" do
@@ -56,7 +56,7 @@ defmodule ExProsemirror.FormTest do
         |> safe_to_string()
 
       assert input_html =~
-               ~s(<div class="ex-prosemirror" data-blocks="[&quot;p&quot;]" data-inline="false" data-marks="[]" data-target="#title" id="title")
+               ~s(<div class="ex-prosemirror" data-blocks="[{&quot;type&quot;:&quot;p&quot;}]" data-inline="false")
     end
   end
 

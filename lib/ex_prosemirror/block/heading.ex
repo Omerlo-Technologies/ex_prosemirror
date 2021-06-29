@@ -2,6 +2,16 @@ defmodule ExProsemirror.Block.Heading do
   @moduledoc ~S"""
   Heading contains multiple ExProsemirror.Block.Text and have attributes that
   define the level of the heading (between 1 and 6).
+
+  ## Usage
+
+      {:heading, levels}
+
+  > `levels` is an array of allowed level (between 1 and 6).
+
+  ## Examples
+
+      {:heading, [1, 3]}
   """
 
   use ExProsemirror.Schema

@@ -1,6 +1,31 @@
 defmodule ExProsemirror.Type do
   @moduledoc ~S"""
   ExProsemirror's type helpers.
+
+  A type is composed by `blocks` and `marks`. Those elements defined what is
+  allowed in your type.
+
+  ## E.g
+
+      types: [
+        title: [
+          blocks: [{:heading, [1, 3]}],
+          marks: [:strong]
+        ]
+      ]
+
+  This will createa type `title` defined by the module `ExProsemirror.Type.Title`.
+  This type will allow `h1` and `h3` blocks but also the mark `strong`.
+
+  `blocks` and `marks` follow the same rules, you can defined them simply with
+  the element name OR with the tuple `{element_name, attrs}` when attrs depends
+  of the element.
+
+  > You can take a look at `ExProsemirror.Mark.Color` or
+  > `ExProsemirror.Block.Heading` for examples).
+
+  As you can see previously, element `heading` allow attrs `1` and `3` that could
+  be translate as level `1` or level `3` (`h1` or `h3`).
   """
 
   import Ecto.Changeset

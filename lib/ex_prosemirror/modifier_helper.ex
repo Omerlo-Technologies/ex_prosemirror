@@ -45,7 +45,7 @@ defmodule ExProsemirror.ModifierHelper do
   > Use macro `ExProsemirror.SchemaHelper.embedded_prosemirror_field/3`.
   """
   defmacro embedded_prosemirror_marks do
-    marks = Application.get_env(:ex_prosemirror, :marks_modules)
+    marks = Application.get_env(:ex_prosemirror, :marks_modules, [])
 
     quote do
       embedded_prosemirror_field(:marks, unquote(marks), array: true)

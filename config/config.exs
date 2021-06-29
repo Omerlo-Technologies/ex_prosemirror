@@ -28,11 +28,11 @@ if Mix.env() == :test do
       title: [
         inline: true,
         marks: [:strong],
-        blocks: [{:heading, [:h1, :h2]}, :p]
+        blocks: [{:heading, [1, 2]}, :p]
       ],
       sublead: [
         marks: [:em],
-        blocks: [{:heading, [:h2, :h3]}]
+        blocks: [{:heading, [2, 3]}]
       ],
       empty: [
         marks: [],
