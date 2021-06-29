@@ -1,7 +1,7 @@
 /**
  * Toggle color text for cursor OR selected element.
  */
-export function toggleColor(markType, attrs) {
+export function toggleMultiMarks(markType, attrs) {
   return function(state, dispatch) {
     let {empty, $cursor, ranges} = state.selection;
     if (empty && !$cursor) return false;

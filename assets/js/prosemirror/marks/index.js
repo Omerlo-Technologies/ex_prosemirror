@@ -1,5 +1,5 @@
 import { marks as prosemirrorMarks } from 'prosemirror-schema-basic';
-import { generateMarkItem, generateColorsMenu } from '../menu';
+import { generateMarkItem, generateColorsMenu, generateFontFamilyMenu } from '../menu';
 import { generateExProsemirrorMarks } from './helper';
 
 export const marks = {
@@ -30,6 +30,20 @@ export const marks = {
       };
     }}],
     generateMenuItem: generateColorsMenu
+  },
+  font_family: {
+    title: 'Font',
+    label: 'Font',
+    attrs: {font_family: {}},
+    toDOM(node) {
+      return ['span', {style: 'font-family: ' + node.attrs.font_family}, 0];
+    },
+    parseDOM: [{ tag: 'span', getAttrs(dom) {
+      return {
+        font_family: dom.style['font-family'],
+      };
+    }}],
+    generateMenuItem: generateFontFamilyMenu
   }
 };
 

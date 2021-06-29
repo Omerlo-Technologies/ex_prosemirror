@@ -58,7 +58,8 @@ defmodule ExProsemirror.MixProject do
       ExProsemirror.Mark.Strong,
       ExProsemirror.Mark.Underline,
       ExProsemirror.Mark.Strikethrough,
-      ExProsemirror.Mark.Color
+      ExProsemirror.Mark.Color,
+      ExProsemirror.Mark.FontFamily
     ]
   end
 
