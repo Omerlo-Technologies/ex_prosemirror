@@ -30,11 +30,11 @@ defmodule ExProsemirror do
     types: [
       title: [
         marks: [:em],
-        blocks: [{:heading, [:h1, :h2]}]
+        blocks: [{:heading, [1, 2]}]
       ],
       content: [
         marks: [:strong, :underline]
-        blocks: [:p, {:heading, :h2}],
+        blocks: [:p, {:heading, 2}],
       ]
     ]
   ```
@@ -51,6 +51,8 @@ defmodule ExProsemirror do
   The first code sample will create a form with 3 fields: `title`, `subtitle` and `body`. The
   title will expose italic marks only. The body will expose italic and strong
   marks plus paragraph and header 1.
+
+  > You can learn more on type in `ExProsemirror.Type`.
 
 
       <form for="article">

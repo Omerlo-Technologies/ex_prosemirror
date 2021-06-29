@@ -52,10 +52,13 @@ defmodule ExProsemirror.MixProject do
       ExProsemirror.Block.Image,
       ExProsemirror.Block.Paragraph,
       ExProsemirror.Block.Text,
+      ExProsemirror.Block.HTML,
       ExProsemirror.Mark,
       ExProsemirror.Mark.Em,
       ExProsemirror.Mark.Strong,
-      ExProsemirror.Mark.Underline
+      ExProsemirror.Mark.Underline,
+      ExProsemirror.Mark.Strikethrough,
+      ExProsemirror.Mark.Color
     ]
   end
 

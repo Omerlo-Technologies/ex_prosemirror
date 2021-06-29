@@ -1,13 +1,25 @@
 defmodule ExProsemirror.Mark.Color do
   @moduledoc ~S"""
-  Color for text.
+  Color mark for text.
+
+  ## Usage
+
+      {:color, colors_list}
+
+  > `colors_list` is a map where keys are the name of the color and the value
+  is the value of the color (could be hex, rgb, or whatever you want).
+
+  ## Examples
+
+      {:color, %{red: "#ff1111", blue: "#1111ff"}}
   """
 
   use ExProsemirror.Schema
 
   import Ecto.Changeset
 
-  @type t :: %__MODULE__{}
+  @type t :: %__MODULE__{attrs: %__MODULE__.Attrs{color: color_value}}
+  @type color_value :: String.t()
 
   @doc false
   embedded_schema do

@@ -20,7 +20,7 @@ export const marks = {
   color: {
     title: 'Color',
     label: 'Color',
-    attrs: {color: {default: 'black'}},
+    attrs: {color: {}},
     toDOM(node) {
       return ['span', {style: 'color: ' + node.attrs.color}, 0];
     },
