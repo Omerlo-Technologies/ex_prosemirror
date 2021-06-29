@@ -1,6 +1,7 @@
-import { MenuItem, blockTypeItem } from 'prosemirror-menu';
+import { MenuItem, blockTypeItem, Dropdown } from 'prosemirror-menu';
 import { icons } from './icons';
 import { toggleMark } from 'prosemirror-commands';
+import { toggleColor } from './marks/helper';
 
 function getTitle({name: name, spec: {title}}) {
   return (title || name);
@@ -8,7 +9,7 @@ function getTitle({name: name, spec: {title}}) {
 
 export const generateHeadingItem = (schema) => {
   if(schema.nodes.heading) {
-    return schema.nodes.heading.spec.allowsLevel.map((heading) => {
+    return schema.nodes.heading.spec.config.values.map((heading) => {
       return blockTypeItem(schema.nodes.heading, {
         title: 'Header ' + heading,
         label: 'Header ' + heading,
@@ -68,18 +69,16 @@ export const generateMediaMenu = (schema) => {
   ];
 };
 
-export const generateMarks = (schema) => {
-  if(schema.marks) {
-    const keys = Object.keys(schema.marks);
+export const generateMarkItem = (type) => {
+  return (schema) => {
+    if (!schema.marks[type]) {
+      return [];
+    }
 
-    return keys.map((mark) => {
-      const markElement = schema.marks[mark];
-      const icon = markElement.spec.icon || icons[mark];
-      return markItem(schema.marks[mark], {title: getTitle(markElement), icon});
-    });
-  }
-
-  return [];
+    const markElement = schema.marks[type];
+    const icon = markElement.spec.icon || icons[type];
+    return [markItem(schema.marks[type], { title: getTitle(markElement), icon })];
+  };
 };
 
 /**
@@ -97,6 +96,7 @@ export function markItem(markType, options) {
   };
 
   for (let prop in options) passedOptions[prop] = options[prop];
+
   return cmdItem(toggleMark(markType), passedOptions);
 }
 
@@ -130,5 +130,35 @@ export function markActive(state, type) {
   if (empty) return type.isInSet(state.storedMarks || $from.marks());
   else return state.doc.rangeHasMark(from, to, type);
 }
+
+export const generateColorsMenu = (schema) => {
+  if (!schema.marks.color) {
+    return [];
+  }
+
+  const items = generateColorItems(schema);
+
+  return [new Dropdown(items, {label: 'Color'})];
+};
+
+export const generateColorItems = (schema) => {
+  if (!schema.marks.color) {
+    return [];
+  }
+
+  const results = [colorItem(schema.marks.color, {title: 'default'})];
+  const values = schema.marks.color.spec.config.values;
+
+  for (const [name, color] of Object.entries(values)) {
+    results.push(colorItem(schema.marks.color, {title: name}, {color: color}));
+  }
+
+  return results;
+};
+
+export function colorItem(markType, options, attrs) {
+  return cmdItem(toggleColor(markType, attrs), {enable: true, ...options});
+}
+
 
 export const menuHelper = { generateParagraphItem, generateHeadingItem, generateHTMLItem, generateMediaMenu };

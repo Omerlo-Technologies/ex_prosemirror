@@ -109,7 +109,7 @@ defmodule ExProsemirror.HTML.Form do
       data
       |> Keyword.put(:marks, config |> Keyword.get_values(:marks) |> to_html_data())
       |> Keyword.put(:blocks, config |> Keyword.get_values(:blocks) |> to_html_data())
-      |> Keyword.put(:inline, config |> Keyword.get(:inline) |> to_html_data())
+      |> Keyword.put(:inline, config |> Keyword.get(:inline))
       |> Keyword.put(:target, "##{Keyword.get(opts, :id)}")
 
     {_value, opts} = Keyword.pop(opts, :value, input_value(form, field))
@@ -127,10 +127,9 @@ defmodule ExProsemirror.HTML.Form do
     values
     |> List.flatten()
     |> Enum.map(&to_html_data/1)
-    |> List.flatten()
     |> Jason.encode!()
   end
 
-  defp to_html_data({_key, values}), do: values
-  defp to_html_data(value), do: value
+  defp to_html_data({type, values}), do: %{type: type, values: values}
+  defp to_html_data(type), do: %{type: type}
 end
