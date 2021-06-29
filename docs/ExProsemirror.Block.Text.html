@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.2.0">
+    <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.Block.Text — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.Block.Text — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-eab92df2d7.js"></script>
+    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.3.0
       </strong>
     </div>
 
@@ -80,14 +80,14 @@ ex_prosemirror
     <div id="content" class="content-inner">
 
       <h1>
-ExProsemirror.Block.Text <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
+ExProsemirror.Block.Text <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
 
       </h1>
 
 
         <section id="moduledoc">
 <p>Prosemirror inline element. It's contained by most of ExProsemirror blocks like
-<a href="ExProsemirror.Block.Paragraph.html"><code class="inline">ExProsemirror.Block.Paragraph</code></a> or <a href="ExProsemirror.Block.Heading.html"><code class="inline">ExProsemirror.Block.Heading</code></a>.</p><p>When creating an ExProsemirror block you can use this module thanks to</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_content</span><span class="p" data-group-id="1984812973-1">(</span><span class="p" data-group-id="1984812973-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="1984812973-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="1984812973-1">)</span></code></pre><p>You can also set <code class="inline">array</code> to <code class="inline">false</code> if you want to inline the block.</p><blockquote><p><code class="inline">embedded_prosemirror_content</code> is defined in <code class="inline">ExProsemirror.SchemaHelper</code> and is imported with
+<a href="ExProsemirror.Block.Paragraph.html"><code class="inline">ExProsemirror.Block.Paragraph</code></a> or <a href="ExProsemirror.Block.Heading.html"><code class="inline">ExProsemirror.Block.Heading</code></a>.</p><p>When creating an ExProsemirror block you can use this module thanks to</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_content</span><span class="p" data-group-id="2845086021-1">(</span><span class="p" data-group-id="2845086021-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="2845086021-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="2845086021-1">)</span></code></pre><p>You can also set <code class="inline">array</code> to <code class="inline">false</code> if you want to inline the block.</p><blockquote><p><code class="inline">embedded_prosemirror_content</code> is defined in <code class="inline">ExProsemirror.SchemaHelper</code> and is imported with
 using <a href="ExProsemirror.Schema.html"><code class="inline">ExProsemirror.Schema</code></a>.</p></blockquote>
         </section>
 
@@ -161,11 +161,7 @@ Types
       <div class="specs">
 
           <pre>t() :: %ExProsemirror.Block.Text{
-  marks: [
-    <a href="ExProsemirror.Mark.Strong.html#t:t/0">ExProsemirror.Mark.Strong.t</a>()
-    | <a href="ExProsemirror.Mark.Em.html#t:t/0">ExProsemirror.Mark.Em.t</a>()
-    | <a href="ExProsemirror.Mark.Underline.html#t:t/0">ExProsemirror.Mark.Underline.t</a>()
-  ],
+  marks: [Strong.t() | Em.t() | Underline.t()],
   text: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
 }</pre>
 
@@ -205,7 +201,7 @@ Functions
   <a href="#extract_simple_text/1-e-g" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   E.g
 </h2>
-<pre><code class="makeup elixir"><span class="nc">ExProsemirror.Block.Text</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="3021371284-1">(</span><span class="p" data-group-id="3021371284-2">%</span><span class="nc" data-group-id="3021371284-2">ExProsemirror.Block.Text</span><span class="p" data-group-id="3021371284-2">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello elixir&#39;s friends&quot;</span><span class="p" data-group-id="3021371284-2">}</span><span class="p" data-group-id="3021371284-1">)</span><span class="w">
+<pre><code class="makeup elixir"><span class="nc">ExProsemirror.Block.Text</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="2953278385-1">(</span><span class="p" data-group-id="2953278385-2">%</span><span class="nc" data-group-id="2953278385-2">ExProsemirror.Block.Text</span><span class="p" data-group-id="2953278385-2">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello elixir&#39;s friends&quot;</span><span class="p" data-group-id="2953278385-2">}</span><span class="p" data-group-id="2953278385-1">)</span><span class="w">
 </span><span class="s">&quot;Hello elixir&#39;s friends&quot;</span></code></pre>
   </section>
 </section>

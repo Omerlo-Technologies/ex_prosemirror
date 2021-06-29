@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.Mark.Underline — ex_prosemirror v0.3.0</title>
+    <title>ExProsemirror.Block.HTML — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-c4f12f2b93.js"></script>
@@ -80,17 +80,28 @@ ex_prosemirror
     <div id="content" class="content-inner">
 
       <h1>
-ExProsemirror.Mark.Underline <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
+ExProsemirror.Block.HTML <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
 
       </h1>
 
 
         <section id="moduledoc">
-<p>Create heading text style using <code class="inline">&lt;span style=&quot;text-decoration: underline;&quot;&gt;&lt;/span&gt;</code> html style.</p><h2 id="module-inputs-opts" class="section-heading">
-  <a href="#module-inputs-opts" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  inputs opts:
+<p>HTML blocks only contain attrs that defines:</p><ul><li>html: html content to embed</li></ul><h2 id="module-js-interop" class="section-heading">
+  <a href="#module-js-interop" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  JS Interop
 </h2>
-<pre><code class="makeup elixir"><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7169666643-1">[</span><span class="ss">:underline</span><span class="p" data-group-id="7169666643-1">]</span></code></pre>
+<p>When inserting an HTML block, <code class="inline">ex_prosemirror</code> will send you a js event.
+With this event, you'll be able to open your own modal to gather the HTML input.</p><pre><code class="makeup elixir"><span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p" data-group-id="8954866274-1">(</span><span class="sc">&#39;.ex-prosemirror&#39;</span><span class="p" data-group-id="8954866274-1">)</span><span class="o">.</span><span class="n">forEach</span><span class="p" data-group-id="8954866274-2">(</span><span class="p" data-group-id="8954866274-3">(</span><span class="n">el</span><span class="p" data-group-id="8954866274-3">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="8954866274-4">{</span><span class="w">
+  </span><span class="n">el</span><span class="o">.</span><span class="n">addEventListener</span><span class="p" data-group-id="8954866274-5">(</span><span class="sc">&#39;insertPlaceholder&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phoenixHook</span><span class="p" data-group-id="8954866274-5">)</span><span class="w">
+</span><span class="p" data-group-id="8954866274-4">}</span><span class="p" data-group-id="8954866274-2">)</span><span class="p">;</span></code></pre><p>Then you will need to send back the content to <code class="inline">ex_prosemirror</code>. This is achieved by dispatching
+an event to the ExEditorView instance.</p><pre><code class="makeup elixir"><span class="n">function</span><span class="w"> </span><span class="n">phoenixHook</span><span class="p" data-group-id="8364279589-1">(</span><span class="n">event</span><span class="p" data-group-id="8364279589-1">)</span><span class="w"> </span><span class="p" data-group-id="8364279589-2">{</span><span class="w">
+  </span><span class="n">this</span><span class="o">.</span><span class="n">dispatchEvent</span><span class="p" data-group-id="8364279589-3">(</span><span class="w">
+    </span><span class="n">new</span><span class="w"> </span><span class="nc">CustomEvent</span><span class="p" data-group-id="8364279589-4">(</span><span class="w">
+      </span><span class="sc">&#39;replacePlaceholder&#39;</span><span class="p">,</span><span class="w">
+      </span><span class="p" data-group-id="8364279589-5">{</span><span class="ss">detail</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8364279589-6">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">tr</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">tr</span><span class="p">,</span><span class="w"> </span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8364279589-7">{</span><span class="ss">html</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;div style=&#39;color: red;&#39;&gt;Hello World&lt;/div&gt;&quot;</span><span class="p" data-group-id="8364279589-7">}</span><span class="p" data-group-id="8364279589-6">}</span><span class="p" data-group-id="8364279589-5">}</span><span class="w">
+    </span><span class="p" data-group-id="8364279589-4">)</span><span class="w">
+  </span><span class="p" data-group-id="8364279589-3">)</span><span class="p">;</span><span class="w">
+</span><span class="p" data-group-id="8364279589-2">}</span></code></pre>
         </section>
 
 
@@ -146,7 +157,9 @@ Types
       <h2>Specs</h2>
       <div class="specs">
 
-          <pre>t() :: %ExProsemirror.Mark.Underline{}</pre>
+          <pre>t() :: %ExProsemirror.Block.HTML{
+  attrs: %ExProsemirror.Block.HTML.Attrs{html: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()}
+}</pre>
 
       </div>
 

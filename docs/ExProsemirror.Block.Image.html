@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.2.0">
+    <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.Block.Image — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.Block.Image — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-eab92df2d7.js"></script>
+    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.3.0
       </strong>
     </div>
 
@@ -80,7 +80,7 @@ ex_prosemirror
     <div id="content" class="content-inner">
 
       <h1>
-ExProsemirror.Block.Image <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
+ExProsemirror.Block.Image <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
 
       </h1>
 
@@ -91,17 +91,17 @@ ExProsemirror.Block.Image <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
   JS Interop
 </h2>
 <p>When inserting an image, <code class="inline">ex_prosemirror</code> will send you a js event.
-With this event, you'll be able to open your own modal for image upload for example.</p><pre><code class="makeup elixir"><span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p" data-group-id="1360465255-1">(</span><span class="sc">&#39;.ex-prosemirror&#39;</span><span class="p" data-group-id="1360465255-1">)</span><span class="o">.</span><span class="n">forEach</span><span class="p" data-group-id="1360465255-2">(</span><span class="p" data-group-id="1360465255-3">(</span><span class="n">el</span><span class="p" data-group-id="1360465255-3">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="1360465255-4">{</span><span class="w">
-  </span><span class="n">el</span><span class="o">.</span><span class="n">addEventListener</span><span class="p" data-group-id="1360465255-5">(</span><span class="sc">&#39;insertPlaceholder&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phoenixHook</span><span class="p" data-group-id="1360465255-5">)</span><span class="w">
-</span><span class="p" data-group-id="1360465255-4">}</span><span class="p" data-group-id="1360465255-2">)</span><span class="p">;</span></code></pre><p>Then you will need to send back the content to <code class="inline">ex_prosemirror</code>. This is achieved by dispatching
-an event to the ExEditorView instance.</p><pre><code class="makeup elixir"><span class="n">function</span><span class="w"> </span><span class="n">phoenixHook</span><span class="p" data-group-id="9715806189-1">(</span><span class="n">event</span><span class="p" data-group-id="9715806189-1">)</span><span class="w"> </span><span class="p" data-group-id="9715806189-2">{</span><span class="w">
-  </span><span class="n">this</span><span class="o">.</span><span class="n">dispatchEvent</span><span class="p" data-group-id="9715806189-3">(</span><span class="w">
-    </span><span class="n">new</span><span class="w"> </span><span class="nc">CustomEvent</span><span class="p" data-group-id="9715806189-4">(</span><span class="w">
+With this event, you'll be able to open your own modal for image upload for example.</p><pre><code class="makeup elixir"><span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p" data-group-id="2992510169-1">(</span><span class="sc">&#39;.ex-prosemirror&#39;</span><span class="p" data-group-id="2992510169-1">)</span><span class="o">.</span><span class="n">forEach</span><span class="p" data-group-id="2992510169-2">(</span><span class="p" data-group-id="2992510169-3">(</span><span class="n">el</span><span class="p" data-group-id="2992510169-3">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="2992510169-4">{</span><span class="w">
+  </span><span class="n">el</span><span class="o">.</span><span class="n">addEventListener</span><span class="p" data-group-id="2992510169-5">(</span><span class="sc">&#39;insertPlaceholder&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">phoenixHook</span><span class="p" data-group-id="2992510169-5">)</span><span class="w">
+</span><span class="p" data-group-id="2992510169-4">}</span><span class="p" data-group-id="2992510169-2">)</span><span class="p">;</span></code></pre><p>Then you will need to send back the content to <code class="inline">ex_prosemirror</code>. This is achieved by dispatching
+an event to the ExEditorView instance.</p><pre><code class="makeup elixir"><span class="n">function</span><span class="w"> </span><span class="n">phoenixHook</span><span class="p" data-group-id="7622303387-1">(</span><span class="n">event</span><span class="p" data-group-id="7622303387-1">)</span><span class="w"> </span><span class="p" data-group-id="7622303387-2">{</span><span class="w">
+  </span><span class="n">this</span><span class="o">.</span><span class="n">dispatchEvent</span><span class="p" data-group-id="7622303387-3">(</span><span class="w">
+    </span><span class="n">new</span><span class="w"> </span><span class="nc">CustomEvent</span><span class="p" data-group-id="7622303387-4">(</span><span class="w">
       </span><span class="sc">&#39;replacePlaceholder&#39;</span><span class="p">,</span><span class="w">
-      </span><span class="p" data-group-id="9715806189-5">{</span><span class="ss">detail</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9715806189-6">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">tr</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">tr</span><span class="p">,</span><span class="w"> </span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9715806189-7">{</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;img_src&quot;</span><span class="p" data-group-id="9715806189-7">}</span><span class="p" data-group-id="9715806189-6">}</span><span class="p" data-group-id="9715806189-5">}</span><span class="w">
-    </span><span class="p" data-group-id="9715806189-4">)</span><span class="w">
-  </span><span class="p" data-group-id="9715806189-3">)</span><span class="p">;</span><span class="w">
-</span><span class="p" data-group-id="9715806189-2">}</span></code></pre>
+      </span><span class="p" data-group-id="7622303387-5">{</span><span class="ss">detail</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7622303387-6">{</span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">tr</span><span class="p">:</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">detail</span><span class="o">.</span><span class="n">tr</span><span class="p">,</span><span class="w"> </span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7622303387-7">{</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;img_src&quot;</span><span class="p" data-group-id="7622303387-7">}</span><span class="p" data-group-id="7622303387-6">}</span><span class="p" data-group-id="7622303387-5">}</span><span class="w">
+    </span><span class="p" data-group-id="7622303387-4">)</span><span class="w">
+  </span><span class="p" data-group-id="7622303387-3">)</span><span class="p">;</span><span class="w">
+</span><span class="p" data-group-id="7622303387-2">}</span></code></pre>
         </section>
 
 

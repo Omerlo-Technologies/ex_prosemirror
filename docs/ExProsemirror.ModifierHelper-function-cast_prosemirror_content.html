@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.2.0">
+    <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.ModifierHelper.cast_prosemirror_content — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.ModifierHelper.cast_prosemirror_content — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-eab92df2d7.js"></script>
+    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.3.0
       </strong>
     </div>
 
@@ -106,14 +106,14 @@ ex_prosemirror
   Examples
 </h2>
 <pre><code class="makeup elixir"><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="2651178153-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="2651178153-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="2651178153-2">(</span><span class="p" data-group-id="2651178153-2">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="8501709944-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="8501709944-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="8501709944-2">(</span><span class="p" data-group-id="8501709944-2">)</span><span class="w">
 
 </span><span class="c1"># or with opts</span><span class="w">
 
 </span><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="2651178153-3">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="2651178153-3">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="2651178153-4">(</span><span class="ss">with</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2651178153-5">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2651178153-6">{</span><span class="nc">ExProsemirror.Block.Text</span><span class="p">,</span><span class="w"> </span><span class="ss">:changeset</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2651178153-7">[</span><span class="n">opts</span><span class="p" data-group-id="2651178153-7">]</span><span class="p" data-group-id="2651178153-6">}</span><span class="p" data-group-id="2651178153-5">]</span><span class="p" data-group-id="2651178153-4">)</span></code></pre><p>Block <a href="ExProsemirror.Block.Text.html"><code class="inline">ExProsemirror.Block.Text</code></a> will be cast using the <code class="inline">changeset/3</code> with params</p><ul><li>%ExProsemirror.Block.Text{...}</li><li>attrs (map of data to cast)</li><li>opts: opts to use in the changeset (e.g. allowed marks to cast defined in the ExProsemirror type.)</li></ul><blockquote><p>If a block/mark's type is not specified in the <code class="inline">with</code> opts, the <code class="inline">changeset/2</code> will be use.</p></blockquote><h2 id="cast_prosemirror_content/2-options" class="section-heading">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="8501709944-3">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="8501709944-3">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="8501709944-4">(</span><span class="ss">with</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8501709944-5">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8501709944-6">{</span><span class="nc">ExProsemirror.Block.Text</span><span class="p">,</span><span class="w"> </span><span class="ss">:changeset</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8501709944-7">[</span><span class="n">opts</span><span class="p" data-group-id="8501709944-7">]</span><span class="p" data-group-id="8501709944-6">}</span><span class="p" data-group-id="8501709944-5">]</span><span class="p" data-group-id="8501709944-4">)</span></code></pre><p>Block <a href="ExProsemirror.Block.Text.html"><code class="inline">ExProsemirror.Block.Text</code></a> will be cast using the <code class="inline">changeset/3</code> with params</p><ul><li>%ExProsemirror.Block.Text{...}</li><li>attrs (map of data to cast)</li><li>opts: opts to use in the changeset (e.g. allowed marks to cast defined in the ExProsemirror type.)</li></ul><blockquote><p>If a block/mark's type is not specified in the <code class="inline">with</code> opts, the <code class="inline">changeset/2</code> will be use.</p></blockquote><h2 id="cast_prosemirror_content/2-options" class="section-heading">
   <a href="#cast_prosemirror_content/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Options
 </h2>

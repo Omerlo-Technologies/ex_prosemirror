@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.2.0">
+    <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.Changeset.validate_prosemirror — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.Changeset.validate_prosemirror — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-eab92df2d7.js"></script>
+    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.3.0
       </strong>
     </div>
 
@@ -105,10 +105,10 @@ ex_prosemirror
 </h2>
 <pre><code class="makeup elixir"><span class="c1"># Assuming changeset contains an ExProsemirror `title` field.</span><span class="w">
 </span><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Ecto.Changeset</span><span class="o">.</span><span class="n">cast</span><span class="p" data-group-id="9927481414-1">(</span><span class="p" data-group-id="9927481414-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid Json&quot;</span><span class="p" data-group-id="9927481414-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9927481414-3">[</span><span class="p" data-group-id="9927481414-3">]</span><span class="p" data-group-id="9927481414-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">validate_prosemirror</span><span class="p" data-group-id="9927481414-4">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="9927481414-4">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Ecto.Changeset</span><span class="o">.</span><span class="n">cast</span><span class="p" data-group-id="3148306889-1">(</span><span class="p" data-group-id="3148306889-2">%{</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid Json&quot;</span><span class="p" data-group-id="3148306889-2">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3148306889-3">[</span><span class="p" data-group-id="3148306889-3">]</span><span class="p" data-group-id="3148306889-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">validate_prosemirror</span><span class="p" data-group-id="3148306889-4">(</span><span class="n">changeset</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">required</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="3148306889-4">)</span><span class="w">
 
-</span><span class="p" data-group-id="9927481414-5">%</span><span class="nc" data-group-id="9927481414-5">Ecto.Changeset</span><span class="p" data-group-id="9927481414-5">{</span><span class="ss">changes</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9927481414-6">%{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9927481414-7">[</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid json&quot;</span><span class="p" data-group-id="9927481414-7">]</span><span class="p" data-group-id="9927481414-6">}</span><span class="p" data-group-id="9927481414-5">}</span></code></pre>
+</span><span class="p" data-group-id="3148306889-5">%</span><span class="nc" data-group-id="3148306889-5">Ecto.Changeset</span><span class="p" data-group-id="3148306889-5">{</span><span class="ss">changes</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3148306889-6">%{</span><span class="ss">errors</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3148306889-7">[</span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Invalid json&quot;</span><span class="p" data-group-id="3148306889-7">]</span><span class="p" data-group-id="3148306889-6">}</span><span class="p" data-group-id="3148306889-5">}</span></code></pre>
   </section>
 </section>
 

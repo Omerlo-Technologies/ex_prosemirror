@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.2.0">
+    <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.Config — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.Config — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-eab92df2d7.js"></script>
+    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.3.0
       </strong>
     </div>
 
@@ -80,24 +80,24 @@ ex_prosemirror
     <div id="content" class="content-inner">
 
       <h1>
-ExProsemirror.Config <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
+ExProsemirror.Config <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
 
       </h1>
 
 
         <section id="moduledoc">
 <p>ExProsemirror allows an extensible configuration system.</p><p>You could generate multiples types of configuration depending on your needs.</p><p>E.g.</p><pre><code class="makeup elixir"><span class="n">config</span><span class="w"> </span><span class="ss">:ex_prosemirror</span><span class="p">,</span><span class="w">
-  </span><span class="ss">marks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-1">[</span><span class="w">
+  </span><span class="ss">marks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-1">[</span><span class="w">
     </span><span class="c1"># ...</span><span class="w">
-  </span><span class="p" data-group-id="1456224096-1">]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">blocks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-2">[</span><span class="w">
+  </span><span class="p" data-group-id="0403664065-1">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">blocks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-2">[</span><span class="w">
     </span><span class="c1"># ...</span><span class="w">
     </span><span class="ss">heading</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Heading</span><span class="w">
-  </span><span class="p" data-group-id="1456224096-2">]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">types</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-3">[</span><span class="w">
-    </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-4">[</span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-5">[</span><span class="p" data-group-id="1456224096-6">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1456224096-7">[</span><span class="ss">:h1</span><span class="p" data-group-id="1456224096-7">]</span><span class="p" data-group-id="1456224096-6">}</span><span class="p" data-group-id="1456224096-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-8">[</span><span class="p" data-group-id="1456224096-8">]</span><span class="p">,</span><span class="w"> </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="1456224096-4">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">subtitle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-9">[</span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-10">[</span><span class="p" data-group-id="1456224096-11">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1456224096-12">[</span><span class="ss">:h2</span><span class="p">,</span><span class="w"> </span><span class="ss">:h3</span><span class="p" data-group-id="1456224096-12">]</span><span class="p" data-group-id="1456224096-11">}</span><span class="p" data-group-id="1456224096-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1456224096-13">[</span><span class="p" data-group-id="1456224096-13">]</span><span class="p" data-group-id="1456224096-9">]</span><span class="w">
-  </span><span class="p" data-group-id="1456224096-3">]</span></code></pre><p>This will create 2 customs types:</p><ul><li><code class="inline">title</code> that allows only <code class="inline">h1</code> block without any marks and will be inline.</li><li><code class="inline">subtitle</code> that allows <code class="inline">h2</code> and <code class="inline">h3</code> blocks and use default marks.</li></ul><h2 id="module-configuration" class="section-heading">
+  </span><span class="p" data-group-id="0403664065-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">types</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-3">[</span><span class="w">
+    </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-4">[</span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-5">[</span><span class="p" data-group-id="0403664065-6">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0403664065-7">[</span><span class="ss">:h1</span><span class="p" data-group-id="0403664065-7">]</span><span class="p" data-group-id="0403664065-6">}</span><span class="p" data-group-id="0403664065-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-8">[</span><span class="p" data-group-id="0403664065-8">]</span><span class="p">,</span><span class="w"> </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="0403664065-4">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">subtitle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-9">[</span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-10">[</span><span class="p" data-group-id="0403664065-11">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0403664065-12">[</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="0403664065-12">]</span><span class="p" data-group-id="0403664065-11">}</span><span class="p" data-group-id="0403664065-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403664065-13">[</span><span class="p" data-group-id="0403664065-13">]</span><span class="p" data-group-id="0403664065-9">]</span><span class="w">
+  </span><span class="p" data-group-id="0403664065-3">]</span></code></pre><p>This will create 2 customs types:</p><ul><li><code class="inline">title</code> that allows only <code class="inline">h1</code> block without any marks and will be inline.</li><li><code class="inline">subtitle</code> that allows <code class="inline">h2</code> and <code class="inline">h3</code> blocks and use default marks.</li></ul><h2 id="module-configuration" class="section-heading">
   <a href="#module-configuration" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Configuration
 </h2>
@@ -212,8 +212,8 @@ Functions
   <a href="#load/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror.Config</span><span class="o">.</span><span class="n">load</span><span class="p" data-group-id="0440031626-1">(</span><span class="ss">:title</span><span class="p" data-group-id="0440031626-1">)</span><span class="w">
-</span><span class="p" data-group-id="0440031626-2">[</span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w"> </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0440031626-3">[</span><span class="ss">:strong</span><span class="p" data-group-id="0440031626-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0440031626-4">[</span><span class="p" data-group-id="0440031626-5">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0440031626-6">[</span><span class="ss">:h1</span><span class="p">,</span><span class="w"> </span><span class="ss">:h2</span><span class="p" data-group-id="0440031626-6">]</span><span class="p" data-group-id="0440031626-5">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:p</span><span class="p" data-group-id="0440031626-4">]</span><span class="p" data-group-id="0440031626-2">]</span></code></pre>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror.Config</span><span class="o">.</span><span class="n">load</span><span class="p" data-group-id="5188472263-1">(</span><span class="ss">:title</span><span class="p" data-group-id="5188472263-1">)</span><span class="w">
+</span><span class="p" data-group-id="5188472263-2">[</span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w"> </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5188472263-3">[</span><span class="ss">:strong</span><span class="p" data-group-id="5188472263-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5188472263-4">[</span><span class="p" data-group-id="5188472263-5">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5188472263-6">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5188472263-6">]</span><span class="p" data-group-id="5188472263-5">}</span><span class="p">,</span><span class="w"> </span><span class="ss">:p</span><span class="p" data-group-id="5188472263-4">]</span><span class="p" data-group-id="5188472263-2">]</span></code></pre>
   </section>
 </section>
 

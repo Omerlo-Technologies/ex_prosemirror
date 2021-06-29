@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.2.0">
+    <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.Type — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.Type — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-eab92df2d7.js"></script>
+    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.3.0
       </strong>
     </div>
 
@@ -80,13 +80,28 @@ ex_prosemirror
     <div id="content" class="content-inner">
 
       <h1>
-ExProsemirror.Type <small class="app-vsn">(ex_prosemirror v0.2.0)</small>
+ExProsemirror.Type <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
 
       </h1>
 
 
         <section id="moduledoc">
-<p>ExProsemirror's type helpers.</p>
+<p>ExProsemirror's type helpers.</p><p>A type is composed by <code class="inline">blocks</code> and <code class="inline">marks</code>. Those elements defined what is
+allowed in your type.</p><h2 id="module-e-g" class="section-heading">
+  <a href="#module-e-g" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  E.g
+</h2>
+<pre><code class="makeup elixir"><span class="ss">types</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-1">[</span><span class="w">
+  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-2">[</span><span class="w">
+    </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-3">[</span><span class="p" data-group-id="4097248409-4">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4097248409-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="4097248409-5">]</span><span class="p" data-group-id="4097248409-4">}</span><span class="p" data-group-id="4097248409-3">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-6">[</span><span class="ss">:strong</span><span class="p" data-group-id="4097248409-6">]</span><span class="w">
+  </span><span class="p" data-group-id="4097248409-2">]</span><span class="w">
+</span><span class="p" data-group-id="4097248409-1">]</span></code></pre><p>This will createa type <code class="inline">title</code> defined by the module <code class="inline">ExProsemirror.Type.Title</code>.
+This type will allow <code class="inline">h1</code> and <code class="inline">h3</code> blocks but also the mark <code class="inline">strong</code>.</p><p><code class="inline">blocks</code> and <code class="inline">marks</code> follow the same rules, you can defined them simply with
+the element name OR with the tuple <code class="inline">{element_name, attrs}</code> when attrs depends
+of the element.</p><blockquote><p>You can take a look at <a href="ExProsemirror.Mark.Color.html"><code class="inline">ExProsemirror.Mark.Color</code></a> or
+<a href="ExProsemirror.Block.Heading.html"><code class="inline">ExProsemirror.Block.Heading</code></a> for examples).</p></blockquote><p>As you can see previously, element <code class="inline">heading</code> allow attrs <code class="inline">1</code> and <code class="inline">3</code> that could
+be translate as level <code class="inline">1</code> or level <code class="inline">3</code> (<code class="inline">h1</code> or <code class="inline">h3</code>).</p>
         </section>
 
 
@@ -217,20 +232,20 @@ Functions
   <a href="#get_context/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="nc">ExProsemirror.TypeGenerator</span><span class="o">.</span><span class="n">get_context</span><span class="p" data-group-id="4845886869-1">(</span><span class="p" data-group-id="4845886869-1">)</span><span class="w">
-</span><span class="p" data-group-id="4845886869-2">[</span><span class="w">
-  </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4845886869-3">[</span><span class="w">
+<pre><code class="makeup elixir"><span class="nc">ExProsemirror.TypeGenerator</span><span class="o">.</span><span class="n">get_context</span><span class="p" data-group-id="2952208211-1">(</span><span class="p" data-group-id="2952208211-1">)</span><span class="w">
+</span><span class="p" data-group-id="2952208211-2">[</span><span class="w">
+  </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2952208211-3">[</span><span class="w">
     </span><span class="ss">em</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Em</span><span class="p">,</span><span class="w">
     </span><span class="ss">strong</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Strong</span><span class="p">,</span><span class="w">
     </span><span class="ss">underline</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Underline</span><span class="w">
-  </span><span class="p" data-group-id="4845886869-3">]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4845886869-4">[</span><span class="w">
+  </span><span class="p" data-group-id="2952208211-3">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2952208211-4">[</span><span class="w">
     </span><span class="ss">p</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Paragraph</span><span class="p">,</span><span class="w">
     </span><span class="ss">heading</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Heading</span><span class="p">,</span><span class="w">
     </span><span class="ss">image</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Image</span><span class="p">,</span><span class="w">
     </span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="w">
-  </span><span class="p" data-group-id="4845886869-4">]</span><span class="w">
-</span><span class="p" data-group-id="4845886869-2">]</span></code></pre>
+  </span><span class="p" data-group-id="2952208211-4">]</span><span class="w">
+</span><span class="p" data-group-id="2952208211-2">]</span></code></pre>
   </section>
 </section>
 <section class="detail" id="to_json/1">

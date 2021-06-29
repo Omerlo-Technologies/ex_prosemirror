@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.2.0">
+    <meta name="project" content="ex_prosemirror v0.3.0">
 
-    <title>ExProsemirror.extract_simple_text — ex_prosemirror v0.2.0</title>
+    <title>ExProsemirror.extract_simple_text — ex_prosemirror v0.3.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-eab92df2d7.js"></script>
+    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 ex_prosemirror
       </a>
       <strong class="sidebar-projectVersion">
-        v0.2.0
+        v0.3.0
       </strong>
     </div>
 
@@ -103,19 +103,19 @@ ex_prosemirror
   <a href="#extract_simple_text/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="2437717795-1">(</span><span class="p" data-group-id="2437717795-2">%</span><span class="nc" data-group-id="2437717795-2">ExProsemirror.Block.Paragraph</span><span class="p" data-group-id="2437717795-2">{</span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2437717795-3">[</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="2437717795-4">%</span><span class="nc" data-group-id="2437717795-4">ExProsemirror.Block.Text</span><span class="p" data-group-id="2437717795-4">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="2437717795-4">}</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="2437717795-5">%</span><span class="nc" data-group-id="2437717795-5">ExProsemirror.Block.Text</span><span class="p" data-group-id="2437717795-5">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="2437717795-5">}</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="2437717795-3">]</span><span class="p" data-group-id="2437717795-2">}</span><span class="p" data-group-id="2437717795-1">)</span><span class="w">
-</span><span class="p" data-group-id="2437717795-6">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="2437717795-6">]</span><span class="w">
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="1068385251-1">(</span><span class="p" data-group-id="1068385251-2">%</span><span class="nc" data-group-id="1068385251-2">ExProsemirror.Block.Paragraph</span><span class="p" data-group-id="1068385251-2">{</span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1068385251-3">[</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-4">%</span><span class="nc" data-group-id="1068385251-4">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-4">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="1068385251-4">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-5">%</span><span class="nc" data-group-id="1068385251-5">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-5">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-5">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="1068385251-3">]</span><span class="p" data-group-id="1068385251-2">}</span><span class="p" data-group-id="1068385251-1">)</span><span class="w">
+</span><span class="p" data-group-id="1068385251-6">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-6">]</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="2437717795-7">(</span><span class="p" data-group-id="2437717795-8">[</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="2437717795-9">%</span><span class="nc" data-group-id="2437717795-9">ExProsemirror.Block.Text</span><span class="p" data-group-id="2437717795-9">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="2437717795-9">}</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="2437717795-10">%</span><span class="nc" data-group-id="2437717795-10">ExProsemirror.Block.Text</span><span class="p" data-group-id="2437717795-10">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="2437717795-10">}</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="2437717795-8">]</span><span class="p" data-group-id="2437717795-7">)</span><span class="w">
-</span><span class="p" data-group-id="2437717795-11">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="2437717795-11">]</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="1068385251-7">(</span><span class="p" data-group-id="1068385251-8">[</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-9">%</span><span class="nc" data-group-id="1068385251-9">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-9">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="1068385251-9">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-10">%</span><span class="nc" data-group-id="1068385251-10">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-10">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-10">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="1068385251-8">]</span><span class="p" data-group-id="1068385251-7">)</span><span class="w">
+</span><span class="p" data-group-id="1068385251-11">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-11">]</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="2437717795-12">(</span><span class="p" data-group-id="2437717795-13">%</span><span class="nc" data-group-id="2437717795-13">ExProsemirror.Block.Text</span><span class="p" data-group-id="2437717795-13">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="2437717795-13">}</span><span class="p" data-group-id="2437717795-12">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="1068385251-12">(</span><span class="p" data-group-id="1068385251-13">%</span><span class="nc" data-group-id="1068385251-13">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-13">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="1068385251-13">}</span><span class="p" data-group-id="1068385251-12">)</span><span class="w">
 </span><span class="s">&quot;Hello&quot;</span></code></pre>
   </section>
 </section>
