@@ -1,7 +1,7 @@
 import { MenuItem, blockTypeItem, Dropdown } from 'prosemirror-menu';
 import { icons } from './icons';
 import { toggleMark } from 'prosemirror-commands';
-import { toggleColor } from './marks/helper';
+import { toggleMultiMarks } from './marks/helper';
 
 function getTitle({name: name, spec: {title}}) {
   return (title || name);
@@ -132,32 +132,42 @@ export function markActive(state, type) {
 }
 
 export const generateColorsMenu = (schema) => {
-  if (!schema.marks.color) {
-    return [];
-  }
-
-  const items = generateColorItems(schema);
-
+  const items = generateMultiMarkItem(schema, 'color');
   return [new Dropdown(items, {label: 'Color'})];
 };
 
-export const generateColorItems = (schema) => {
-  if (!schema.marks.color) {
+export const generateFontFamilyMenu = (schema) => {
+  const items = generateMultiMarkItem(schema, 'font_family');
+  return [new Dropdown(items, {label: 'Font'})];
+};
+
+export const generateMultiMarkItem = (schema, markType) => {
+  if (!schema.marks[markType]) {
     return [];
   }
 
-  const results = [colorItem(schema.marks.color, {title: 'default'})];
-  const values = schema.marks.color.spec.config.values;
+  const results = [multiMarkItem(schema.marks[markType], {title: 'default'})];
+  const values = schema.marks[markType].spec.config.values;
 
-  for (const [name, color] of Object.entries(values)) {
-    results.push(colorItem(schema.marks.color, {title: name}, {color: color}));
+  if (Array.isArray(values)) {
+    for (const value of values) {
+      const attrs = [];
+      attrs[markType] = value;
+      results.push(multiMarkItem(schema.marks[markType], { title: value }, attrs));
+    }
+  } else {
+    for (const [name, value] of Object.entries(values)) {
+      const attrs = [];
+      attrs[markType] = value;
+      results.push(multiMarkItem(schema.marks[markType], { title: name }, attrs));
+    }
   }
 
   return results;
 };
 
-export function colorItem(markType, options, attrs) {
-  return cmdItem(toggleColor(markType, attrs), {enable: true, ...options});
+export function multiMarkItem(markType, options, attrs) {
+  return cmdItem(toggleMultiMarks(markType, attrs), {enable: true, ...options});
 }
 
 
