@@ -35,7 +35,7 @@ defmodule ExProsemirror.Schema do
   defmacro prosemirror_field(name, type) do
     quote do
       field unquote(:"#{name}_plain"), :string, virtual: true
-      embeds_one unquote(name), unquote(type)
+      embeds_one unquote(name), unquote(type), on_replace: :delete
     end
   end
 end
