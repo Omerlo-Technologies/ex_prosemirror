@@ -5,6 +5,7 @@ import { generateExProsemirrorMarks } from './helper';
 export const marks = {
   strong: { ...prosemirrorMarks.strong, generateMenuItem: generateMarkItem('strong') },
   em: { ...prosemirrorMarks.em, generateMenuItem: generateMarkItem('em') },
+  link: { ...prosemirrorMarks.link },
   strikethrough: {
     toDOM() {return ['del', 0];},
     parseDOM: [{ tag: 'del' }],
