@@ -89,6 +89,10 @@ defmodule ExProsemirror.Type do
     Enum.map(elements, &encode(&1, context))
   end
 
+  def encode(%Ecto.Changeset{} = element, context) do
+    encode(element.data, context)
+  end
+
   def encode(element, context) do
     type = context[:blocks][element.__struct__] || raise "Invalid configuration"
 
