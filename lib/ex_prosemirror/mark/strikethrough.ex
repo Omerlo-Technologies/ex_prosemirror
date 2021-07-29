@@ -15,4 +15,12 @@ defmodule ExProsemirror.Mark.Strikethrough do
   def changeset(struct_or_changeset, _attrs \\ %{}) do
     %Ecto.Changeset{valid?: true, data: struct_or_changeset}
   end
+
+  defimpl ExProsemirror.Encoder.HTML do
+    import Phoenix.HTML.Tag, only: [content_tag: 2]
+
+    def encode(_struct, opts) do
+      content_tag(:del, opts[:inner_content])
+    end
+  end
 end

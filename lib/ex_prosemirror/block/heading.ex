@@ -20,6 +20,7 @@ defmodule ExProsemirror.Block.Heading do
   import Ecto.Changeset
 
   alias ExProsemirror.Block.Text
+  alias ExProsemirror.Encoder.HTML, as: HTMLEncoder
 
   @type t :: %__MODULE__{
           attrs: %__MODULE__.Attrs{level: attrs_level},
@@ -40,6 +41,15 @@ defmodule ExProsemirror.Block.Heading do
     |> cast(attrs, [])
     |> cast_embed(:attrs, required: true)
     |> cast_prosemirror_content(with: [text: {Text, :changeset, [opts]}])
+  end
+
+  defimpl HTMLEncoder do
+    import Phoenix.HTML.Tag
+
+    def encode(struct, _opts) do
+      tag = "h#{struct.attrs.level}"
+      content_tag(tag, HTMLEncoder.encode(struct.content))
+    end
   end
 
   defmodule __MODULE__.Attrs do

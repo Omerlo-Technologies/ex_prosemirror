@@ -1,4 +1,4 @@
-defmodule ExProsemirror.FormTest do
+defmodule ExProsemirror.HTML.FormTest do
   use ExUnit.Case
 
   import Phoenix.HTML

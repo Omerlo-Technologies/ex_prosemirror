@@ -9,6 +9,7 @@ defmodule ExProsemirror.Block.Paragraph do
   import Ecto.Changeset
 
   alias ExProsemirror.Block.Text
+  alias ExProsemirror.Encoder.HTML, as: HTMLEncoder
 
   @type t :: %__MODULE__{
           content: [Text.t()]
@@ -28,5 +29,13 @@ defmodule ExProsemirror.Block.Paragraph do
 
   def extract_simple_text(struct) do
     Enum.map(struct.content, &ExProsemirror.extract_simple_text/1)
+  end
+
+  defimpl HTMLEncoder do
+    import Phoenix.HTML.Tag, only: [content_tag: 2]
+
+    def encode(struct, _opts) do
+      content_tag("p", HTMLEncoder.encode(struct.content))
+    end
   end
 end

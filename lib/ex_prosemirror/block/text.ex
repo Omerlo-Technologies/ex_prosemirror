@@ -18,6 +18,8 @@ defmodule ExProsemirror.Block.Text do
 
   import Ecto.Changeset
 
+  alias ExProsemirror.Encoder.HTML, as: HTMLEncoder
+
   @type t :: %__MODULE__{
           text: String.t(),
           marks: [Strong.t() | Em.t() | Underline.t()]
@@ -58,4 +60,16 @@ defmodule ExProsemirror.Block.Text do
       "Hello elixir's friends"
   """
   def extract_simple_text(%__MODULE__{text: text}), do: text
+
+  defimpl HTMLEncoder do
+    def encode(struct, _opts) do
+      text = Phoenix.HTML.html_escape(struct.text)
+
+      struct.marks
+      |> Enum.reverse()
+      |> Enum.reduce(text, fn mark, acc ->
+        HTMLEncoder.encode(mark, inner_content: acc)
+      end)
+    end
+  end
 end

@@ -50,6 +50,12 @@ defmodule ExProsemirror.Block.HTML do
     |> cast_embed(:attrs, required: true)
   end
 
+  defimpl ExProsemirror.Encoder.HTML do
+    def encode(%{attrs: %{html: html}}, _inner_content) do
+      {:safe, html}
+    end
+  end
+
   defmodule __MODULE__.Attrs do
     @derive {Jason.Encoder, except: [:__struct__]}
     @moduledoc false
