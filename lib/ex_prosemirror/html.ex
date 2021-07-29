@@ -9,6 +9,8 @@ defmodule ExProsemirror.HTML do
   @doc ~S"""
   Render a type to an html element.
   """
+  def html_safe(nil), do: content_tag(:div, nil)
+
   def html_safe(ex_prosemirror_type) do
     content_tag(
       :div,

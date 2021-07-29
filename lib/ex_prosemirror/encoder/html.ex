@@ -35,3 +35,7 @@ defimpl ExProsemirror.Encoder.HTML, for: List do
     Enum.map(structs, &ExProsemirror.Encoder.HTML.encode/1)
   end
 end
+
+defimpl ExProsemirror.Encoder.HTML, for: Atom do
+  def encode(struct, _opts), do: Phoenix.HTML.html_escape(struct)
+end

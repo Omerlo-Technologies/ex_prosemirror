@@ -8,6 +8,16 @@ defmodule ExProsemirror.Encoder.HTMLTest do
   alias ExProsemirror.Encoder.HTML, as: HTMLEncoder
   alias ExProsemirror.Mark.{Color, Em, FontFamily, Link, Strikethrough, Strong, Underline}
 
+  describe "special case" do
+    test "atom :titi" do
+      assert HTMLEncoder.encode(:titi) == {:safe, "titi"}
+    end
+
+    test "nil" do
+      assert HTMLEncoder.encode(nil) == {:safe, ""}
+    end
+  end
+
   describe "blocks" do
     test "encode header" do
       header =
