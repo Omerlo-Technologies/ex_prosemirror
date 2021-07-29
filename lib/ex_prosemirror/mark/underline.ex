@@ -9,6 +9,7 @@ defmodule ExProsemirror.Mark.Underline do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :underline
 
   @type t :: %__MODULE__{}
 

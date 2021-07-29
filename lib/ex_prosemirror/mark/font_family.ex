@@ -14,6 +14,7 @@ defmodule ExProsemirror.Mark.FontFamily do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :font_family
 
   import Ecto.Changeset
 

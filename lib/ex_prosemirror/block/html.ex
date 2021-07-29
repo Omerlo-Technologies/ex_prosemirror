@@ -29,6 +29,7 @@ defmodule ExProsemirror.Block.HTML do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :html
 
   import Ecto.Changeset
 

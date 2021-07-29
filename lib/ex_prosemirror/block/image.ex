@@ -31,6 +31,7 @@ defmodule ExProsemirror.Block.Image do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :image
 
   import Ecto.Changeset
 
