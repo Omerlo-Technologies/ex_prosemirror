@@ -37,9 +37,16 @@ defmodule ExProsemirror.MixProject do
       extras: ["guides/extends_editor.md"],
       groups_for_modules: [
         HTML: [ExProsemirror.HTML.Form],
+        Encoders: prosemirror_encoders(),
         Ecto: prosemirror_ecto_related(),
         Modifiers: prosemirror_modifiers()
       ]
+    ]
+  end
+
+  defp prosemirror_encoders do
+    [
+      ExProsemirror.Encoder.HTML
     ]
   end
 
@@ -55,6 +62,7 @@ defmodule ExProsemirror.MixProject do
       ExProsemirror.Block.HTML,
       ExProsemirror.Mark,
       ExProsemirror.Mark.Em,
+      ExProsemirror.Mark.Link,
       ExProsemirror.Mark.Strong,
       ExProsemirror.Mark.Underline,
       ExProsemirror.Mark.Strikethrough,

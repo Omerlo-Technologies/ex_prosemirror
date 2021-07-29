@@ -64,6 +64,14 @@ defmodule ExProsemirror.Mark.Link do
     |> cast_embed(:attrs)
   end
 
+  defimpl ExProsemirror.Encoder.HTML do
+    import Phoenix.HTML.Tag, only: [content_tag: 3]
+
+    def encode(struct, opts) do
+      content_tag(:a, opts[:inner_content], href: struct.attrs.href)
+    end
+  end
+
   defmodule __MODULE__.Attrs do
     @derive {Jason.Encoder, except: [:__struct__]}
     @moduledoc false

@@ -33,6 +33,14 @@ defmodule ExProsemirror.Mark.Color do
     |> cast_embed(:attrs)
   end
 
+  defimpl ExProsemirror.Encoder.HTML do
+    import Phoenix.HTML.Tag, only: [content_tag: 3]
+
+    def encode(struct, opts) do
+      content_tag(:span, opts[:inner_content], style: "color: #{struct.attrs.color};")
+    end
+  end
+
   defmodule __MODULE__.Attrs do
     @derive {Jason.Encoder, except: [:__struct__]}
     @moduledoc false

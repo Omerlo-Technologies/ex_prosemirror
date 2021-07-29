@@ -54,6 +54,14 @@ defmodule ExProsemirror.Block.Image do
     |> cast_embed(:attrs, required: true)
   end
 
+  defimpl ExProsemirror.Encoder.HTML do
+    import Phoenix.HTML.Tag, only: [tag: 2]
+
+    def encode(%{attrs: attrs}, _opts) do
+      tag("img", src: attrs.src, alt: attrs.alt)
+    end
+  end
+
   defmodule __MODULE__.Attrs do
     @derive {Jason.Encoder, except: [:__struct__]}
     @moduledoc false
