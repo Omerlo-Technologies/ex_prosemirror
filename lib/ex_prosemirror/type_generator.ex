@@ -55,7 +55,6 @@ defmodule ExProsemirror.TypeGenerator do
       defimpl Jason.Encoder do
         def encode(struct, opts) do
           Map.from_struct(struct)
-          |> Map.put(:type, unquote(opts[:name]))
           |> Jason.Encode.map(opts)
         end
       end

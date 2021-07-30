@@ -39,7 +39,7 @@ defmodule ExProsemirror.Changeset do
 
   def update_plain_field(changeset, field) do
     if type_changes = Ecto.Changeset.get_field(changeset, field) do
-      plain_value = Jason.encode(type_changes)
+      plain_value = Jason.encode!(type_changes)
       Ecto.Changeset.put_change(changeset, :"#{field}_plain", plain_value)
     else
       changeset
