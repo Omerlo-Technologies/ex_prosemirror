@@ -15,6 +15,7 @@ defmodule ExProsemirror.Mark.Color do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :color
 
   import Ecto.Changeset
 

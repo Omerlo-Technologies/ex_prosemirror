@@ -47,6 +47,7 @@ defmodule ExProsemirror.Mark.Link do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :link
 
   import Ecto.Changeset
 

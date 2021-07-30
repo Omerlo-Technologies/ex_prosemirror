@@ -5,6 +5,7 @@ defmodule ExProsemirror.Block.Paragraph do
 
   use ExProsemirror.Schema
   use ExProsemirror
+  use ExProsemirror.Encoder.Json, type: :paragraph
 
   import Ecto.Changeset
 

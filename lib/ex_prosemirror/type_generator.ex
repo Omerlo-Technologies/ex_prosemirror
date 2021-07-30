@@ -29,6 +29,7 @@ defmodule ExProsemirror.TypeGenerator do
       opts
       |> Keyword.put_new(:blocks, @default_blocks)
       |> Keyword.put_new(:marks, @default_marks)
+      |> Keyword.put_new(:name, name)
 
     module_content = type_module_content(opts, context)
     Module.create(module_name, module_content, Macro.Env.location(__ENV__))
@@ -50,6 +51,14 @@ defmodule ExProsemirror.TypeGenerator do
       unquote(type_schema(context))
       unquote(type_changeset(context))
       defdelegate changeset(struct_or_changeset, attrs, allowed_marks), to: ExProsemirror.Type
+
+      defimpl Jason.Encoder do
+        def encode(struct, opts) do
+          Map.from_struct(struct)
+          |> Map.put(:type, unquote(opts[:name]))
+          |> Jason.Encode.map(opts)
+        end
+      end
     end
   end
 

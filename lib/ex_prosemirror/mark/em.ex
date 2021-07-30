@@ -4,6 +4,7 @@ defmodule ExProsemirror.Mark.Em do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :em
 
   @type t :: %__MODULE__{}
 

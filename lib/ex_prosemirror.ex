@@ -203,7 +203,7 @@ defmodule ExProsemirror do
 
   ## Examples
 
-        def extract_simple_text(%__MODULE__{text: text}), do: text
+      def extract_simple_text(%__MODULE__{text: text}), do: text
   """
   @callback extract_simple_text(struct :: struct()) :: String.t() | nil
 

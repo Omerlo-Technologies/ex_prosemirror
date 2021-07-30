@@ -9,6 +9,7 @@ defmodule ExProsemirror.Mark.Strong do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :strong
 
   @type t :: %__MODULE__{}
 

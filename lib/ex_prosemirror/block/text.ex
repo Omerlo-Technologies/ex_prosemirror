@@ -15,6 +15,7 @@ defmodule ExProsemirror.Block.Text do
 
   use ExProsemirror
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :text
 
   import Ecto.Changeset
 

@@ -16,6 +16,7 @@ defmodule ExProsemirror.Block.Heading do
 
   use ExProsemirror.Schema
   use ExProsemirror
+  use ExProsemirror.Encoder.Json, type: :heading
 
   import Ecto.Changeset
 

@@ -4,6 +4,7 @@ defmodule ExProsemirror.Mark.Strikethrough do
   """
 
   use ExProsemirror.Schema
+  use ExProsemirror.Encoder.Json, type: :strikethrough
 
   @type t :: %__MODULE__{}
 
