@@ -11,7 +11,7 @@ if Mix.env() == :test do
       underline: ExProsemirror.Mark.Underline
     ],
     blocks_modules: [
-      p: ExProsemirror.Block.Paragraph,
+      paragraph: ExProsemirror.Block.Paragraph,
       heading: ExProsemirror.Block.Heading,
       image: ExProsemirror.Block.Image,
       text: ExProsemirror.Block.Text
@@ -22,13 +22,13 @@ if Mix.env() == :test do
         marks: [:em]
       ],
       blocks_only: [
-        blocks: [:p],
+        blocks: [:paragraph],
         marks: []
       ],
       title: [
         inline: true,
         marks: [:strong],
-        blocks: [{:heading, [1, 2]}, :p]
+        blocks: [{:heading, [1, 2]}, :paragraph]
       ],
       sublead: [
         marks: [:em],

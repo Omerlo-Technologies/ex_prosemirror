@@ -3,7 +3,7 @@ import { generateExProsemirorBlocks } from './helpers';
 
 import { menuHelper } from '../menu';
 
-const p = {
+const paragraph = {
   ...nodes.paragraph,
   generateMenuItem: menuHelper.generateParagraphItem
 };
@@ -44,7 +44,7 @@ const image = {
 export const blocks = {
   doc: nodes.doc,
   text: nodes.text,
-  p,
+  paragraph,
   heading,
   image,
   html
