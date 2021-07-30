@@ -47,7 +47,7 @@ defmodule ExProsemirror.Config do
   ## Examples
 
       iex> ExProsemirror.Config.load(:title)
-      [inline: true, marks: [:strong], blocks: [{:heading, [1, 2]}, :p]]
+      [inline: true, marks: [:strong], blocks: [{:heading, [1, 2]}, :paragraph]]
 
   """
 

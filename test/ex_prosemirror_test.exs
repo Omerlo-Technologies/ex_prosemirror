@@ -15,7 +15,7 @@ defmodule ExProsemirrorTest do
 
   @simple_data_attrs %{
     type: "doc",
-    content: [%{type: "p", content: [@simple_text.attr]}]
+    content: [%{type: "paragraph", content: [@simple_text.attr]}]
   }
 
   @simple_schema_data %BlocksOnly{

@@ -22,8 +22,8 @@ export const generateHeadingItem = (schema) => {
 };
 
 export const generateParagraphItem = (schema) => {
-  if(schema.nodes.p) {
-    return [blockTypeItem(schema.nodes.p, {
+  if(schema.nodes.paragraph) {
+    return [blockTypeItem(schema.nodes.paragraph, {
       title: 'paragraph',
       label: 'paragraph'
     })];

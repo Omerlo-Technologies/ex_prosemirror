@@ -34,7 +34,7 @@ defmodule ExProsemirror do
       ],
       content: [
         marks: [:strong, :underline]
-        blocks: [:p, {:heading, 2}],
+        blocks: [:paragraph, {:heading, 2}],
       ]
     ]
   ```
