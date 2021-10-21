@@ -22,7 +22,7 @@ defmodule ExProsemirror.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix_html, "~> 2.14"},
+      {:phoenix_html, "~> 2.14 or ~> 3.0"},
       {:ecto, "~> 3.6"},
       {:polymorphic_embed, "~> 1.6"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
