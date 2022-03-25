@@ -44,7 +44,9 @@ lint-fix:
 
 .PHONY: docs
 docs:
+	rm -rf docs
 	mix docs -o docs
+	git add docs
 .PHONY: help
 help:
 	$(info $(HELP))

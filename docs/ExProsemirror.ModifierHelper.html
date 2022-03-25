@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.3.0">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="ex_prosemirror v0.3.2">
 
-    <title>ExProsemirror.ModifierHelper — ex_prosemirror v0.3.0</title>
-    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+    <title>ExProsemirror.ModifierHelper — ex_prosemirror v0.3.2</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
+    <script src="dist/sidebar_items-1b1b648476.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,27 +22,34 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle">
-  <span class="icon-menu" title="Collapse/expand sidebar"></span>
-</button>
 
 <section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
   <form class="sidebar-search" action="search.html">
     <button type="submit" class="search-button" aria-label="Submit Search">
-      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
     <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -53,24 +60,24 @@
   </div>
 
   <div class="sidebar-header">
+
     <div class="sidebar-projectDetails">
-      <a href="ExProsemirror.html" class="sidebar-projectName">
+      <a href="ExProsemirror.html" class="sidebar-projectName" translate="no">
 ex_prosemirror
       </a>
-      <strong class="sidebar-projectVersion">
-        v0.3.0
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.3.2
       </strong>
     </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+    </ul>
   </div>
 
-  <ul class="sidebar-listNav">
-    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
-
-      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
-
-
-  </ul>
   <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
 </section>
@@ -79,99 +86,111 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-      <h1>
-ExProsemirror.ModifierHelper <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
 
-      </h1>
+
+  <span translate="no">ExProsemirror.ModifierHelper</span> 
+  <small class="app-vsn" translate="no">(ex_prosemirror v0.3.2)</small>
+
+</h1>
 
 
-        <section id="moduledoc">
+  <section id="moduledoc">
 <p>Ecto schema helper that defines multiple macros to use inside an Ecto.Schema.</p><p>In contrast of <a href="ExProsemirror.Schema.html"><code class="inline">ExProsemirror.Schema</code></a>, this module should not be imported to your business schema.
 It <strong>MUST</strong> be used to create custom block / marks.</p><p>It helps you build custom blocks / marks for <a href="ExProsemirror.html"><code class="inline">ExProsemirror</code></a>.</p><blockquote><p>This module is automatically import if you use <a href="ExProsemirror.html"><code class="inline">ExProsemirror</code></a>.</p></blockquote>
-        </section>
+  </section>
 
 
-        <section id="summary" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#summary">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Summary
-          </h1>
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
 
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#cast_prosemirror_content/2">cast_prosemirror_content(struct_or_changeset, opts \\ [])</a>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast_prosemirror_content/2" translate="no">cast_prosemirror_content(struct_or_changeset, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Cast prosemirror data struct.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast_prosemirror_marks/2" translate="no">cast_prosemirror_marks(struct_or_changeset, opts \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#embedded_prosemirror_content/2" translate="no">embedded_prosemirror_content(mapped_types, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Add the PolymorphicField mark in your ecto schema.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#embedded_prosemirror_field/3" translate="no">embedded_prosemirror_field(field_name, mapped_types, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Add the PolymorphicField in your ecto schema.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#embedded_prosemirror_marks/0" translate="no">embedded_prosemirror_marks()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Add the PolymorphicField mark in your ecto schema.</p></div>
+
+      </div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Cast prosemirror data struct.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#cast_prosemirror_marks/2">cast_prosemirror_marks(struct_or_changeset, opts \\ [])</a>
-
-  </div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#embedded_prosemirror_content/2">embedded_prosemirror_content(mapped_types, opts \\ [])</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Add the PolymorphicField mark in your ecto schema.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#embedded_prosemirror_field/3">embedded_prosemirror_field(field_name, mapped_types, opts \\ [])</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Add the PolymorphicField in your ecto schema.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#embedded_prosemirror_marks/0">embedded_prosemirror_marks()</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Add the PolymorphicField mark in your ecto schema.</p></div>
-
-</div>
-
-  </div>
-
-        </section>
+  </section>
 
 
-        <section id="functions" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
 Functions
-          </h1>
-          <div class="functions-list">
+    </h1>
+    <div class="functions-list">
 <section class="detail" id="cast_prosemirror_content/2">
 
     <span id="cast_prosemirror_content/1"></span>
 
   <div class="detail-header">
     <a href="#cast_prosemirror_content/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">cast_prosemirror_content(struct_or_changeset, opts \\ [])</h1>
+    <h1 class="signature" translate="no">cast_prosemirror_content(struct_or_changeset, opts \\ [])</h1>
 
 
   </div>
@@ -179,19 +198,23 @@ Functions
   <section class="docstring">
 
 <p>Cast prosemirror data struct.</p><h2 id="cast_prosemirror_content/2-examples" class="section-heading">
-  <a href="#cast_prosemirror_content/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#cast_prosemirror_content/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="8501709944-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="8501709944-1">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="8501709944-2">(</span><span class="p" data-group-id="8501709944-2">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="n">struct_or_changeset</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="1899685274-1">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="1899685274-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="1899685274-2">(</span><span class="p" data-group-id="1899685274-2">)</span><span class="w">
 
 </span><span class="c1"># or with opts</span><span class="w">
 
 </span><span class="n">struct_or_changeset</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="8501709944-3">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="8501709944-3">)</span><span class="w">
-</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="8501709944-4">(</span><span class="ss">with</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8501709944-5">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8501709944-6">{</span><span class="nc">ExProsemirror.Block.Text</span><span class="p">,</span><span class="w"> </span><span class="ss">:changeset</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8501709944-7">[</span><span class="n">opts</span><span class="p" data-group-id="8501709944-7">]</span><span class="p" data-group-id="8501709944-6">}</span><span class="p" data-group-id="8501709944-5">]</span><span class="p" data-group-id="8501709944-4">)</span></code></pre><p>Block <a href="ExProsemirror.Block.Text.html"><code class="inline">ExProsemirror.Block.Text</code></a> will be cast using the <code class="inline">changeset/3</code> with params</p><ul><li>%ExProsemirror.Block.Text{...}</li><li>attrs (map of data to cast)</li><li>opts: opts to use in the changeset (e.g. allowed marks to cast defined in the ExProsemirror type.)</li></ul><blockquote><p>If a block/mark's type is not specified in the <code class="inline">with</code> opts, the <code class="inline">changeset/2</code> will be use.</p></blockquote><h2 id="cast_prosemirror_content/2-options" class="section-heading">
-  <a href="#cast_prosemirror_content/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="1899685274-3">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="n">some_fields_to_cast</span><span class="p" data-group-id="1899685274-3">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="1899685274-4">(</span><span class="ss">with</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1899685274-5">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1899685274-6">{</span><span class="nc">ExProsemirror.Block.Text</span><span class="p">,</span><span class="w"> </span><span class="ss">:changeset</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1899685274-7">[</span><span class="n">opts</span><span class="p" data-group-id="1899685274-7">]</span><span class="p" data-group-id="1899685274-6">}</span><span class="p" data-group-id="1899685274-5">]</span><span class="p" data-group-id="1899685274-4">)</span></code></pre><p>Block <a href="ExProsemirror.Block.Text.html"><code class="inline">ExProsemirror.Block.Text</code></a> will be cast using the <code class="inline">changeset/3</code> with params</p><ul><li>%ExProsemirror.Block.Text{...}</li><li>attrs (map of data to cast)</li><li>opts: opts to use in the changeset (e.g. allowed marks to cast defined in the ExProsemirror type.)</li></ul><blockquote><p>If a block/mark's type is not specified in the <code class="inline">with</code> opts, the <code class="inline">changeset/2</code> will be use.</p></blockquote><h2 id="cast_prosemirror_content/2-options" class="section-heading">
+  <a href="#cast_prosemirror_content/2-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">options</p>
+  </a>
   Options
 </h2>
 <ul><li><code class="inline">with</code>: define the changeset to apply, to send allowed marks we recommend
@@ -204,10 +227,10 @@ Functions
 
   <div class="detail-header">
     <a href="#cast_prosemirror_marks/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">cast_prosemirror_marks(struct_or_changeset, opts \\ [])</h1>
+    <h1 class="signature" translate="no">cast_prosemirror_marks(struct_or_changeset, opts \\ [])</h1>
 
 
   </div>
@@ -223,10 +246,10 @@ Functions
 
   <div class="detail-header">
     <a href="#embedded_prosemirror_content/2" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature">embedded_prosemirror_content(mapped_types, opts \\ [])</h1>
+    <h1 class="signature" translate="no">embedded_prosemirror_content(mapped_types, opts \\ [])</h1>
 
 
       <span class="note">(macro)</span>
@@ -236,11 +259,15 @@ Functions
   <section class="docstring">
 
 <p>Add the PolymorphicField mark in your ecto schema.</p><h2 id="embedded_prosemirror_content/2-examples" class="section-heading">
-  <a href="#embedded_prosemirror_content/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#embedded_prosemirror_content/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="w">  </span><span class="n">embedded_prosemirror_content</span><span class="p" data-group-id="9838061366-1">(</span><span class="p" data-group-id="9838061366-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="9838061366-2">]</span><span class="p" data-group-id="9838061366-1">)</span></code></pre><h2 id="embedded_prosemirror_content/2-options" class="section-heading">
-  <a href="#embedded_prosemirror_content/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<pre><code class="makeup elixir" translate="no"><span class="w">  </span><span class="n">embedded_prosemirror_content</span><span class="p" data-group-id="7825207428-1">(</span><span class="p" data-group-id="7825207428-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="7825207428-2">]</span><span class="p" data-group-id="7825207428-1">)</span></code></pre><h2 id="embedded_prosemirror_content/2-options" class="section-heading">
+  <a href="#embedded_prosemirror_content/2-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">options</p>
+  </a>
   Options
 </h2>
 <ul><li>array: boolean that defines if we could have multiple elements.</li></ul><blockquote><p>Use macro <code class="inline">ExProsemirror.SchemaHelper.embedded_prosemirror_field/3</code>.</p></blockquote>
@@ -252,10 +279,10 @@ Functions
 
   <div class="detail-header">
     <a href="#embedded_prosemirror_field/3" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature">embedded_prosemirror_field(field_name, mapped_types, opts \\ [])</h1>
+    <h1 class="signature" translate="no">embedded_prosemirror_field(field_name, mapped_types, opts \\ [])</h1>
 
 
       <span class="note">(macro)</span>
@@ -264,22 +291,25 @@ Functions
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre>embedded_prosemirror_field(:content | :marks, [<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">module</a>()], [{:array, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()}]) ::
+          <pre translate="no"><span class="attribute">@spec</span> embedded_prosemirror_field(:content | :marks, [<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">module</a>()], [{:array, <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()}]) ::
   <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()</pre>
 
       </div>
 
 <p>Add the PolymorphicField in your ecto schema.</p><h2 id="embedded_prosemirror_field/3-examples" class="section-heading">
-  <a href="#embedded_prosemirror_field/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#embedded_prosemirror_field/3-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
   Examples
 </h2>
-<p>Single element</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="1644795509-1">(</span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1644795509-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="1644795509-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="1644795509-1">)</span><span class="w">
+<p>Single element</p><pre><code class="makeup elixir" translate="no"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="3563434987-1">(</span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3563434987-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="3563434987-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="3563434987-1">)</span><span class="w">
 </span><span class="c1"># same as</span><span class="w">
-</span><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="1644795509-3">(</span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1644795509-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="1644795509-4">]</span><span class="p" data-group-id="1644795509-3">)</span></code></pre><p>Multiple elements</p><pre><code class="makeup elixir"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="8629877599-1">(</span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8629877599-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="8629877599-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="8629877599-1">)</span></code></pre><h2 id="embedded_prosemirror_field/3-options" class="section-heading">
-  <a href="#embedded_prosemirror_field/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+</span><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="3563434987-3">(</span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3563434987-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="3563434987-4">]</span><span class="p" data-group-id="3563434987-3">)</span></code></pre><p>Multiple elements</p><pre><code class="makeup elixir" translate="no"><span class="n">embedded_prosemirror_field</span><span class="p" data-group-id="9921056853-1">(</span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9921056853-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="9921056853-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="9921056853-1">)</span></code></pre><h2 id="embedded_prosemirror_field/3-options" class="section-heading">
+  <a href="#embedded_prosemirror_field/3-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">options</p>
+  </a>
   Options
 </h2>
 <ul><li><code class="inline">array</code>: boolean</li></ul><p>The <code class="inline">array</code> option will configure PolymorphicEmbed automatically to be a list of your data OR a single element.</p>
@@ -289,10 +319,10 @@ Functions
 
   <div class="detail-header">
     <a href="#embedded_prosemirror_marks/0" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature">embedded_prosemirror_marks()</h1>
+    <h1 class="signature" translate="no">embedded_prosemirror_marks()</h1>
 
 
       <span class="note">(macro)</span>
@@ -302,45 +332,24 @@ Functions
   <section class="docstring">
 
 <p>Add the PolymorphicField mark in your ecto schema.</p><p>The embedded_field created accepts an array of marks.</p><h2 id="embedded_prosemirror_marks/0-examples" class="section-heading">
-  <a href="#embedded_prosemirror_marks/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#embedded_prosemirror_marks/0-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="w">  </span><span class="n">embedded_prosemirror_mark</span><span class="p" data-group-id="2145824975-1">(</span><span class="p" data-group-id="2145824975-1">)</span></code></pre><p>Set all marks defined in <code class="inline">configs.exs</code>.</p><blockquote><p>Use macro <code class="inline">ExProsemirror.SchemaHelper.embedded_prosemirror_field/3</code>.</p></blockquote>
+<pre><code class="makeup elixir" translate="no"><span class="w">  </span><span class="n">embedded_prosemirror_mark</span><span class="p" data-group-id="2935639767-1">(</span><span class="p" data-group-id="2935639767-1">)</span></code></pre><p>Set all marks defined in <code class="inline">configs.exs</code>.</p><blockquote><p>Use macro <code class="inline">ExProsemirror.SchemaHelper.embedded_prosemirror_field/3</code>.</p></blockquote>
   </section>
 </section>
 
-          </div>
-        </section>
+    </div>
+  </section>
 
       <footer class="footer">
-        <p>
-          <span class="line">
-            Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.2) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
-          </span>
-          <span class="line">
-            Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
-          </span>
-        </p>
-        <p>
 
-            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
-
-          <button class="line footer-button display-shortcuts-help">
-            Display keyboard shortcuts
-          </button>
-          <button class="line footer-button night-mode-toggle">
-            Toggle night mode
-          </button>
-          <button class="line footer-button display-quick-switch">
-            Go to a HexDocs package
-          </button>
-          <button class="line footer-button tooltips-toggle">
-            <span class="tooltips-option-disable">Disable tooltips</span>
-            <span class="tooltips-option-enable">Enable tooltips</span>
-          </button>
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
     </div>

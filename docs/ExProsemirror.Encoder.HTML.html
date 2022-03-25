@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.28.3">
     <meta name="project" content="ex_prosemirror v0.3.2">
 
-    <title>ExProsemirror.Block.Text — ex_prosemirror v0.3.2</title>
+    <title>ExProsemirror.Encoder.HTML — ex_prosemirror v0.3.2</title>
     <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
     <script src="dist/sidebar_items-1b1b648476.js"></script>
@@ -93,16 +93,31 @@ ex_prosemirror
 </button>
 
 
-  <span translate="no">ExProsemirror.Block.Text</span> 
+  <span translate="no">ExProsemirror.Encoder.HTML</span> <small>protocol</small>
   <small class="app-vsn" translate="no">(ex_prosemirror v0.3.2)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Prosemirror inline element. It's contained by most of ExProsemirror blocks like
-<a href="ExProsemirror.Block.Paragraph.html"><code class="inline">ExProsemirror.Block.Paragraph</code></a> or <a href="ExProsemirror.Block.Heading.html"><code class="inline">ExProsemirror.Block.Heading</code></a>.</p><p>When creating an ExProsemirror block you can use this module thanks to</p><pre><code class="makeup elixir" translate="no"><span class="n">embedded_prosemirror_content</span><span class="p" data-group-id="2654300612-1">(</span><span class="p" data-group-id="2654300612-2">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="p" data-group-id="2654300612-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="2654300612-1">)</span></code></pre><p>You can also set <code class="inline">array</code> to <code class="inline">false</code> if you want to inline the block.</p><blockquote><p><code class="inline">embedded_prosemirror_content</code> is defined in <code class="inline">ExProsemirror.SchemaHelper</code> and is imported with
-using <a href="ExProsemirror.Schema.html"><code class="inline">ExProsemirror.Schema</code></a>.</p></blockquote>
+<p>HTML encoder protocol for ExProsemirror's struct.</p><h2 id="module-example-of-implementation" class="section-heading">
+  <a href="#module-example-of-implementation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">example-of-implementation</p>
+  </a>
+  Example of implementation
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="kn">alias</span><span class="w"> </span><span class="nc">ExProsemirror.Encoder.HTML</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="nc">HTMLEncoder</span><span class="w">
+
+</span><span class="kd">defimpl</span><span class="w"> </span><span class="nc">HTMLEncoder</span><span class="w"> </span><span class="k" data-group-id="8481224308-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">encode</span><span class="p" data-group-id="8481224308-2">(</span><span class="n">struct</span><span class="p">,</span><span class="w"> </span><span class="c">_opts</span><span class="p" data-group-id="8481224308-2">)</span><span class="w"> </span><span class="k" data-group-id="8481224308-3">do</span><span class="w">
+    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Phoenix.HTML</span><span class="o">.</span><span class="n">html_escape</span><span class="p" data-group-id="8481224308-4">(</span><span class="n">struct</span><span class="o">.</span><span class="n">text</span><span class="p" data-group-id="8481224308-4">)</span><span class="w">
+
+    </span><span class="n">struct</span><span class="o">.</span><span class="n">marks</span><span class="w">
+    </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">reverse</span><span class="p" data-group-id="8481224308-5">(</span><span class="p" data-group-id="8481224308-5">)</span><span class="w">
+    </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Enum</span><span class="o">.</span><span class="n">reduce</span><span class="p" data-group-id="8481224308-6">(</span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="8481224308-7">fn</span><span class="w"> </span><span class="n">mark</span><span class="p">,</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+      </span><span class="nc">HTMLEncoder</span><span class="o">.</span><span class="n">encode</span><span class="p" data-group-id="8481224308-8">(</span><span class="n">mark</span><span class="p">,</span><span class="w"> </span><span class="ss">inner_content</span><span class="p">:</span><span class="w"> </span><span class="n">acc</span><span class="p" data-group-id="8481224308-8">)</span><span class="w">
+    </span><span class="k" data-group-id="8481224308-7">end</span><span class="p" data-group-id="8481224308-6">)</span><span class="w">
+  </span><span class="k" data-group-id="8481224308-3">end</span></code></pre>
   </section>
 
 
@@ -137,11 +152,11 @@ using <a href="ExProsemirror.Schema.html"><code class="inline">ExProsemirror.Sch
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#extract_simple_text/1" translate="no">extract_simple_text(text)</a>
+          <a href="#encode/2" translate="no">encode(struct, opts \\ [])</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>Returns the text of an <a href="ExProsemirror.Block.Text.html#content"><code class="inline">ExProsemirror.Block.Text</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Encode the struct to html content.</p></div>
 
       </div>
 
@@ -175,10 +190,7 @@ Types
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@type</span> t() :: %ExProsemirror.Block.Text{
-  marks: [Strong.t() | Em.t() | Underline.t()],
-  text: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
-}</pre>
+          <pre translate="no"><span class="attribute">@type</span> t() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()</pre>
 
       </div>
 
@@ -198,28 +210,29 @@ Types
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="extract_simple_text/1">
+<section class="detail" id="encode/2">
+
+    <span id="encode/1"></span>
 
   <div class="detail-header">
-    <a href="#extract_simple_text/1" class="detail-link" title="Link to this function">
+    <a href="#encode/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">extract_simple_text(text)</h1>
+    <h1 class="signature" translate="no">encode(struct, opts \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>Returns the text of an <a href="ExProsemirror.Block.Text.html#content"><code class="inline">ExProsemirror.Block.Text</code></a>.</p><h2 id="extract_simple_text/1-e-g" class="section-heading">
-  <a href="#extract_simple_text/1-e-g" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">e-g</p>
+<p>Encode the struct to html content.</p><h2 id="encode/2-options" class="section-heading">
+  <a href="#encode/2-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">options</p>
   </a>
-  E.g
+  Options
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="nc">ExProsemirror.Block.Text</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="7239241260-1">(</span><span class="p" data-group-id="7239241260-2">%</span><span class="nc" data-group-id="7239241260-2">ExProsemirror.Block.Text</span><span class="p" data-group-id="7239241260-2">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello elixir&#39;s friends&quot;</span><span class="p" data-group-id="7239241260-2">}</span><span class="p" data-group-id="7239241260-1">)</span><span class="w">
-</span><span class="s">&quot;Hello elixir&#39;s friends&quot;</span></code></pre>
+<ul><li><code class="inline">inner_content</code>: element to put inside the encoded block / marks.</li></ul>
   </section>
 </section>
 

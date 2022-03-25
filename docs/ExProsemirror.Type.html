@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.3.0">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="ex_prosemirror v0.3.2">
 
-    <title>ExProsemirror.Type — ex_prosemirror v0.3.0</title>
-    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+    <title>ExProsemirror.Type — ex_prosemirror v0.3.2</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
+    <script src="dist/sidebar_items-1b1b648476.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,27 +22,34 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle">
-  <span class="icon-menu" title="Collapse/expand sidebar"></span>
-</button>
 
 <section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
   <form class="sidebar-search" action="search.html">
     <button type="submit" class="search-button" aria-label="Submit Search">
-      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
     <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -53,24 +60,24 @@
   </div>
 
   <div class="sidebar-header">
+
     <div class="sidebar-projectDetails">
-      <a href="ExProsemirror.html" class="sidebar-projectName">
+      <a href="ExProsemirror.html" class="sidebar-projectName" translate="no">
 ex_prosemirror
       </a>
-      <strong class="sidebar-projectVersion">
-        v0.3.0
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.3.2
       </strong>
     </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+    </ul>
   </div>
 
-  <ul class="sidebar-listNav">
-    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
-
-      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
-
-
-  </ul>
   <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
 </section>
@@ -79,103 +86,89 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-      <h1>
-ExProsemirror.Type <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
 
-      </h1>
+
+  <span translate="no">ExProsemirror.Type</span> 
+  <small class="app-vsn" translate="no">(ex_prosemirror v0.3.2)</small>
+
+</h1>
 
 
-        <section id="moduledoc">
+  <section id="moduledoc">
 <p>ExProsemirror's type helpers.</p><p>A type is composed by <code class="inline">blocks</code> and <code class="inline">marks</code>. Those elements defined what is
 allowed in your type.</p><h2 id="module-e-g" class="section-heading">
-  <a href="#module-e-g" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#module-e-g" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">e-g</p>
+  </a>
   E.g
 </h2>
-<pre><code class="makeup elixir"><span class="ss">types</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-1">[</span><span class="w">
-  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-2">[</span><span class="w">
-    </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-3">[</span><span class="p" data-group-id="4097248409-4">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4097248409-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="4097248409-5">]</span><span class="p" data-group-id="4097248409-4">}</span><span class="p" data-group-id="4097248409-3">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4097248409-6">[</span><span class="ss">:strong</span><span class="p" data-group-id="4097248409-6">]</span><span class="w">
-  </span><span class="p" data-group-id="4097248409-2">]</span><span class="w">
-</span><span class="p" data-group-id="4097248409-1">]</span></code></pre><p>This will createa type <code class="inline">title</code> defined by the module <code class="inline">ExProsemirror.Type.Title</code>.
+<pre><code class="makeup elixir" translate="no"><span class="ss">types</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1108149508-1">[</span><span class="w">
+  </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1108149508-2">[</span><span class="w">
+    </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1108149508-3">[</span><span class="p" data-group-id="1108149508-4">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1108149508-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="1108149508-5">]</span><span class="p" data-group-id="1108149508-4">}</span><span class="p" data-group-id="1108149508-3">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1108149508-6">[</span><span class="ss">:strong</span><span class="p" data-group-id="1108149508-6">]</span><span class="w">
+  </span><span class="p" data-group-id="1108149508-2">]</span><span class="w">
+</span><span class="p" data-group-id="1108149508-1">]</span></code></pre><p>This will createa type <code class="inline">title</code> defined by the module <code class="inline">ExProsemirror.Type.Title</code>.
 This type will allow <code class="inline">h1</code> and <code class="inline">h3</code> blocks but also the mark <code class="inline">strong</code>.</p><p><code class="inline">blocks</code> and <code class="inline">marks</code> follow the same rules, you can defined them simply with
 the element name OR with the tuple <code class="inline">{element_name, attrs}</code> when attrs depends
 of the element.</p><blockquote><p>You can take a look at <a href="ExProsemirror.Mark.Color.html"><code class="inline">ExProsemirror.Mark.Color</code></a> or
 <a href="ExProsemirror.Block.Heading.html"><code class="inline">ExProsemirror.Block.Heading</code></a> for examples).</p></blockquote><p>As you can see previously, element <code class="inline">heading</code> allow attrs <code class="inline">1</code> and <code class="inline">3</code> that could
 be translate as level <code class="inline">1</code> or level <code class="inline">3</code> (<code class="inline">h1</code> or <code class="inline">h3</code>).</p>
-        </section>
+  </section>
 
 
-        <section id="summary" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#summary">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Summary
-          </h1>
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
 
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#changeset/3">changeset(struct_or_changeset, attrs \\ %{}, opts \\ [])</a>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#changeset/3" translate="no">changeset(struct_or_changeset, attrs \\ %{}, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Changeset used by all <a href="ExProsemirror.Type.html#content"><code class="inline">ExProsemirror.Type</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#get_context/0" translate="no">get_context()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Returns context to use for ExProsemirror types.</p></div>
+
+      </div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Changeset used by all <a href="ExProsemirror.Type.html#content"><code class="inline">ExProsemirror.Type</code></a>.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#encode/2">encode(elements, context)</a>
-
-  </div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#get_context/0">get_context()</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Returns context to use for ExProsemirror types.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#to_json/1">to_json(ex_prosemirror_type)</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Json the specified prosemirror type.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#to_json!/1">to_json!(ex_prosemirror_type)</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>See <a href="#to_json/1"><code class="inline">to_json/1</code></a></p></div>
-
-</div>
-
-  </div>
-
-        </section>
+  </section>
 
 
-        <section id="functions" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
 Functions
-          </h1>
-          <div class="functions-list">
+    </h1>
+    <div class="functions-list">
 <section class="detail" id="changeset/3">
 
     <span id="changeset/1"></span>
@@ -184,10 +177,10 @@ Functions
 
   <div class="detail-header">
     <a href="#changeset/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">changeset(struct_or_changeset, attrs \\ %{}, opts \\ [])</h1>
+    <h1 class="signature" translate="no">changeset(struct_or_changeset, attrs \\ %{}, opts \\ [])</h1>
 
 
   </div>
@@ -197,31 +190,14 @@ Functions
 <p>Changeset used by all <a href="ExProsemirror.Type.html#content"><code class="inline">ExProsemirror.Type</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="encode/2">
-
-  <div class="detail-header">
-    <a href="#encode/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">encode(elements, context)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 <section class="detail" id="get_context/0">
 
   <div class="detail-header">
     <a href="#get_context/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">get_context()</h1>
+    <h1 class="signature" translate="no">get_context()</h1>
 
 
   </div>
@@ -229,100 +205,37 @@ Functions
   <section class="docstring">
 
 <p>Returns context to use for ExProsemirror types.</p><h2 id="get_context/0-examples" class="section-heading">
-  <a href="#get_context/0-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#get_context/0-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="nc">ExProsemirror.TypeGenerator</span><span class="o">.</span><span class="n">get_context</span><span class="p" data-group-id="2952208211-1">(</span><span class="p" data-group-id="2952208211-1">)</span><span class="w">
-</span><span class="p" data-group-id="2952208211-2">[</span><span class="w">
-  </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2952208211-3">[</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="nc">ExProsemirror.TypeGenerator</span><span class="o">.</span><span class="n">get_context</span><span class="p" data-group-id="3288069425-1">(</span><span class="p" data-group-id="3288069425-1">)</span><span class="w">
+</span><span class="p" data-group-id="3288069425-2">[</span><span class="w">
+  </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3288069425-3">[</span><span class="w">
     </span><span class="ss">em</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Em</span><span class="p">,</span><span class="w">
     </span><span class="ss">strong</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Strong</span><span class="p">,</span><span class="w">
     </span><span class="ss">underline</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Underline</span><span class="w">
-  </span><span class="p" data-group-id="2952208211-3">]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2952208211-4">[</span><span class="w">
+  </span><span class="p" data-group-id="3288069425-3">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3288069425-4">[</span><span class="w">
     </span><span class="ss">p</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Paragraph</span><span class="p">,</span><span class="w">
     </span><span class="ss">heading</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Heading</span><span class="p">,</span><span class="w">
     </span><span class="ss">image</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Image</span><span class="p">,</span><span class="w">
     </span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="w">
-  </span><span class="p" data-group-id="2952208211-4">]</span><span class="w">
-</span><span class="p" data-group-id="2952208211-2">]</span></code></pre>
-  </section>
-</section>
-<section class="detail" id="to_json/1">
-
-  <div class="detail-header">
-    <a href="#to_json/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">to_json(ex_prosemirror_type)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <h2>Specs</h2>
-      <div class="specs">
-
-          <pre>to_json(ex_prosemirror_type :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) ::
-  {:ok, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
-
-      </div>
-
-<p>Json the specified prosemirror type.</p>
-  </section>
-</section>
-<section class="detail" id="to_json!/1">
-
-  <div class="detail-header">
-    <a href="#to_json!/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">to_json!(ex_prosemirror_type)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>See <a href="#to_json/1"><code class="inline">to_json/1</code></a></p>
+  </span><span class="p" data-group-id="3288069425-4">]</span><span class="w">
+</span><span class="p" data-group-id="3288069425-2">]</span></code></pre>
   </section>
 </section>
 
-          </div>
-        </section>
+    </div>
+  </section>
 
       <footer class="footer">
-        <p>
-          <span class="line">
-            Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.2) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
-          </span>
-          <span class="line">
-            Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
-          </span>
-        </p>
-        <p>
 
-            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
-
-          <button class="line footer-button display-shortcuts-help">
-            Display keyboard shortcuts
-          </button>
-          <button class="line footer-button night-mode-toggle">
-            Toggle night mode
-          </button>
-          <button class="line footer-button display-quick-switch">
-            Go to a HexDocs package
-          </button>
-          <button class="line footer-button tooltips-toggle">
-            <span class="tooltips-option-disable">Disable tooltips</span>
-            <span class="tooltips-option-enable">Enable tooltips</span>
-          </button>
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
     </div>
