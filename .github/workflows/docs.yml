@@ -1,0 +1,49 @@
+name: Mix Docs
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Elixir
+        uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
+        with:
+          elixir-version: "1.13.4" # Define the elixir version [required]
+          otp-version: "24.1" # Define the OTP version [required]
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Force push to gh-pages
+        run: |
+          ORIGIN=$(git config --get remote.origin.url)
+
+          # Generate docs
+          mix docs
+
+          # Setup
+          cd doc
+          git init --initial-branch gh-pages
+          git remote add origin "$ORIGIN"
+          git config user.name 'mix docs'
+          eval `ssh-agent -s`
+          ssh-add - <<< '${{ secrets.GH_PAGES_SSH }}'
+
+          # Push
+          git add .
+          git commit -m 'mix docs'
+          git push --set-upstream origin gh-pages -f
