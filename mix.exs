@@ -8,6 +8,10 @@ defmodule ExProsemirror.MixProject do
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+
+      # ExDoc
+      name: "ExProsemirror",
+      source_url: "https://github.com/Omerlo-Technologies/ex_prosemirror",
       docs: docs()
     ]
   end
@@ -26,7 +30,7 @@ defmodule ExProsemirror.MixProject do
       {:ecto, "~> 3.6"},
       {:polymorphic_embed, "~> 1.6"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.28.3", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.28.4", only: :dev, runtime: false}
     ]
   end
 
