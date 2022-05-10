@@ -34,7 +34,7 @@ defmodule ExProsemirror.MixProject do
     [
       main: "ExProsemirror",
       nest_modules_by_prefix: prosemirror_modifiers(),
-      extras: ["README.md", "CODE_OF_CONDUCT.md", "guides/extends_editor.md"],
+      extras: ["README.md", "CODE_OF_CONDUCT.md", "guides/extends_editor.md", "LICENSE.md"],
       groups_for_modules: [
         HTML: [ExProsemirror.HTML.Form],
         Encoders: prosemirror_encoders(),
