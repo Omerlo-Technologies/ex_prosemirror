@@ -48,7 +48,7 @@ class ExProsemirror {
     if (target instanceof HTMLElement) {
       target.innerHTML = '';
       const plugins = this.plugins || [];
-      return new ExEditorView(target, {blocks: this.blocks, marks: this.marks, plugins});
+      return new ExEditorView(target, { blocks: this.blocks, marks: this.marks, plugins });
     }
 
     return null;
