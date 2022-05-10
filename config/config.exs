@@ -1,9 +1,10 @@
-use Mix.Config
+import Config
 
 config :ex_prosemirror,
-  debug: false
+  debug: false,
+  env: config_env()
 
-if Mix.env() == :test do
+if config_env() == :test do
   config :ex_prosemirror,
     marks_modules: [
       em: ExProsemirror.Mark.Em,
