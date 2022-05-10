@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.3.0">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="ex_prosemirror v0.3.2">
 
-    <title>ExProsemirror.HTML.Form — ex_prosemirror v0.3.0</title>
-    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+    <title>ExProsemirror.HTML.Form — ex_prosemirror v0.3.2</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
+    <script src="dist/sidebar_items-1b1b648476.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,27 +22,34 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle">
-  <span class="icon-menu" title="Collapse/expand sidebar"></span>
-</button>
 
 <section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
   <form class="sidebar-search" action="search.html">
     <button type="submit" class="search-button" aria-label="Submit Search">
-      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
     <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -53,24 +60,24 @@
   </div>
 
   <div class="sidebar-header">
+
     <div class="sidebar-projectDetails">
-      <a href="ExProsemirror.html" class="sidebar-projectName">
+      <a href="ExProsemirror.html" class="sidebar-projectName" translate="no">
 ex_prosemirror
       </a>
-      <strong class="sidebar-projectVersion">
-        v0.3.0
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.3.2
       </strong>
     </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+    </ul>
   </div>
 
-  <ul class="sidebar-listNav">
-    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
-
-      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
-
-
-  </ul>
   <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
 </section>
@@ -79,88 +86,100 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-      <h1>
-ExProsemirror.HTML.Form <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
 
-      </h1>
+
+  <span translate="no">ExProsemirror.HTML.Form</span> 
+  <small class="app-vsn" translate="no">(ex_prosemirror v0.3.2)</small>
+
+</h1>
 
 
-        <section id="moduledoc">
+  <section id="moduledoc">
 <p>Form helpers to generate HTML fields required by ProseMirror.</p><p>Using this component, ProseMirror will automatically be link to hidden input
 fields. These hidden inputs will be used by <a href="https://hexdocs.pm/phoenix_html/2.14.3/Phoenix.HTML.Form.html"><code class="inline">Phoenix.HTML.Form</code></a> to send data
 to the backend.</p><blockquote><p>Live synchronization over LiveView is not currently supported.</p></blockquote><h2 id="module-options" class="section-heading">
-  <a href="#module-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#module-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">options</p>
+  </a>
   Options
 </h2>
 <ul><li><code class="inline">marks</code>: mark tags to use defined in your ProseMirror config</li><li><code class="inline">blocks</code>: block tags to use defined in your ProseMirror config</li><li><code class="inline">type</code>: type of input to use (see: <a href="ExProsemirror.Config.html"><code class="inline">ExProsemirror.Config</code></a> for more informations)</li></ul>
-        </section>
+  </section>
 
 
-        <section id="summary" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#summary">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Summary
-          </h1>
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
 
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#prosemirror_editor/3">prosemirror_editor(form, field, opts \\ [])</a>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#prosemirror_editor/3" translate="no">prosemirror_editor(form, field, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Generates the <code class="inline">&lt;div&gt;</code> that will be used by javascript to mount the ProseMirror component.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#prosemirror_hidden_input/3" translate="no">prosemirror_hidden_input(form, field, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Generates a hidden input field to store data for ProseMirror.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#prosemirror_input/3" translate="no">prosemirror_input(form, field, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Generates inputs for ProseMirror.</p></div>
+
+      </div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Generates the <code class="inline">&lt;div&gt;</code> that will be used by javascript to mount the ProseMirror component.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#prosemirror_hidden_input/3">prosemirror_hidden_input(form, field, opts \\ [])</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Generates a hidden input field to store data for ProseMirror.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#prosemirror_input/3">prosemirror_input(form, field, opts \\ [])</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Generates inputs for ProseMirror.</p></div>
-
-</div>
-
-  </div>
-
-        </section>
+  </section>
 
 
-        <section id="functions" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
 Functions
-          </h1>
-          <div class="functions-list">
+    </h1>
+    <div class="functions-list">
 <section class="detail" id="prosemirror_editor/3">
 
     <span id="prosemirror_editor/2"></span>
 
   <div class="detail-header">
     <a href="#prosemirror_editor/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">prosemirror_editor(form, field, opts \\ [])</h1>
+    <h1 class="signature" translate="no">prosemirror_editor(form, field, opts \\ [])</h1>
 
 
   </div>
@@ -168,10 +187,12 @@ Functions
   <section class="docstring">
 
 <p>Generates the <code class="inline">&lt;div&gt;</code> that will be used by javascript to mount the ProseMirror component.</p><h2 id="prosemirror_editor/3-usage" class="section-heading">
-  <a href="#prosemirror_editor/3-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#prosemirror_editor/3-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">usage</p>
+  </a>
   Usage
 </h2>
-<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_editor</span><span class="p" data-group-id="0332053624-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="0332053624-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre><p>See <a href="ExProsemirror.HTML.Form.html#content"><code class="inline">ExProsemirror.HTML.Form</code></a> for options</p>
+<pre><code class="makeup elixir" translate="no"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_editor</span><span class="p" data-group-id="9289397035-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="9289397035-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre><p>See <a href="ExProsemirror.HTML.Form.html#content"><code class="inline">ExProsemirror.HTML.Form</code></a> for options</p>
   </section>
 </section>
 <section class="detail" id="prosemirror_hidden_input/3">
@@ -180,10 +201,10 @@ Functions
 
   <div class="detail-header">
     <a href="#prosemirror_hidden_input/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">prosemirror_hidden_input(form, field, opts \\ [])</h1>
+    <h1 class="signature" translate="no">prosemirror_hidden_input(form, field, opts \\ [])</h1>
 
 
   </div>
@@ -191,10 +212,12 @@ Functions
   <section class="docstring">
 
 <p>Generates a hidden input field to store data for ProseMirror.</p><blockquote><p>Uses <code class="inline">Phoenix.HTML.Form.html.hidden_input/3</code> under the hood.</p></blockquote><h2 id="prosemirror_hidden_input/3-usage" class="section-heading">
-  <a href="#prosemirror_hidden_input/3-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#prosemirror_hidden_input/3-usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">usage</p>
+  </a>
   Usage
 </h2>
-<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_hidden_input</span><span class="p" data-group-id="1352382991-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="1352382991-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_hidden_input</span><span class="p" data-group-id="4879154367-1">(</span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p" data-group-id="4879154367-1">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre>
   </section>
 </section>
 <section class="detail" id="prosemirror_input/3">
@@ -203,10 +226,10 @@ Functions
 
   <div class="detail-header">
     <a href="#prosemirror_input/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">prosemirror_input(form, field, opts \\ [])</h1>
+    <h1 class="signature" translate="no">prosemirror_input(form, field, opts \\ [])</h1>
 
 
   </div>
@@ -214,10 +237,12 @@ Functions
   <section class="docstring">
 
 <p>Generates inputs for ProseMirror.</p><h2 id="prosemirror_input/3-usages" class="section-heading">
-  <a href="#prosemirror_input/3-usages" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#prosemirror_input/3-usages" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">usages</p>
+  </a>
   Usages
 </h2>
-<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-article-input&quot;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-article-input&quot;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
 </span><span class="c1"># Generates a prosemirror input with the :title configuration.</span><span class="w">
 
 </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="na">@form</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:content</span><span class="p">,</span><span class="w"> </span><span class="ss">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-article-content&quot;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
@@ -225,38 +250,15 @@ Functions
   </section>
 </section>
 
-          </div>
-        </section>
+    </div>
+  </section>
 
       <footer class="footer">
-        <p>
-          <span class="line">
-            Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.2) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
-          </span>
-          <span class="line">
-            Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
-          </span>
-        </p>
-        <p>
 
-            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
-
-          <button class="line footer-button display-shortcuts-help">
-            Display keyboard shortcuts
-          </button>
-          <button class="line footer-button night-mode-toggle">
-            Toggle night mode
-          </button>
-          <button class="line footer-button display-quick-switch">
-            Go to a HexDocs package
-          </button>
-          <button class="line footer-button tooltips-toggle">
-            <span class="tooltips-option-disable">Disable tooltips</span>
-            <span class="tooltips-option-enable">Enable tooltips</span>
-          </button>
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
     </div>

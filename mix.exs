@@ -26,7 +26,7 @@ defmodule ExProsemirror.MixProject do
       {:ecto, "~> 3.6"},
       {:polymorphic_embed, "~> 1.6"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.24.2", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.28.3", only: :dev, runtime: false}
     ]
   end
 
@@ -34,7 +34,7 @@ defmodule ExProsemirror.MixProject do
     [
       main: "ExProsemirror",
       nest_modules_by_prefix: prosemirror_modifiers(),
-      extras: ["guides/extends_editor.md", "LICENSE.md"],
+      extras: ["README.md", "CODE_OF_CONDUCT.md", "guides/extends_editor.md", "LICENSE.md"],
       groups_for_modules: [
         HTML: [ExProsemirror.HTML.Form],
         Encoders: prosemirror_encoders(),

@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.3.0">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="ex_prosemirror v0.3.2">
 
-    <title>ExProsemirror — ex_prosemirror v0.3.0</title>
-    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+    <title>ExProsemirror — ex_prosemirror v0.3.2</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
+    <script src="dist/sidebar_items-1b1b648476.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,27 +22,34 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle">
-  <span class="icon-menu" title="Collapse/expand sidebar"></span>
-</button>
 
 <section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
   <form class="sidebar-search" action="search.html">
     <button type="submit" class="search-button" aria-label="Submit Search">
-      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
     <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -53,24 +60,24 @@
   </div>
 
   <div class="sidebar-header">
+
     <div class="sidebar-projectDetails">
-      <a href="ExProsemirror.html" class="sidebar-projectName">
+      <a href="ExProsemirror.html" class="sidebar-projectName" translate="no">
 ex_prosemirror
       </a>
-      <strong class="sidebar-projectVersion">
-        v0.3.0
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.3.2
       </strong>
     </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+    </ul>
   </div>
 
-  <ul class="sidebar-listNav">
-    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
-
-      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
-
-
-  </ul>
   <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
 </section>
@@ -79,44 +86,53 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-      <h1>
-ExProsemirror <small>behaviour</small> <small class="app-vsn">(ex_prosemirror v0.3.0)</small>
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
 
-      </h1>
+
+  <span translate="no">ExProsemirror</span> <small>behaviour</small>
+  <small class="app-vsn" translate="no">(ex_prosemirror v0.3.2)</small>
+
+</h1>
 
 
-        <section id="moduledoc">
+  <section id="moduledoc">
 <p>ExProsemirror is a helper for the <a href="https://prosemirror.net/">ProseMirror</a> rich-text
 editor inside of <a href="https://hexdocs.pm/phoenix_html/Phoenix.HTML.Form.html">Phoenix.HTML.Form</a>.</p><p><strong>The current version is in alpha and we don't guarantee it works as expected.</strong></p><h2 id="module-eex-examples" class="section-heading">
-  <a href="#module-eex-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#module-eex-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">eex-examples</p>
+  </a>
   EEx examples
 </h2>
-<pre><code class="makeup elixir"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">form_for</span><span class="w"> </span><span class="na">@changeset</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;#&quot;</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="4831620704-1">fn</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">form_for</span><span class="w"> </span><span class="na">@changeset</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;#&quot;</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="5636446492-1">fn</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="ss">:title</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:title</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="ss">:subtitle</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:title</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">prosemirror_input</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="ss">:body</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="ss">:content</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
-</span><span class="o">&lt;</span><span class="p">%</span><span class="w"> </span><span class="k" data-group-id="4831620704-1">end</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre><p>Assuming we have the following in our config:</p><pre><code class="makeup elixir"><span class="n">config</span><span class="w"> </span><span class="ss">:ex_prosemirror</span><span class="p">,</span><span class="w">
-  </span><span class="ss">marks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-1">[</span><span class="w">
+</span><span class="o">&lt;</span><span class="p">%</span><span class="w"> </span><span class="k" data-group-id="5636446492-1">end</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span></code></pre><p>Assuming we have the following in our config:</p><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:ex_prosemirror</span><span class="p">,</span><span class="w">
+  </span><span class="ss">marks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-1">[</span><span class="w">
     </span><span class="ss">em</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Em</span><span class="p">,</span><span class="w">
     </span><span class="ss">strong</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Strong</span><span class="p">,</span><span class="w">
     </span><span class="ss">underline</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Mark.Underline</span><span class="w">
-  </span><span class="p" data-group-id="4580041366-1">]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">blocks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-2">[</span><span class="w">
+  </span><span class="p" data-group-id="8583659608-1">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">blocks_modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-2">[</span><span class="w">
     </span><span class="ss">p</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Paragraph</span><span class="p">,</span><span class="w">
     </span><span class="ss">heading</span><span class="p">:</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Heading</span><span class="p">,</span><span class="w">
-  </span><span class="p" data-group-id="4580041366-2">]</span><span class="p">,</span><span class="w">
-  </span><span class="ss">types</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-3">[</span><span class="w">
-    </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-4">[</span><span class="w">
-      </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-5">[</span><span class="ss">:em</span><span class="p" data-group-id="4580041366-5">]</span><span class="p">,</span><span class="w">
-      </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-6">[</span><span class="p" data-group-id="4580041366-7">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4580041366-8">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4580041366-8">]</span><span class="p" data-group-id="4580041366-7">}</span><span class="p" data-group-id="4580041366-6">]</span><span class="w">
-    </span><span class="p" data-group-id="4580041366-4">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-9">[</span><span class="w">
-      </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-10">[</span><span class="ss">:strong</span><span class="p">,</span><span class="w"> </span><span class="ss">:underline</span><span class="p" data-group-id="4580041366-10">]</span><span class="w">
-      </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4580041366-11">[</span><span class="ss">:p</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4580041366-12">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4580041366-12">}</span><span class="p" data-group-id="4580041366-11">]</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="4580041366-9">]</span><span class="w">
-  </span><span class="p" data-group-id="4580041366-3">]</span></code></pre><p>We will get the following results:</p><ul><li>Inputs of type <code class="inline">:title</code> will be instantiated with<ul><li>blocks: <code class="inline">h1</code> and <code class="inline">h2</code></li><li>marks: <code class="inline">em</code></li></ul></li><li>Inputs of type <code class="inline">:body</code> will be instantiated with<ul><li>blocks: <code class="inline">p</code> and <code class="inline">h2</code></li><li>marks: <code class="inline">strong</code> and <code class="inline">underline</code></li></ul></li></ul><p>The first code sample will create a form with 3 fields: <code class="inline">title</code>, <code class="inline">subtitle</code> and <code class="inline">body</code>. The
+  </span><span class="p" data-group-id="8583659608-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">types</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-3">[</span><span class="w">
+    </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-4">[</span><span class="w">
+      </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-5">[</span><span class="ss">:em</span><span class="p" data-group-id="8583659608-5">]</span><span class="p">,</span><span class="w">
+      </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-6">[</span><span class="p" data-group-id="8583659608-7">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8583659608-8">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8583659608-8">]</span><span class="p" data-group-id="8583659608-7">}</span><span class="p" data-group-id="8583659608-6">]</span><span class="w">
+    </span><span class="p" data-group-id="8583659608-4">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-9">[</span><span class="w">
+      </span><span class="ss">marks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-10">[</span><span class="ss">:strong</span><span class="p">,</span><span class="w"> </span><span class="ss">:underline</span><span class="p" data-group-id="8583659608-10">]</span><span class="w">
+      </span><span class="ss">blocks</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8583659608-11">[</span><span class="ss">:paragraph</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8583659608-12">{</span><span class="ss">:heading</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8583659608-12">}</span><span class="p" data-group-id="8583659608-11">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="8583659608-9">]</span><span class="w">
+  </span><span class="p" data-group-id="8583659608-3">]</span></code></pre><p>We will get the following results:</p><ul><li>Inputs of type <code class="inline">:title</code> will be instantiated with<ul><li>blocks: <code class="inline">h1</code> and <code class="inline">h2</code></li><li>marks: <code class="inline">em</code></li></ul></li><li>Inputs of type <code class="inline">:body</code> will be instantiated with<ul><li>blocks: <code class="inline">p</code> and <code class="inline">h2</code></li><li>marks: <code class="inline">strong</code> and <code class="inline">underline</code></li></ul></li></ul><p>The first code sample will create a form with 3 fields: <code class="inline">title</code>, <code class="inline">subtitle</code> and <code class="inline">body</code>. The
 title will expose italic marks only. The body will expose italic and strong
-marks plus paragraph and header 1.</p><blockquote><p>You can learn more on type in <a href="ExProsemirror.Type.html"><code class="inline">ExProsemirror.Type</code></a>.</p></blockquote><pre><code class="makeup elixir"><span class="o">&lt;</span><span class="n">form</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;article&quot;</span><span class="o">&gt;</span><span class="w">
+marks plus paragraph and header 1.</p><blockquote><p>You can learn more on type in <a href="ExProsemirror.Type.html"><code class="inline">ExProsemirror.Type</code></a>.</p></blockquote><pre><code class="makeup elixir" translate="no"><span class="o">&lt;</span><span class="n">form</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;article&quot;</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;article[title_plain]&quot;</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s">&quot;ProseMirrorTitleDiv&quot;</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="o">/</span><span class="n">div</span><span class="o">&gt;</span><span class="w">
 
@@ -126,10 +142,12 @@ marks plus paragraph and header 1.</p><blockquote><p>You can learn more on type 
   </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;article[body_plain]&quot;</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s">&quot;ProseMirrorBodyDiv&quot;</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="o">/</span><span class="n">div</span><span class="o">&gt;</span><span class="w">
 </span><span class="o">&lt;</span><span class="o">/</span><span class="n">form</span><span class="o">&gt;</span></code></pre><p>HTML nodes with id <code class="inline">ProseMirror___Div</code> will be updated by the js part to instanciate ExProsemirror js editor.</p><h2 id="module-ecto-examples" class="section-heading">
-  <a href="#module-ecto-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#module-ecto-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">ecto-examples</p>
+  </a>
   Ecto examples
 </h2>
-<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Paragraph</span><span class="w"> </span><span class="k" data-group-id="8608469212-1">do</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Paragraph</span><span class="w"> </span><span class="k" data-group-id="2117466013-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExProsemirror.Schema</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExProsemirror</span><span class="w">
 
@@ -137,34 +155,36 @@ marks plus paragraph and header 1.</p><blockquote><p>You can learn more on type 
 
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">ExProsemirror.Block.Text</span><span class="w">
 
-  </span><span class="n">embedded_schema</span><span class="w"> </span><span class="k" data-group-id="8608469212-2">do</span><span class="w">
+  </span><span class="n">embedded_schema</span><span class="w"> </span><span class="k" data-group-id="2117466013-2">do</span><span class="w">
     </span><span class="c1"># Create a embedded ex_prosemirror content and define if it&#39;s an array or not</span><span class="w">
-    </span><span class="n">embedded_prosemirror_content</span><span class="p" data-group-id="8608469212-3">(</span><span class="p" data-group-id="8608469212-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">Text</span><span class="p" data-group-id="8608469212-4">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="8608469212-3">)</span><span class="w">
-  </span><span class="k" data-group-id="8608469212-2">end</span><span class="w">
+    </span><span class="n">embedded_prosemirror_content</span><span class="p" data-group-id="2117466013-3">(</span><span class="p" data-group-id="2117466013-4">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="nc">Text</span><span class="p" data-group-id="2117466013-4">]</span><span class="p">,</span><span class="w"> </span><span class="ss">array</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="2117466013-3">)</span><span class="w">
+  </span><span class="k" data-group-id="2117466013-2">end</span><span class="w">
 
   </span><span class="c1"># opts contains allowed marks</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">changeset</span><span class="p" data-group-id="8608469212-5">(</span><span class="n">struct_or_changeset</span><span class="p">,</span><span class="w"> </span><span class="n">attrs</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="p" data-group-id="8608469212-6">%{</span><span class="p" data-group-id="8608469212-6">}</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="p" data-group-id="8608469212-7">[</span><span class="p" data-group-id="8608469212-7">]</span><span class="p" data-group-id="8608469212-5">)</span><span class="w"> </span><span class="k" data-group-id="8608469212-8">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">changeset</span><span class="p" data-group-id="2117466013-5">(</span><span class="n">struct_or_changeset</span><span class="p">,</span><span class="w"> </span><span class="n">attrs</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="p" data-group-id="2117466013-6">%{</span><span class="p" data-group-id="2117466013-6">}</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="p" data-group-id="2117466013-7">[</span><span class="p" data-group-id="2117466013-7">]</span><span class="p" data-group-id="2117466013-5">)</span><span class="w"> </span><span class="k" data-group-id="2117466013-8">do</span><span class="w">
     </span><span class="n">struct_or_changeset</span><span class="w">
-    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="8608469212-9">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8608469212-10">[</span><span class="p" data-group-id="8608469212-10">]</span><span class="p" data-group-id="8608469212-9">)</span><span class="w">
+    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast</span><span class="p" data-group-id="2117466013-9">(</span><span class="n">attrs</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2117466013-10">[</span><span class="p" data-group-id="2117466013-10">]</span><span class="p" data-group-id="2117466013-9">)</span><span class="w">
     </span><span class="c1"># cast_prosemirror_content will cast the embedded schema</span><span class="w">
-    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="8608469212-11">(</span><span class="ss">with</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8608469212-12">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8608469212-13">{</span><span class="nc">Text</span><span class="p">,</span><span class="w"> </span><span class="ss">:changeset</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8608469212-14">[</span><span class="n">opts</span><span class="p" data-group-id="8608469212-14">]</span><span class="p" data-group-id="8608469212-13">}</span><span class="p" data-group-id="8608469212-12">]</span><span class="p" data-group-id="8608469212-11">)</span><span class="w">
-  </span><span class="k" data-group-id="8608469212-8">end</span><span class="w">
+    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">cast_prosemirror_content</span><span class="p" data-group-id="2117466013-11">(</span><span class="ss">with</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2117466013-12">[</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2117466013-13">{</span><span class="nc">Text</span><span class="p">,</span><span class="w"> </span><span class="ss">:changeset</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2117466013-14">[</span><span class="n">opts</span><span class="p" data-group-id="2117466013-14">]</span><span class="p" data-group-id="2117466013-13">}</span><span class="p" data-group-id="2117466013-12">]</span><span class="p" data-group-id="2117466013-11">)</span><span class="w">
+  </span><span class="k" data-group-id="2117466013-8">end</span><span class="w">
 
   </span><span class="c1"># A callback to return the text of the block</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">extract_simple_text</span><span class="p" data-group-id="8608469212-15">(</span><span class="n">struct</span><span class="p" data-group-id="8608469212-15">)</span><span class="w"> </span><span class="k" data-group-id="8608469212-16">do</span><span class="w">
-    </span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="8608469212-17">(</span><span class="n">struct</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="8608469212-17">)</span><span class="w">
-  </span><span class="k" data-group-id="8608469212-16">end</span><span class="w">
-</span><span class="k" data-group-id="8608469212-1">end</span></code></pre><blockquote><p>To learn more, take a look at <a href="ExProsemirror.Schema.html"><code class="inline">ExProsemirror.Schema</code></a> and <a href="ExProsemirror.Changeset.html"><code class="inline">ExProsemirror.Changeset</code></a>.</p></blockquote><h2 id="module-installation" class="section-heading">
-  <a href="#module-installation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">extract_simple_text</span><span class="p" data-group-id="2117466013-15">(</span><span class="n">struct</span><span class="p" data-group-id="2117466013-15">)</span><span class="w"> </span><span class="k" data-group-id="2117466013-16">do</span><span class="w">
+    </span><span class="nc">Enum</span><span class="o">.</span><span class="n">map</span><span class="p" data-group-id="2117466013-17">(</span><span class="n">struct</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="o">/</span><span class="mi">1</span><span class="p" data-group-id="2117466013-17">)</span><span class="w">
+  </span><span class="k" data-group-id="2117466013-16">end</span><span class="w">
+</span><span class="k" data-group-id="2117466013-1">end</span></code></pre><blockquote><p>To learn more, take a look at <a href="ExProsemirror.Schema.html"><code class="inline">ExProsemirror.Schema</code></a> and <a href="ExProsemirror.Changeset.html"><code class="inline">ExProsemirror.Changeset</code></a>.</p></blockquote><h2 id="module-installation" class="section-heading">
+  <a href="#module-installation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">installation</p>
+  </a>
   Installation
 </h2>
-<ul><li>First, you need to add the dependency according to the following code:</li></ul><pre><code class="makeup elixir"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="3207426811-1">do</span><span class="w">
-</span><span class="p" data-group-id="3207426811-2">[</span><span class="w">
-  </span><span class="p" data-group-id="3207426811-3">{</span><span class="ss">:ex_prosemirror</span><span class="p">,</span><span class="w"> </span><span class="ss">git</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/Omerlo-Technologies/ex_prosemirror&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.2.0&quot;</span><span class="p" data-group-id="3207426811-3">}</span><span class="p">,</span><span class="w">
-</span><span class="p" data-group-id="3207426811-2">]</span><span class="w">
-</span><span class="k" data-group-id="3207426811-1">end</span></code></pre><ul><li>Then, you have to import <a href="ExProsemirror.HTML.Form.html"><code class="inline">ExProsemirror.HTML.Form</code></a> in your views / liveviews<blockquote><p>This could be done directly in your AppWeb.ex in <code class="inline">view/0</code> and/or <code class="inline">live_view/0</code>.
-In recent phoenix versions, you could simply add the line in <code class="inline">view_helper/0</code>.</p></blockquote></li></ul><pre><code class="makeup elixir"><span class="kd">defp</span><span class="w"> </span><span class="nf">view_helpers</span><span class="w"> </span><span class="k" data-group-id="3385232921-1">do</span><span class="w">
-  </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="3385232921-2">do</span><span class="w">
+<ul><li>First, you need to add the dependency according to the following code:</li></ul><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="8946595543-1">do</span><span class="w">
+</span><span class="p" data-group-id="8946595543-2">[</span><span class="w">
+  </span><span class="p" data-group-id="8946595543-3">{</span><span class="ss">:ex_prosemirror</span><span class="p">,</span><span class="w"> </span><span class="ss">git</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/Omerlo-Technologies/ex_prosemirror&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0.2.0&quot;</span><span class="p" data-group-id="8946595543-3">}</span><span class="p">,</span><span class="w">
+</span><span class="p" data-group-id="8946595543-2">]</span><span class="w">
+</span><span class="k" data-group-id="8946595543-1">end</span></code></pre><ul><li>Then, you have to import <a href="ExProsemirror.HTML.Form.html"><code class="inline">ExProsemirror.HTML.Form</code></a> in your views / liveviews<blockquote><p>This could be done directly in your AppWeb.ex in <code class="inline">view/0</code> and/or <code class="inline">live_view/0</code>.
+In recent phoenix versions, you could simply add the line in <code class="inline">view_helper/0</code>.</p></blockquote></li></ul><pre><code class="makeup elixir" translate="no"><span class="kd">defp</span><span class="w"> </span><span class="nf">view_helpers</span><span class="w"> </span><span class="k" data-group-id="9984880917-1">do</span><span class="w">
+  </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="9984880917-2">do</span><span class="w">
     </span><span class="kn">use</span><span class="w"> </span><span class="nc">Phoenix.HTML</span><span class="w">
 
     </span><span class="kn">import</span><span class="w"> </span><span class="nc">Phoenix.View</span><span class="w">
@@ -173,215 +193,126 @@ In recent phoenix versions, you could simply add the line in <code class="inline
 
     </span><span class="kn">import</span><span class="w"> </span><span class="nc">AppWeb.ErrorHelpers</span><span class="w">
     </span><span class="kn">alias</span><span class="w"> </span><span class="nc">AppWeb.Router.Helpers</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="nc">Routes</span><span class="w">
-  </span><span class="k" data-group-id="3385232921-2">end</span><span class="w">
-</span><span class="k" data-group-id="3385232921-1">end</span></code></pre><ul><li>Add the <code class="inline">ex_prosemirror</code> dependency to your package.json:</li></ul><pre><code class="json">{
+  </span><span class="k" data-group-id="9984880917-2">end</span><span class="w">
+</span><span class="k" data-group-id="9984880917-1">end</span></code></pre><ul><li>Add the <code class="inline">ex_prosemirror</code> dependency to your package.json:</li></ul><pre><code class="json">{
   ...
   &quot;dependencies&quot;: {
     ...
     &quot;ex_prosemirror&quot;: &quot;file:../deps/ex_prosemirror/assets&quot;
   }
   ...
-}</code></pre><ul><li>Finally add <code class="inline">ExProsemirrorHooks</code> to phoenix hooks</li></ul><pre><code class="makeup elixir"><span class="o">/</span><span class="o">/</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">hooks</span><span class="o">.</span><span class="n">js</span><span class="w"> </span><span class="n">file</span><span class="w">
-</span><span class="kn">import</span><span class="w"> </span><span class="p" data-group-id="4455049622-1">{</span><span class="w"> </span><span class="nc">ExProsemirrorHooks</span><span class="w"> </span><span class="p" data-group-id="4455049622-1">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror/js/hooks&#39;</span><span class="p">;</span><span class="w">
+}</code></pre><ul><li>Finally add <code class="inline">ExProsemirrorHooks</code> to phoenix hooks</li></ul><pre><code class="makeup elixir" translate="no"><span class="o">//</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">hooks</span><span class="o">.</span><span class="n">js</span><span class="w"> </span><span class="n">file</span><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="p" data-group-id="0148114050-1">{</span><span class="w"> </span><span class="nc">ExProsemirrorHooks</span><span class="w"> </span><span class="p" data-group-id="0148114050-1">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror/js/hooks&#39;</span><span class="p">;</span><span class="w">
 
-</span><span class="n">const</span><span class="w"> </span><span class="nc">Hooks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="4455049622-2">{</span><span class="p" data-group-id="4455049622-2">}</span><span class="p">;</span><span class="w"> </span><span class="o">/</span><span class="o">/</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">hooks</span><span class="w">
+</span><span class="n">const</span><span class="w"> </span><span class="nc">Hooks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0148114050-2">{</span><span class="p" data-group-id="0148114050-2">}</span><span class="p">;</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">hooks</span><span class="w">
 
-</span><span class="n">export</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="p" data-group-id="4455049622-3">{</span><span class="w"> </span><span class="n">...</span><span class="nc">ExProsemirrorHooks</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="nc">Hooks</span><span class="w"> </span><span class="p" data-group-id="4455049622-3">}</span><span class="p">;</span></code></pre><blockquote><p>Optional: If you want to use the default prosemirror css, you can import the <code class="inline">css/prosemirror.css</code> file.</p><p>E.g <code class="inline">@import &quot;~ex_prosemirror/css/prosemirror.css&quot;;</code></p></blockquote>
-        </section>
+</span><span class="n">export</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="p" data-group-id="0148114050-3">{</span><span class="w"> </span><span class="n">...</span><span class="nc">ExProsemirrorHooks</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="nc">Hooks</span><span class="w"> </span><span class="p" data-group-id="0148114050-3">}</span><span class="p">;</span></code></pre><blockquote><p>Optional: If you want to use the default prosemirror css, you can import the <code class="inline">css/prosemirror.css</code> file.</p><p>E.g <code class="inline">@import &quot;~ex_prosemirror/css/prosemirror.css&quot;;</code></p></blockquote>
+  </section>
 
 
-        <section id="summary" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#summary">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Summary
-          </h1>
-
-  <div class="summary-functions summary">
-    <h2>
-      <a href="#functions">Functions</a>
-    </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#__using__/1">__using__(opts)</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Import ExProsemirror.EctoHelper and add the behaviour of ExProsemirror.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#debug/1">debug(boolean)</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Setting debug to true will display the hidden form with json structure.
-By default, this field is input_hidden.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#extract_simple_text/1">extract_simple_text(list_of_structs)</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Extracts the text(s) value(s) without any text marks / blocks.</p></div>
-
-</div>
-
-  </div>
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
 
   <div class="summary-callbacks summary">
     <h2>
       <a href="#callbacks">Callbacks</a>
     </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#c:changeset/3">changeset(struct_or_changeset, attrs, opts)</a>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:changeset/3" translate="no">changeset(struct_or_changeset, attrs, opts)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Custom changeset defintion for ex_prosemirror.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:extract_simple_text/1" translate="no">extract_simple_text(struct)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Override the default <a href="#extract_simple_text/1"><code class="inline">extract_simple_text/1</code></a> system for the module that implements the callback.</p></div>
+
+      </div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Custom changeset defintion for ex_prosemirror.</p></div>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
 
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#c:extract_simple_text/1">extract_simple_text(struct)</a>
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#__using__/1" translate="no">__using__(opts)</a>
 
-  </div>
+        </div>
 
-    <div class="summary-synopsis"><p>Override the default <a href="#extract_simple_text/1"><code class="inline">extract_simple_text/1</code></a> system for the module that implements the callback.</p></div>
+          <div class="summary-synopsis"><p>Import ExProsemirror.EctoHelper and add the behaviour of ExProsemirror.</p></div>
 
-</div>
+      </div>
 
-  </div>
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#debug/1" translate="no">debug(boolean)</a>
 
-        </section>
+        </div>
 
+          <div class="summary-synopsis"><p>Setting debug to true will display the hidden form with json structure.
+By default, this field is input_hidden.</p></div>
 
-        <section id="functions" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-Functions
-          </h1>
-          <div class="functions-list">
-<section class="detail" id="__using__/1">
+      </div>
 
-  <div class="detail-header">
-    <a href="#__using__/1" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature">__using__(opts)</h1>
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#extract_simple_text/1" translate="no">extract_simple_text(list_of_structs)</a>
 
+        </div>
 
-      <span class="note">(macro)</span>
+          <div class="summary-synopsis"><p>Extracts the text(s) value(s) without any text marks / blocks.</p></div>
+
+      </div>
 
   </div>
 
-  <section class="docstring">
-
-<p>Import ExProsemirror.EctoHelper and add the behaviour of ExProsemirror.</p><h2 id="__using__/1-options" class="section-heading">
-  <a href="#__using__/1-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Options
-</h2>
-<ul><li><code class="inline">safe_parser</code> defines if the protocole Pheonix.HTML.Safe should be defined by default. When <code class="inline">true</code>, it
-will use <a href="#extract_simple_text/1"><code class="inline">ExProsemirror.extract_simple_text/1</code></a> (default: <code class="inline">true</code>)</li></ul>
   </section>
-</section>
-<section class="detail" id="debug/1">
-
-  <div class="detail-header">
-    <a href="#debug/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">debug(boolean)</h1>
 
 
-  </div>
-
-  <section class="docstring">
-
-<p>Setting debug to true will display the hidden form with json structure.
-By default, this field is input_hidden.</p><h2 id="debug/1-examples" class="section-heading">
-  <a href="#debug/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-<pre><code class="makeup elixir"><span class="n">debug</span><span class="p" data-group-id="1849537633-1">(</span><span class="no">true</span><span class="p" data-group-id="1849537633-1">)</span></code></pre>
-  </section>
-</section>
-<section class="detail" id="extract_simple_text/1">
-
-  <div class="detail-header">
-    <a href="#extract_simple_text/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">extract_simple_text(list_of_structs)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Extracts the text(s) value(s) without any text marks / blocks.</p><h2 id="extract_simple_text/1-examples" class="section-heading">
-  <a href="#extract_simple_text/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Examples
-</h2>
-<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="1068385251-1">(</span><span class="p" data-group-id="1068385251-2">%</span><span class="nc" data-group-id="1068385251-2">ExProsemirror.Block.Paragraph</span><span class="p" data-group-id="1068385251-2">{</span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1068385251-3">[</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-4">%</span><span class="nc" data-group-id="1068385251-4">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-4">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="1068385251-4">}</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-5">%</span><span class="nc" data-group-id="1068385251-5">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-5">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-5">}</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="1068385251-3">]</span><span class="p" data-group-id="1068385251-2">}</span><span class="p" data-group-id="1068385251-1">)</span><span class="w">
-</span><span class="p" data-group-id="1068385251-6">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-6">]</span><span class="w">
-
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="1068385251-7">(</span><span class="p" data-group-id="1068385251-8">[</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-9">%</span><span class="nc" data-group-id="1068385251-9">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-9">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="1068385251-9">}</span><span class="p">,</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="1068385251-10">%</span><span class="nc" data-group-id="1068385251-10">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-10">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-10">}</span><span class="w">
-</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="1068385251-8">]</span><span class="p" data-group-id="1068385251-7">)</span><span class="w">
-</span><span class="p" data-group-id="1068385251-11">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="1068385251-11">]</span><span class="w">
-
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="1068385251-12">(</span><span class="p" data-group-id="1068385251-13">%</span><span class="nc" data-group-id="1068385251-13">ExProsemirror.Block.Text</span><span class="p" data-group-id="1068385251-13">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="1068385251-13">}</span><span class="p" data-group-id="1068385251-12">)</span><span class="w">
-</span><span class="s">&quot;Hello&quot;</span></code></pre>
-  </section>
-</section>
-
-          </div>
-        </section>
-
-        <section id="callbacks" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#callbacks">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
+  <section id="callbacks" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#callbacks">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
 Callbacks
-          </h1>
-          <div class="callbacks-list">
+    </h1>
+    <div class="callbacks-list">
 <section class="detail" id="c:changeset/3">
 
   <div class="detail-header">
     <a href="#c:changeset/3" class="detail-link" title="Link to this callback">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature">changeset(struct_or_changeset, attrs, opts)</h1>
+    <h1 class="signature" translate="no">changeset(struct_or_changeset, attrs, opts)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre>changeset(struct_or_changeset :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), attrs :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), opts :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) ::
+          <pre translate="no"><span class="attribute">@callback</span> changeset(struct_or_changeset :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), attrs :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), opts :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) ::
   <a href="https://hexdocs.pm/ecto/3.6.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
 
       </div>
@@ -393,10 +324,10 @@ Callbacks
 
   <div class="detail-header">
     <a href="#c:extract_simple_text/1" class="detail-link" title="Link to this callback">
-      <span class="icon-link" aria-hidden="true"></span>
+      <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature">extract_simple_text(struct)</h1>
+    <h1 class="signature" translate="no">extract_simple_text(struct)</h1>
 
 
       <span class="note">(optional)</span>
@@ -405,53 +336,130 @@ Callbacks
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre>extract_simple_text(struct :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>() | nil</pre>
+          <pre translate="no"><span class="attribute">@callback</span> extract_simple_text(struct :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>() | nil</pre>
 
       </div>
 
 <p>Override the default <a href="#extract_simple_text/1"><code class="inline">extract_simple_text/1</code></a> system for the module that implements the callback.</p><h2 id="c:extract_simple_text/1-examples" class="section-heading">
-  <a href="#c:extract_simple_text/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#c:extract_simple_text/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
   Examples
 </h2>
-<pre><code class="makeup elixir"><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="nf">extract_simple_text</span><span class="p" data-group-id="7228042781-1">(</span><span class="p">%</span><span class="bp">__MODULE__</span><span class="p" data-group-id="7228042781-2">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="n">text</span><span class="p" data-group-id="7228042781-2">}</span><span class="p" data-group-id="7228042781-1">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">text</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">extract_simple_text</span><span class="p" data-group-id="5071239651-1">(</span><span class="p">%</span><span class="bp">__MODULE__</span><span class="p" data-group-id="5071239651-2">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="n">text</span><span class="p" data-group-id="5071239651-2">}</span><span class="p" data-group-id="5071239651-1">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">text</span></code></pre>
   </section>
 </section>
 
-          </div>
-        </section>
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Functions
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="__using__/1">
+
+  <div class="detail-header">
+    <a href="#__using__/1" class="detail-link" title="Link to this macro">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <h1 class="signature" translate="no">__using__(opts)</h1>
+
+
+      <span class="note">(macro)</span>
+
+  </div>
+
+  <section class="docstring">
+
+<p>Import ExProsemirror.EctoHelper and add the behaviour of ExProsemirror.</p><h2 id="__using__/1-options" class="section-heading">
+  <a href="#__using__/1-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">options</p>
+  </a>
+  Options
+</h2>
+<ul><li><code class="inline">safe_parser</code> defines if the protocole Pheonix.HTML.Safe should be defined by default. When <code class="inline">true</code>, it
+will use <a href="#extract_simple_text/1"><code class="inline">ExProsemirror.extract_simple_text/1</code></a> (default: <code class="inline">true</code>)</li></ul>
+  </section>
+</section>
+<section class="detail" id="debug/1">
+
+  <div class="detail-header">
+    <a href="#debug/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">debug(boolean)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Setting debug to true will display the hidden form with json structure.
+By default, this field is input_hidden.</p><h2 id="debug/1-examples" class="section-heading">
+  <a href="#debug/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="n">debug</span><span class="p" data-group-id="0550812468-1">(</span><span class="no">true</span><span class="p" data-group-id="0550812468-1">)</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="extract_simple_text/1">
+
+  <div class="detail-header">
+    <a href="#extract_simple_text/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">extract_simple_text(list_of_structs)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Extracts the text(s) value(s) without any text marks / blocks.</p><h2 id="extract_simple_text/1-examples" class="section-heading">
+  <a href="#extract_simple_text/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="7987662713-1">(</span><span class="p" data-group-id="7987662713-2">%</span><span class="nc" data-group-id="7987662713-2">ExProsemirror.Block.Paragraph</span><span class="p" data-group-id="7987662713-2">{</span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7987662713-3">[</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="7987662713-4">%</span><span class="nc" data-group-id="7987662713-4">ExProsemirror.Block.Text</span><span class="p" data-group-id="7987662713-4">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="7987662713-4">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="7987662713-5">%</span><span class="nc" data-group-id="7987662713-5">ExProsemirror.Block.Text</span><span class="p" data-group-id="7987662713-5">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="7987662713-5">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="7987662713-3">]</span><span class="p" data-group-id="7987662713-2">}</span><span class="p" data-group-id="7987662713-1">)</span><span class="w">
+</span><span class="p" data-group-id="7987662713-6">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="7987662713-6">]</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="7987662713-7">(</span><span class="p" data-group-id="7987662713-8">[</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="7987662713-9">%</span><span class="nc" data-group-id="7987662713-9">ExProsemirror.Block.Text</span><span class="p" data-group-id="7987662713-9">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="7987662713-9">}</span><span class="p">,</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="w">  </span><span class="p" data-group-id="7987662713-10">%</span><span class="nc" data-group-id="7987662713-10">ExProsemirror.Block.Text</span><span class="p" data-group-id="7987662713-10">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="7987662713-10">}</span><span class="w">
+</span><span class="gp unselectable">...&gt; </span><span class="p" data-group-id="7987662713-8">]</span><span class="p" data-group-id="7987662713-7">)</span><span class="w">
+</span><span class="p" data-group-id="7987662713-11">[</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p" data-group-id="7987662713-11">]</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">ExProsemirror</span><span class="o">.</span><span class="n">extract_simple_text</span><span class="p" data-group-id="7987662713-12">(</span><span class="p" data-group-id="7987662713-13">%</span><span class="nc" data-group-id="7987662713-13">ExProsemirror.Block.Text</span><span class="p" data-group-id="7987662713-13">{</span><span class="ss">text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p" data-group-id="7987662713-13">}</span><span class="p" data-group-id="7987662713-12">)</span><span class="w">
+</span><span class="s">&quot;Hello&quot;</span></code></pre>
+  </section>
+</section>
+
+    </div>
+  </section>
 
       <footer class="footer">
-        <p>
-          <span class="line">
-            Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.2) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
-          </span>
-          <span class="line">
-            Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
-          </span>
-        </p>
-        <p>
 
-            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
-
-          <button class="line footer-button display-shortcuts-help">
-            Display keyboard shortcuts
-          </button>
-          <button class="line footer-button night-mode-toggle">
-            Toggle night mode
-          </button>
-          <button class="line footer-button display-quick-switch">
-            Go to a HexDocs package
-          </button>
-          <button class="line footer-button tooltips-toggle">
-            <span class="tooltips-option-disable">Disable tooltips</span>
-            <span class="tooltips-option-enable">Enable tooltips</span>
-          </button>
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
     </div>

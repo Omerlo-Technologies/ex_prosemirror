@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="ex_prosemirror v0.3.0">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="ex_prosemirror v0.3.2">
 
-    <title>Extends the editor — ex_prosemirror v0.3.0</title>
-    <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
+    <title>Extends the editor — ex_prosemirror v0.3.2</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-c4f12f2b93.js"></script>
+    <script src="dist/sidebar_items-1b1b648476.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-f27ff079945e43879c46.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,27 +22,34 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle">
-  <span class="icon-menu" title="Collapse/expand sidebar"></span>
-</button>
 
 <section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
   <form class="sidebar-search" action="search.html">
     <button type="submit" class="search-button" aria-label="Submit Search">
-      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
     <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -53,24 +60,24 @@
   </div>
 
   <div class="sidebar-header">
+
     <div class="sidebar-projectDetails">
-      <a href="ExProsemirror.html" class="sidebar-projectName">
+      <a href="ExProsemirror.html" class="sidebar-projectName" translate="no">
 ex_prosemirror
       </a>
-      <strong class="sidebar-projectVersion">
-        v0.3.0
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.3.2
       </strong>
     </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+    </ul>
   </div>
 
-  <ul class="sidebar-listNav">
-    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
-
-      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
-
-
-  </ul>
   <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
 </section>
@@ -79,73 +86,87 @@ ex_prosemirror
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>Extends the editor</h1><p>To create a new <code class="inline">mark</code> / <code class="inline">block</code>, you should first follow prosemirror spec.</p><p>You can find an example <a href="https://prosemirror.net/examples/schema/">here</a>.</p><h2 id="create-a-custom-span-mark" class="section-heading">
-  <a href="#create-a-custom-span-mark" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+  <span>Extends the editor</span>
+</h1>
+
+<p>To create a new <code class="inline">mark</code> / <code class="inline">block</code>, you should first follow prosemirror spec.</p><p>You can find an example <a href="https://prosemirror.net/examples/schema/">here</a>.</p><h2 id="create-a-custom-span-mark" class="section-heading">
+  <a href="#create-a-custom-span-mark" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">create-a-custom-span-mark</p>
+  </a>
   Create a custom span mark
 </h2>
-<p>In our example, we will have the following mark spec:</p><pre><code class="makeup elixir"><span class="kn">import</span><span class="w"> </span><span class="n">exProsemirror</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror&#39;</span><span class="p">;</span><span class="w">
+<p>In our example, we will have the following mark spec:</p><pre><code class="makeup elixir" translate="no"><span class="kn">import</span><span class="w"> </span><span class="n">exProsemirror</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror&#39;</span><span class="p">;</span><span class="w">
 
-</span><span class="n">const</span><span class="w"> </span><span class="n">spanMark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="0334568043-1">{</span><span class="w">
+</span><span class="n">const</span><span class="w"> </span><span class="n">spanMark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="7760204460-1">{</span><span class="w">
   </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
   </span><span class="ss">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;inline&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0334568043-2">[</span><span class="p" data-group-id="0334568043-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="0334568043-3">}</span><span class="p" data-group-id="0334568043-2">]</span><span class="p">,</span><span class="w">
-  </span><span class="n">toDOM</span><span class="p" data-group-id="0334568043-4">(</span><span class="p" data-group-id="0334568043-4">)</span><span class="w"> </span><span class="p" data-group-id="0334568043-5">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="0334568043-6">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0334568043-6">]</span><span class="w"> </span><span class="p" data-group-id="0334568043-5">}</span><span class="w">
-</span><span class="p" data-group-id="0334568043-1">}</span><span class="w">
+  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7760204460-2">[</span><span class="p" data-group-id="7760204460-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="7760204460-3">}</span><span class="p" data-group-id="7760204460-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="n">toDOM</span><span class="p" data-group-id="7760204460-4">(</span><span class="p" data-group-id="7760204460-4">)</span><span class="w"> </span><span class="p" data-group-id="7760204460-5">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="7760204460-6">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="7760204460-6">]</span><span class="w"> </span><span class="p" data-group-id="7760204460-5">}</span><span class="w">
+</span><span class="p" data-group-id="7760204460-1">}</span><span class="w">
 
-</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">setCustomMarks</span><span class="p" data-group-id="0334568043-7">(</span><span class="p" data-group-id="0334568043-8">{</span><span class="ss">span</span><span class="p">:</span><span class="w"> </span><span class="n">spanMark</span><span class="p" data-group-id="0334568043-8">}</span><span class="p" data-group-id="0334568043-7">)</span><span class="p">;</span><span class="w">
+</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">setCustomMarks</span><span class="p" data-group-id="7760204460-7">(</span><span class="p" data-group-id="7760204460-8">{</span><span class="ss">span</span><span class="p">:</span><span class="w"> </span><span class="n">spanMark</span><span class="p" data-group-id="7760204460-8">}</span><span class="p" data-group-id="7760204460-7">)</span><span class="p">;</span><span class="w">
 
-</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">initAll</span><span class="p" data-group-id="0334568043-9">(</span><span class="p" data-group-id="0334568043-9">)</span><span class="p">;</span></code></pre><p>ExProsemirror allows you to add more options in the spec:</p><ul><li><code class="inline">icon: Object</code>: icon to display in the menu<ul><li><code class="inline">width</code>: size of the svg</li><li><code class="inline">path</code>: svg definition</li></ul></li><li><code class="inline">title: String</code>: Title of the mark in the menu</li></ul><p>Example</p><pre><code class="makeup elixir"><span class="kn">import</span><span class="w"> </span><span class="n">exProsemirror</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror&#39;</span><span class="p">;</span><span class="w">
+</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">initAll</span><span class="p" data-group-id="7760204460-9">(</span><span class="p" data-group-id="7760204460-9">)</span><span class="p">;</span></code></pre><p>ExProsemirror allows you to add more options in the spec:</p><ul><li><code class="inline">icon: Object</code>: icon to display in the menu<ul><li><code class="inline">width</code>: size of the svg</li><li><code class="inline">path</code>: svg definition</li></ul></li><li><code class="inline">title: String</code>: Title of the mark in the menu</li></ul><p>Example</p><pre><code class="makeup elixir" translate="no"><span class="kn">import</span><span class="w"> </span><span class="n">exProsemirror</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror&#39;</span><span class="p">;</span><span class="w">
 
-</span><span class="n">const</span><span class="w"> </span><span class="n">spanMark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="4667008204-1">{</span><span class="w">
+</span><span class="n">const</span><span class="w"> </span><span class="n">spanMark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="9677019887-1">{</span><span class="w">
   </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w">
   </span><span class="ss">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;inline&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4667008204-2">[</span><span class="p" data-group-id="4667008204-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="4667008204-3">}</span><span class="p" data-group-id="4667008204-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9677019887-2">[</span><span class="p" data-group-id="9677019887-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="9677019887-3">}</span><span class="p" data-group-id="9677019887-2">]</span><span class="p">,</span><span class="w">
   </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;My custom span&#39;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">icon</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4667008204-4">{</span><span class="w">
+  </span><span class="ss">icon</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9677019887-4">{</span><span class="w">
     </span><span class="ss">width</span><span class="p">:</span><span class="w"> </span><span class="mi">896</span><span class="p">,</span><span class="w"> </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">
     </span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;M608 192l-96 96 224 224-224 224 96 96 288-320-288-320zM288 192l-288 320 288 320 96-96-224-224 224-224-96-96z&quot;</span><span class="w">
-  </span><span class="p" data-group-id="4667008204-4">}</span><span class="p">,</span><span class="w">
-  </span><span class="n">toDOM</span><span class="p" data-group-id="4667008204-5">(</span><span class="p" data-group-id="4667008204-5">)</span><span class="w"> </span><span class="p" data-group-id="4667008204-6">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="4667008204-7">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="4667008204-7">]</span><span class="w"> </span><span class="p" data-group-id="4667008204-6">}</span><span class="w">
-</span><span class="p" data-group-id="4667008204-1">}</span><span class="w">
+  </span><span class="p" data-group-id="9677019887-4">}</span><span class="p">,</span><span class="w">
+  </span><span class="n">toDOM</span><span class="p" data-group-id="9677019887-5">(</span><span class="p" data-group-id="9677019887-5">)</span><span class="w"> </span><span class="p" data-group-id="9677019887-6">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="9677019887-7">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9677019887-7">]</span><span class="w"> </span><span class="p" data-group-id="9677019887-6">}</span><span class="w">
+</span><span class="p" data-group-id="9677019887-1">}</span><span class="w">
 
-</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">setCustomMarks</span><span class="p" data-group-id="4667008204-8">(</span><span class="p" data-group-id="4667008204-9">{</span><span class="ss">span</span><span class="p">:</span><span class="w"> </span><span class="n">spanMark</span><span class="p" data-group-id="4667008204-9">}</span><span class="p" data-group-id="4667008204-8">)</span><span class="p">;</span><span class="w">
+</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">setCustomMarks</span><span class="p" data-group-id="9677019887-8">(</span><span class="p" data-group-id="9677019887-9">{</span><span class="ss">span</span><span class="p">:</span><span class="w"> </span><span class="n">spanMark</span><span class="p" data-group-id="9677019887-9">}</span><span class="p" data-group-id="9677019887-8">)</span><span class="p">;</span><span class="w">
 
-</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">initAll</span><span class="p" data-group-id="4667008204-10">(</span><span class="p" data-group-id="4667008204-10">)</span><span class="p">;</span></code></pre><h2 id="create-a-custom-blocks" class="section-heading">
-  <a href="#create-a-custom-blocks" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">initAll</span><span class="p" data-group-id="9677019887-10">(</span><span class="p" data-group-id="9677019887-10">)</span><span class="p">;</span></code></pre><h2 id="create-a-custom-blocks" class="section-heading">
+  <a href="#create-a-custom-blocks" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">create-a-custom-blocks</p>
+  </a>
   Create a custom blocks
 </h2>
-<p>In our example, we will have the following block spec:</p><pre><code class="makeup elixir"><span class="n">const</span><span class="w"> </span><span class="n">spanBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="6039114119-1">{</span><span class="w">
+<p>In our example, we will have the following block spec:</p><pre><code class="makeup elixir" translate="no"><span class="n">const</span><span class="w"> </span><span class="n">spanBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="4092177253-1">{</span><span class="w">
   </span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;inline*&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;block&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6039114119-2">[</span><span class="p" data-group-id="6039114119-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="6039114119-3">}</span><span class="p" data-group-id="6039114119-2">]</span><span class="p">,</span><span class="w">
-  </span><span class="n">toDOM</span><span class="p" data-group-id="6039114119-4">(</span><span class="p" data-group-id="6039114119-4">)</span><span class="w"> </span><span class="p" data-group-id="6039114119-5">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="6039114119-6">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="6039114119-6">]</span><span class="w"> </span><span class="p" data-group-id="6039114119-5">}</span><span class="w">
-</span><span class="p" data-group-id="6039114119-1">}</span></code></pre><p>ExProsemirror allows you to add more options in the spec:</p><ul><li><code class="inline">icon: Object</code>: icon to display in the menu<ul><li><code class="inline">width</code>: size of the svg</li><li><code class="inline">path</code>: svg definition</li></ul></li><li><code class="inline">title: String</code>: Title of the mark in the menu</li><li><code class="inline">label: String</code>: Label to display in the menu</li></ul><blockquote><p>If an <code class="inline">icon</code> is defined, then the label will not be displayed.</p></blockquote><p>Example</p><pre><code class="makeup elixir"><span class="kn">import</span><span class="w"> </span><span class="n">exProsemirror</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror&#39;</span><span class="p">;</span><span class="w">
+  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4092177253-2">[</span><span class="p" data-group-id="4092177253-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="4092177253-3">}</span><span class="p" data-group-id="4092177253-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="n">toDOM</span><span class="p" data-group-id="4092177253-4">(</span><span class="p" data-group-id="4092177253-4">)</span><span class="w"> </span><span class="p" data-group-id="4092177253-5">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="4092177253-6">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="4092177253-6">]</span><span class="w"> </span><span class="p" data-group-id="4092177253-5">}</span><span class="w">
+</span><span class="p" data-group-id="4092177253-1">}</span></code></pre><p>ExProsemirror allows you to add more options in the spec:</p><ul><li><code class="inline">icon: Object</code>: icon to display in the menu<ul><li><code class="inline">width</code>: size of the svg</li><li><code class="inline">path</code>: svg definition</li></ul></li><li><code class="inline">title: String</code>: Title of the mark in the menu</li><li><code class="inline">label: String</code>: Label to display in the menu</li></ul><blockquote><p>If an <code class="inline">icon</code> is defined, then the label will not be displayed.</p></blockquote><p>Example</p><pre><code class="makeup elixir" translate="no"><span class="kn">import</span><span class="w"> </span><span class="n">exProsemirror</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="sc">&#39;ex_prosemirror&#39;</span><span class="p">;</span><span class="w">
 
-</span><span class="n">const</span><span class="w"> </span><span class="n">spanBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="1184856676-1">{</span><span class="w">
+</span><span class="n">const</span><span class="w"> </span><span class="n">spanBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="9426387369-1">{</span><span class="w">
   </span><span class="ss">content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;inline*&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;block&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1184856676-2">[</span><span class="p" data-group-id="1184856676-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="1184856676-3">}</span><span class="p" data-group-id="1184856676-2">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">parseDOM</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9426387369-2">[</span><span class="p" data-group-id="9426387369-3">{</span><span class="ss">tag</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;span&quot;</span><span class="p" data-group-id="9426387369-3">}</span><span class="p" data-group-id="9426387369-2">]</span><span class="p">,</span><span class="w">
   </span><span class="ss">title</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;my custom span block&#39;</span><span class="p">,</span><span class="w">
   </span><span class="ss">label</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;custom span&#39;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">icon</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1184856676-4">{</span><span class="w">
+  </span><span class="ss">icon</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9426387369-4">{</span><span class="w">
     </span><span class="ss">width</span><span class="p">:</span><span class="w"> </span><span class="mi">896</span><span class="p">,</span><span class="w"> </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">
     </span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;M608 192l-96 96 224 224-224 224 96 96 288-320-288-320zM288 192l-288 320 288 320 96-96-224-224 224-224-96-96z&quot;</span><span class="w">
-  </span><span class="p" data-group-id="1184856676-4">}</span><span class="p">,</span><span class="w">
-  </span><span class="n">toDOM</span><span class="p" data-group-id="1184856676-5">(</span><span class="p" data-group-id="1184856676-5">)</span><span class="w"> </span><span class="p" data-group-id="1184856676-6">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="1184856676-7">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="1184856676-7">]</span><span class="w"> </span><span class="p" data-group-id="1184856676-6">}</span><span class="w">
-</span><span class="p" data-group-id="1184856676-1">}</span><span class="w">
+  </span><span class="p" data-group-id="9426387369-4">}</span><span class="p">,</span><span class="w">
+  </span><span class="n">toDOM</span><span class="p" data-group-id="9426387369-5">(</span><span class="p" data-group-id="9426387369-5">)</span><span class="w"> </span><span class="p" data-group-id="9426387369-6">{</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="p" data-group-id="9426387369-7">[</span><span class="sc">&#39;span&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9426387369-7">]</span><span class="w"> </span><span class="p" data-group-id="9426387369-6">}</span><span class="w">
+</span><span class="p" data-group-id="9426387369-1">}</span><span class="w">
 
-</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">setCustomBlocks</span><span class="p" data-group-id="1184856676-8">(</span><span class="p" data-group-id="1184856676-9">{</span><span class="ss">span</span><span class="p">:</span><span class="w"> </span><span class="n">spanBlock</span><span class="p" data-group-id="1184856676-9">}</span><span class="p" data-group-id="1184856676-8">)</span><span class="p">;</span><span class="w">
+</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">setCustomBlocks</span><span class="p" data-group-id="9426387369-8">(</span><span class="p" data-group-id="9426387369-9">{</span><span class="ss">span</span><span class="p">:</span><span class="w"> </span><span class="n">spanBlock</span><span class="p" data-group-id="9426387369-9">}</span><span class="p" data-group-id="9426387369-8">)</span><span class="p">;</span><span class="w">
 
-</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">initAll</span><span class="p" data-group-id="1184856676-10">(</span><span class="p" data-group-id="1184856676-10">)</span><span class="p">;</span></code></pre>
+</span><span class="n">exProsemirror</span><span class="o">.</span><span class="n">initAll</span><span class="p" data-group-id="9426387369-10">(</span><span class="p" data-group-id="9426387369-10">)</span><span class="p">;</span></code></pre>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
-      <a href="api-reference.html" class="bottom-actions-button" rel="prev">
+      <a href="code_of_conduct.html" class="bottom-actions-button" rel="prev">
         <span class="subheader">
           ← Previous Page
         </span>
         <span class="title">
-API Reference
+Contributor Code of Conduct
         </span>
       </a>
 
@@ -156,34 +177,11 @@ API Reference
 </div>
 
       <footer class="footer">
-        <p>
-          <span class="line">
-            Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.24.2) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
-          </span>
-          <span class="line">
-            Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
-          </span>
-        </p>
-        <p>
 
-            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
-
-          <button class="line footer-button display-shortcuts-help">
-            Display keyboard shortcuts
-          </button>
-          <button class="line footer-button night-mode-toggle">
-            Toggle night mode
-          </button>
-          <button class="line footer-button display-quick-switch">
-            Go to a HexDocs package
-          </button>
-          <button class="line footer-button tooltips-toggle">
-            <span class="tooltips-option-disable">Disable tooltips</span>
-            <span class="tooltips-option-enable">Enable tooltips</span>
-          </button>
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
     </div>
