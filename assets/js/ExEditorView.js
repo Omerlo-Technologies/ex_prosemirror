@@ -1,13 +1,13 @@
+import { DOMParser } from 'prosemirror-model';
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
-import { DOMParser } from 'prosemirror-model';
-import schemaFunc from './prosemirror/schema';
 import { insertPlaceholder } from './prosemirror/plugins/placeholder';
+import schemaFunc from './prosemirror/schema';
 
 export default class ExEditorView {
   /**
    * @param {HTMLElement} editorNode
-   * @param {{blocks: Object[], marks: Object[]}, plugins: Object[]} opts
+   * @param {{ blocks: Object[], marks: Object[], plugins: Object[] }} opts
    */
   constructor(editorNode, opts) {
     this.editorNode = editorNode;
@@ -63,8 +63,8 @@ export default class ExEditorView {
 
   addListeners() {
     const exEditorView = this;
-    this.editorNode.addEventListener('exProsemirrorInsertPlaceholder', ({detail}) => {
-      insertPlaceholder(exEditorView, {nodeType: detail.nodeType});
+    this.editorNode.addEventListener('exProsemirrorInsertPlaceholder', ({ detail }) => {
+      insertPlaceholder(exEditorView, { nodeType: detail.nodeType });
     });
   }
 
@@ -74,7 +74,10 @@ export default class ExEditorView {
 
     // TODO liveview supports
 
-    document.querySelector(this.target).value = JSON.stringify(parsedState);
+    const input = document.querySelector(this.target);
+    input.value = JSON.stringify(parsedState);
+    input.dispatchEvent(new CustomEvent('change', { detail: JSON.parse(input.value) }));
+
     this.editorView.updateState(newState);
   }
 }
