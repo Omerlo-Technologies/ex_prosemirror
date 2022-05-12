@@ -44,6 +44,7 @@ const image = {
 export const blocks = {
   doc: nodes.doc,
   text: nodes.text,
+  hard_break: nodes.hard_break,
   paragraph,
   heading,
   image,
