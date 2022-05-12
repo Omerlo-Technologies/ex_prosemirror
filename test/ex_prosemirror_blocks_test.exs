@@ -2,7 +2,7 @@ defmodule ExProsemirrorBlocksTest do
   use ExUnit.Case
   import Ecto.Changeset
 
-  alias ExProsemirror.Block.{Heading, HTML, Image, Paragraph, Text}
+  alias ExProsemirror.Block.{Heading, HardBreak, HTML, Image, Paragraph, Text}
 
   setup do
     custom_text = Ecto.UUID.generate()
@@ -22,6 +22,15 @@ defmodule ExProsemirrorBlocksTest do
       |> apply_changes()
 
     assert paragraph == %Paragraph{content: [text.struct]}
+  end
+
+  test "hard break", _ do
+    paragraph =
+      %HardBreak{}
+      |> HardBreak.changeset(%{})
+      |> apply_changes()
+
+    assert paragraph == %HardBreak{}
   end
 
   test "heading", %{text: text} do

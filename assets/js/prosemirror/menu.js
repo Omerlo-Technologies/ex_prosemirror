@@ -7,6 +7,17 @@ function getTitle({name: name, spec: {title}}) {
   return (title || name);
 }
 
+export const generateHardBreakItem = (schema) => {
+  if(schema.nodes.hard_break) {
+    return [blockTypeItem(schema.nodes.hard_break, {
+      title: 'hard break',
+      label: 'hard break'
+    })];
+  }
+
+  return [];
+};
+
 export const generateHeadingItem = (schema) => {
   if(schema.nodes.heading) {
     return schema.nodes.heading.spec.config.values.map((heading) => {
@@ -171,4 +182,4 @@ export function multiMarkItem(markType, options, attrs) {
 }
 
 
-export const menuHelper = { generateParagraphItem, generateHeadingItem, generateHTMLItem, generateMediaMenu };
+export const menuHelper = { generateParagraphItem, generateHardBreakItem, generateHeadingItem, generateHTMLItem, generateMediaMenu };

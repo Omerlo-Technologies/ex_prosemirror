@@ -8,6 +8,11 @@ const paragraph = {
   generateMenuItem: menuHelper.generateParagraphItem
 };
 
+const hard_break = {
+  ...nodes.hard_break,
+  generateMenuItem: menuHelper.generateHardBreakItem
+};
+
 const heading = {
   ...nodes.heading,
   generateMenuItem: menuHelper.generateHeadingItem
@@ -45,6 +50,7 @@ export const blocks = {
   doc: nodes.doc,
   text: nodes.text,
   paragraph,
+  hard_break,
   heading,
   image,
   html

@@ -55,6 +55,7 @@ defmodule ExProsemirror.MixProject do
       ExProsemirror.ModifierHelper,
       ExProsemirror.Block,
       ExProsemirror.Block.Doc,
+      ExProsemirror.Block.HardBreak,
       ExProsemirror.Block.Heading,
       ExProsemirror.Block.Image,
       ExProsemirror.Block.Paragraph,
