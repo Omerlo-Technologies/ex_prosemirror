@@ -9,7 +9,7 @@ defmodule ExProsemirror.Block.Paragraph do
 
   import Ecto.Changeset
 
-  alias ExProsemirror.Block.Text
+  alias ExProsemirror.Block.{HardBreak, Text}
   alias ExProsemirror.Encoder.HTML, as: HTMLEncoder
 
   @type t :: %__MODULE__{
@@ -18,7 +18,7 @@ defmodule ExProsemirror.Block.Paragraph do
 
   @doc false
   embedded_schema do
-    embedded_prosemirror_content([text: Text], array: true)
+    embedded_prosemirror_content([text: Text, hard_break: HardBreak], array: true)
   end
 
   @doc false
