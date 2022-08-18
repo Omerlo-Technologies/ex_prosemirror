@@ -35,8 +35,8 @@ defmodule ExProsemirror.HTML.FormTest do
         |> prosemirror_editor(:title, type: :empty)
         |> safe_to_string()
 
-      assert input_html =~
-               ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[]" data-target="#title" id="title")
+      assert input_html =~ ~s(data-blocks="[]")
+      assert input_html =~ ~s(data-marks="[]")
     end
 
     test "marks only" do
@@ -45,8 +45,8 @@ defmodule ExProsemirror.HTML.FormTest do
         |> prosemirror_editor(:title, type: :marks_only)
         |> safe_to_string()
 
-      assert input_html =~
-               ~s(<div class="ex-prosemirror" data-blocks="[]" data-inline="false" data-marks="[{&quot;type&quot;:&quot;em&quot;}]" data-target="#title" id="title")
+      assert input_html =~ ~s(data-blocks="[]")
+      assert input_html =~ ~s(data-marks="[{&quot;type&quot;:&quot;em&quot;}]")
     end
 
     test "blocks only" do
@@ -55,8 +55,8 @@ defmodule ExProsemirror.HTML.FormTest do
         |> prosemirror_editor(:title, type: :blocks_only)
         |> safe_to_string()
 
-      assert input_html =~
-               ~s(<div class="ex-prosemirror" data-blocks="[{&quot;type&quot;:&quot;paragraph&quot;}]" data-inline="false")
+      assert input_html =~ ~s(data-blocks="[{&quot;type&quot;:&quot;paragraph&quot;}]")
+      assert input_html =~ ~s(data-marks="[]")
     end
   end
 
