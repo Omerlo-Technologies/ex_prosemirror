@@ -28,7 +28,7 @@ defmodule ExProsemirror.MixProject do
     [
       {:phoenix_html, "~> 2.14 or ~> 3.0"},
       {:ecto, "~> 3.6"},
-      {:polymorphic_embed, "~> 1.6"},
+      {:polymorphic_embed, git: "https://github.com/Matsa59/polymorphic_embed"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.28.4", only: :dev, runtime: false}
     ]
